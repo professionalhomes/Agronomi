@@ -1,0 +1,49 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/signup.css" rel="stylesheet" />
+    <title>Registrarse</title>
+</head>
+<body>
+    <div class="container">
+        <div class="tittle">
+            <img clas="logo" src="~/Content/img/logoAgronomi.png"  alt="" width="250" height="250">
+            <label>Bienvenido! Registrate aquí</label>
+        </div>
+        <div class="content">
+            <form action="@Url.Action("Registrarse", "Access")" method="post">
+                <div class="inputContent">
+                    <div class="inputContentOption">
+                        <input  name="Nombre" id="name" class="form-control mb-3" type="text" placeholder="Nombre completo" required />
+                    </div>
+                    <div class="inputContentOption">
+                        <input name="PrimerApellido" id="firstLastName" class="" type="text" placeholder="Primer apellido" required />
+                    </div>
+                    <div class="inputContentOption">
+                        <input name="SegundoApellido" id="secondLastName" class="form-control mb-3" type="text" placeholder="Segundo apellido" required />
+                    </div>
+                    <div class="inputContentOption">
+                        <input name="Correo" id="correo" class="form-control mb-3" type="text" placeholder="Correo electrónico" required />
+                    </div>
+                    <div class="inputContentOption">
+                        <input name="Clave" id="password" class="form-control mb-3" type="password" placeholder="Contraseña" required />
+                    </div>
+                    <div class="d-grid gap-2 mb-3">
+                        <button class="btnAgronomi" type="submit">Registrate</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <a href="@Url.Action("Login","Access")"> Iniciar Sesion</a>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

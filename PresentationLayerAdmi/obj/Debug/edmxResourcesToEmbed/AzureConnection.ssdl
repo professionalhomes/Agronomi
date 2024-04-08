@@ -1,0 +1,566 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DB_CIVCO_TESTModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tbl_Access">
+    <Key>
+      <PropertyRef Name="idAccess" />
+    </Key>
+    <Property Name="idAccess" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idUserRole" Type="int" />
+    <Property Name="access" Type="varchar" MaxLength="30" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'DB_CIVCO_TEST.dbo.tbl_AssociatedContact' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="tbl_AssociatedContact">
+          <Property Name="idContact" Type="int" />
+          <Property Name="idCustomer" Type="int" />
+        </EntityType>-->
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_CIVCO_TEST.dbo.tbl_AssociateProfessional' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="tbl_AssociateProfessional">
+    <Key>
+      <PropertyRef Name="professionalCard" />
+    </Key>
+    <Property Name="idCollege" Type="int" />
+    <Property Name="idProfessional" Type="int" />
+    <Property Name="professionalCard" Type="varchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbl_Classifications">
+    <Key>
+      <PropertyRef Name="cdType" />
+    </Key>
+    <Property Name="cdType" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="classificationType" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="area" Type="varchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="tbl_College">
+    <Key>
+      <PropertyRef Name="idCollege" />
+    </Key>
+    <Property Name="idCollege" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="collegeName" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbl_Contact">
+    <Key>
+      <PropertyRef Name="idContact" />
+    </Key>
+    <Property Name="idContact" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="contactName" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="lastName" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="secondLastName" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="contactRole" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbl_Customer">
+    <Key>
+      <PropertyRef Name="idCustomer" />
+    </Key>
+    <Property Name="idCustomer" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="mail" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="phone" Type="varchar" MaxLength="12" Nullable="false" />
+    <Property Name="country" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="typeCustomer" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_CIVCO_TEST.dbo.tbl_LegalCustomer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="tbl_LegalCustomer">
+    <Key>
+      <PropertyRef Name="legalIdentity" />
+      <PropertyRef Name="customerName" />
+    </Key>
+    <Property Name="idCustomer" Type="int" />
+    <Property Name="legalIdentity" Type="varchar" MaxLength="16" Nullable="false" />
+    <Property Name="customerName" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_CIVCO_TEST.dbo.tbl_PhysicalCustomer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="tbl_PhysicalCustomer">
+    <Key>
+      <PropertyRef Name="identification" />
+      <PropertyRef Name="customerName" />
+      <PropertyRef Name="lastName" />
+      <PropertyRef Name="secondLastName" />
+    </Key>
+    <Property Name="idCustomer" Type="int" />
+    <Property Name="identification" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="customerName" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="lastName" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="secondLastName" Type="varchar" MaxLength="25" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbl_Professional">
+    <Key>
+      <PropertyRef Name="idProfessional" />
+    </Key>
+    <Property Name="idProfessional" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="identification" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="professionalName" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="lastName" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="secondLastName" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="mail" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="phone" Type="varchar" MaxLength="12" Nullable="false" />
+    <Property Name="profession" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="academicDegree" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_CIVCO_TEST.dbo.tbl_Project' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="tbl_Project">
+    <Key>
+      <PropertyRef Name="professionalRole" />
+    </Key>
+    <Property Name="idProject" Type="int" />
+    <Property Name="idCustomer" Type="int" />
+    <Property Name="idProfessional" Type="int" />
+    <Property Name="professionalRole" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="idUser" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_CIVCO_TEST.dbo.tbl_ProjectClassification' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="tbl_ProjectClassification">
+    <Key>
+      <PropertyRef Name="projectType" />
+    </Key>
+    <Property Name="idProject" Type="int" />
+    <Property Name="cdType" Type="varchar" MaxLength="10" />
+    <Property Name="projectType" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="projectArea" Type="varchar" MaxLength="30" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_CIVCO_TEST.dbo.tbl_ProjectDescription' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="tbl_ProjectDescription">
+    <Key>
+      <PropertyRef Name="projectDescription" />
+    </Key>
+    <Property Name="idProject" Type="int" />
+    <Property Name="projectDescription" Type="varchar" MaxLength="500" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_CIVCO_TEST.dbo.tbl_ProjectLocation' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="tbl_ProjectLocation">
+    <Key>
+      <PropertyRef Name="country" />
+      <PropertyRef Name="province" />
+      <PropertyRef Name="city" />
+      <PropertyRef Name="district" />
+    </Key>
+    <Property Name="idProject" Type="int" />
+    <Property Name="country" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="province" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="city" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="district" Type="varchar" MaxLength="30" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbl_ProyectInfo">
+    <Key>
+      <PropertyRef Name="idProject" />
+    </Key>
+    <Property Name="idProject" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="projectCode" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="nameProject" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="startDate" Type="varchar" MaxLength="10" />
+    <Property Name="endDate" Type="varchar" MaxLength="10" />
+    <Property Name="costInColones" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="costInDollars" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="accreditedProject" Type="bit" Nullable="false" />
+    <Property Name="adhonoremProject" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbl_UserRole">
+    <Key>
+      <PropertyRef Name="idUserRole" />
+    </Key>
+    <Property Name="idUserRole" Type="int" Nullable="false" />
+    <Property Name="userRole" Type="varchar" MaxLength="30" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbl_Users">
+    <Key>
+      <PropertyRef Name="idUser" />
+    </Key>
+    <Property Name="idUser" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idUserRole" Type="int" />
+    <Property Name="condition" Type="bit" Nullable="false" />
+    <Property Name="userName" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="lastName" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="secondLastName" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="mail" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="userPassword" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_CIVCO_TEST.sys.database_firewall_rules' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="database_firewall_rules">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="name" />
+      <PropertyRef Name="start_ip_address" />
+      <PropertyRef Name="end_ip_address" />
+      <PropertyRef Name="create_date" />
+      <PropertyRef Name="modify_date" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="start_ip_address" Type="varchar" MaxLength="45" Nullable="false" />
+    <Property Name="end_ip_address" Type="varchar" MaxLength="45" Nullable="false" />
+    <Property Name="create_date" Type="datetime" Nullable="false" />
+    <Property Name="modify_date" Type="datetime" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__tbl_Acces__idUse__73BA3083">
+    <End Role="tbl_UserRole" Type="Self.tbl_UserRole" Multiplicity="0..1" />
+    <End Role="tbl_Access" Type="Self.tbl_Access" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_UserRole">
+        <PropertyRef Name="idUserRole" />
+      </Principal>
+      <Dependent Role="tbl_Access">
+        <PropertyRef Name="idUserRole" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_Assoc__idCol__76969D2E">
+    <End Role="tbl_College" Type="Self.tbl_College" Multiplicity="0..1" />
+    <End Role="tbl_AssociateProfessional" Type="Self.tbl_AssociateProfessional" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_College">
+        <PropertyRef Name="idCollege" />
+      </Principal>
+      <Dependent Role="tbl_AssociateProfessional">
+        <PropertyRef Name="idCollege" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <!--Errors Found During Generation:
+error 6004: The table 'DB_CIVCO_TEST.dbo.tbl_AssociatedContact' is referenced by a relationship, but cannot be found.
+        <Association Name="FK__tbl_Assoc__idCon__74AE54BC" />-->
+  <!--Errors Found During Generation:
+error 6004: The table 'DB_CIVCO_TEST.dbo.tbl_AssociatedContact' is referenced by a relationship, but cannot be found.
+        <Association Name="FK__tbl_Assoc__idCus__75A278F5" />-->
+  <Association Name="FK__tbl_Assoc__idPro__778AC167">
+    <End Role="tbl_Professional" Type="Self.tbl_Professional" Multiplicity="0..1" />
+    <End Role="tbl_AssociateProfessional" Type="Self.tbl_AssociateProfessional" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Professional">
+        <PropertyRef Name="idProfessional" />
+      </Principal>
+      <Dependent Role="tbl_AssociateProfessional">
+        <PropertyRef Name="idProfessional" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_Legal__idCus__787EE5A0">
+    <End Role="tbl_Customer" Type="Self.tbl_Customer" Multiplicity="0..1" />
+    <End Role="tbl_LegalCustomer" Type="Self.tbl_LegalCustomer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Customer">
+        <PropertyRef Name="idCustomer" />
+      </Principal>
+      <Dependent Role="tbl_LegalCustomer">
+        <PropertyRef Name="idCustomer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_Physi__idCus__797309D9">
+    <End Role="tbl_Customer" Type="Self.tbl_Customer" Multiplicity="0..1" />
+    <End Role="tbl_PhysicalCustomer" Type="Self.tbl_PhysicalCustomer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Customer">
+        <PropertyRef Name="idCustomer" />
+      </Principal>
+      <Dependent Role="tbl_PhysicalCustomer">
+        <PropertyRef Name="idCustomer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_Proje__cdTyp__7E37BEF6">
+    <End Role="tbl_Classifications" Type="Self.tbl_Classifications" Multiplicity="0..1" />
+    <End Role="tbl_ProjectClassification" Type="Self.tbl_ProjectClassification" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Classifications">
+        <PropertyRef Name="cdType" />
+      </Principal>
+      <Dependent Role="tbl_ProjectClassification">
+        <PropertyRef Name="cdType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_Proje__idCus__7A672E12">
+    <End Role="tbl_Customer" Type="Self.tbl_Customer" Multiplicity="0..1" />
+    <End Role="tbl_Project" Type="Self.tbl_Project" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Customer">
+        <PropertyRef Name="idCustomer" />
+      </Principal>
+      <Dependent Role="tbl_Project">
+        <PropertyRef Name="idCustomer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_Proje__idPro__00200768">
+    <End Role="tbl_ProyectInfo" Type="Self.tbl_ProyectInfo" Multiplicity="0..1" />
+    <End Role="tbl_ProjectDescription" Type="Self.tbl_ProjectDescription" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_ProyectInfo">
+        <PropertyRef Name="idProject" />
+      </Principal>
+      <Dependent Role="tbl_ProjectDescription">
+        <PropertyRef Name="idProject" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_Proje__idPro__01142BA1">
+    <End Role="tbl_ProyectInfo" Type="Self.tbl_ProyectInfo" Multiplicity="0..1" />
+    <End Role="tbl_ProjectLocation" Type="Self.tbl_ProjectLocation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_ProyectInfo">
+        <PropertyRef Name="idProject" />
+      </Principal>
+      <Dependent Role="tbl_ProjectLocation">
+        <PropertyRef Name="idProject" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_Proje__idPro__7B5B524B">
+    <End Role="tbl_Professional" Type="Self.tbl_Professional" Multiplicity="0..1" />
+    <End Role="tbl_Project" Type="Self.tbl_Project" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Professional">
+        <PropertyRef Name="idProfessional" />
+      </Principal>
+      <Dependent Role="tbl_Project">
+        <PropertyRef Name="idProfessional" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_Proje__idPro__7C4F7684">
+    <End Role="tbl_ProyectInfo" Type="Self.tbl_ProyectInfo" Multiplicity="0..1" />
+    <End Role="tbl_Project" Type="Self.tbl_Project" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_ProyectInfo">
+        <PropertyRef Name="idProject" />
+      </Principal>
+      <Dependent Role="tbl_Project">
+        <PropertyRef Name="idProject" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_Proje__idPro__7F2BE32F">
+    <End Role="tbl_ProyectInfo" Type="Self.tbl_ProyectInfo" Multiplicity="0..1" />
+    <End Role="tbl_ProjectClassification" Type="Self.tbl_ProjectClassification" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_ProyectInfo">
+        <PropertyRef Name="idProject" />
+      </Principal>
+      <Dependent Role="tbl_ProjectClassification">
+        <PropertyRef Name="idProject" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_Proje__idUse__7D439ABD">
+    <End Role="tbl_Users" Type="Self.tbl_Users" Multiplicity="0..1" />
+    <End Role="tbl_Project" Type="Self.tbl_Project" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Users">
+        <PropertyRef Name="idUser" />
+      </Principal>
+      <Dependent Role="tbl_Project">
+        <PropertyRef Name="idUser" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_Users__idUse__02084FDA">
+    <End Role="tbl_UserRole" Type="Self.tbl_UserRole" Multiplicity="0..1" />
+    <End Role="tbl_Users" Type="Self.tbl_Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_UserRole">
+        <PropertyRef Name="idUserRole" />
+      </Principal>
+      <Dependent Role="tbl_Users">
+        <PropertyRef Name="idUserRole" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="SP_Delete_ProjectInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idProject" Type="int" Mode="In" />
+    <Parameter Name="result" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="SP_Insert_ProjectDescription" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idProject" Type="int" Mode="In" />
+    <Parameter Name="description" Type="varchar" Mode="In" />
+    <Parameter Name="message" Type="varchar" Mode="InOut" />
+    <Parameter Name="result" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="SP_Insert_ProjectInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="projectCode" Type="varchar" Mode="In" />
+    <Parameter Name="nameProject" Type="varchar" Mode="In" />
+    <Parameter Name="startDate" Type="date" Mode="In" />
+    <Parameter Name="endDate" Type="date" Mode="In" />
+    <Parameter Name="costInColones" Type="decimal" Mode="In" />
+    <Parameter Name="costInDollars" Type="decimal" Mode="In" />
+    <Parameter Name="accreditedProject" Type="bit" Mode="In" />
+    <Parameter Name="adhonoremProject" Type="bit" Mode="In" />
+    <Parameter Name="message" Type="varchar" Mode="InOut" />
+    <Parameter Name="result" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="SP_Insert_ProjectLocation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idProject" Type="int" Mode="In" />
+    <Parameter Name="country" Type="varchar" Mode="In" />
+    <Parameter Name="province" Type="varchar" Mode="In" />
+    <Parameter Name="city" Type="varchar" Mode="In" />
+    <Parameter Name="district" Type="varchar" Mode="In" />
+    <Parameter Name="message" Type="varchar" Mode="InOut" />
+    <Parameter Name="result" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="SP_Update_ProjectDescription" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idProject" Type="int" Mode="In" />
+    <Parameter Name="description" Type="varchar" Mode="In" />
+    <Parameter Name="message" Type="varchar" Mode="InOut" />
+    <Parameter Name="result" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="SP_Update_ProjectInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idProject" Type="int" Mode="In" />
+    <Parameter Name="projectCode" Type="varchar" Mode="In" />
+    <Parameter Name="nameProject" Type="varchar" Mode="In" />
+    <Parameter Name="startDate" Type="date" Mode="In" />
+    <Parameter Name="endDate" Type="date" Mode="In" />
+    <Parameter Name="costInColones" Type="decimal" Mode="In" />
+    <Parameter Name="costInDollars" Type="decimal" Mode="In" />
+    <Parameter Name="accreditedProject" Type="bit" Mode="In" />
+    <Parameter Name="adhonoremProject" Type="bit" Mode="In" />
+    <Parameter Name="message" Type="varchar" Mode="InOut" />
+    <Parameter Name="result" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="SP_Update_ProjectLocation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idProject" Type="int" Mode="In" />
+    <Parameter Name="country" Type="varchar" Mode="In" />
+    <Parameter Name="province" Type="varchar" Mode="In" />
+    <Parameter Name="city" Type="varchar" Mode="In" />
+    <Parameter Name="district" Type="varchar" Mode="In" />
+    <Parameter Name="message" Type="varchar" Mode="InOut" />
+    <Parameter Name="result" Type="int" Mode="InOut" />
+  </Function>
+  <EntityContainer Name="DB_CIVCO_TESTModelStoreContainer">
+    <EntitySet Name="tbl_Access" EntityType="Self.tbl_Access" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_Classifications" EntityType="Self.tbl_Classifications" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_College" EntityType="Self.tbl_College" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_Contact" EntityType="Self.tbl_Contact" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_Customer" EntityType="Self.tbl_Customer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_Professional" EntityType="Self.tbl_Professional" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_ProyectInfo" EntityType="Self.tbl_ProyectInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_UserRole" EntityType="Self.tbl_UserRole" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_Users" EntityType="Self.tbl_Users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_AssociateProfessional" EntityType="Self.tbl_AssociateProfessional" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [tbl_AssociateProfessional].[idCollege] AS [idCollege], 
+    [tbl_AssociateProfessional].[idProfessional] AS [idProfessional], 
+    [tbl_AssociateProfessional].[professionalCard] AS [professionalCard]
+    FROM [dbo].[tbl_AssociateProfessional] AS [tbl_AssociateProfessional]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="tbl_LegalCustomer" EntityType="Self.tbl_LegalCustomer" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [tbl_LegalCustomer].[idCustomer] AS [idCustomer], 
+    [tbl_LegalCustomer].[legalIdentity] AS [legalIdentity], 
+    [tbl_LegalCustomer].[customerName] AS [customerName]
+    FROM [dbo].[tbl_LegalCustomer] AS [tbl_LegalCustomer]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="tbl_PhysicalCustomer" EntityType="Self.tbl_PhysicalCustomer" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [tbl_PhysicalCustomer].[idCustomer] AS [idCustomer], 
+    [tbl_PhysicalCustomer].[identification] AS [identification], 
+    [tbl_PhysicalCustomer].[customerName] AS [customerName], 
+    [tbl_PhysicalCustomer].[lastName] AS [lastName], 
+    [tbl_PhysicalCustomer].[secondLastName] AS [secondLastName]
+    FROM [dbo].[tbl_PhysicalCustomer] AS [tbl_PhysicalCustomer]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="tbl_Project" EntityType="Self.tbl_Project" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [tbl_Project].[idProject] AS [idProject], 
+    [tbl_Project].[idCustomer] AS [idCustomer], 
+    [tbl_Project].[idProfessional] AS [idProfessional], 
+    [tbl_Project].[professionalRole] AS [professionalRole], 
+    [tbl_Project].[idUser] AS [idUser]
+    FROM [dbo].[tbl_Project] AS [tbl_Project]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="tbl_ProjectClassification" EntityType="Self.tbl_ProjectClassification" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [tbl_ProjectClassification].[idProject] AS [idProject], 
+    [tbl_ProjectClassification].[cdType] AS [cdType], 
+    [tbl_ProjectClassification].[projectType] AS [projectType], 
+    [tbl_ProjectClassification].[projectArea] AS [projectArea]
+    FROM [dbo].[tbl_ProjectClassification] AS [tbl_ProjectClassification]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="tbl_ProjectDescription" EntityType="Self.tbl_ProjectDescription" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [tbl_ProjectDescription].[idProject] AS [idProject], 
+    [tbl_ProjectDescription].[projectDescription] AS [projectDescription]
+    FROM [dbo].[tbl_ProjectDescription] AS [tbl_ProjectDescription]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="tbl_ProjectLocation" EntityType="Self.tbl_ProjectLocation" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [tbl_ProjectLocation].[idProject] AS [idProject], 
+    [tbl_ProjectLocation].[country] AS [country], 
+    [tbl_ProjectLocation].[province] AS [province], 
+    [tbl_ProjectLocation].[city] AS [city], 
+    [tbl_ProjectLocation].[district] AS [district]
+    FROM [dbo].[tbl_ProjectLocation] AS [tbl_ProjectLocation]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="database_firewall_rules" EntityType="Self.database_firewall_rules" store:Type="Views" store:Schema="sys">
+      <DefiningQuery>SELECT 
+    [database_firewall_rules].[id] AS [id], 
+    [database_firewall_rules].[name] AS [name], 
+    [database_firewall_rules].[start_ip_address] AS [start_ip_address], 
+    [database_firewall_rules].[end_ip_address] AS [end_ip_address], 
+    [database_firewall_rules].[create_date] AS [create_date], 
+    [database_firewall_rules].[modify_date] AS [modify_date]
+    FROM [sys].[database_firewall_rules] AS [database_firewall_rules]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK__tbl_Acces__idUse__73BA3083" Association="Self.FK__tbl_Acces__idUse__73BA3083">
+      <End Role="tbl_UserRole" EntitySet="tbl_UserRole" />
+      <End Role="tbl_Access" EntitySet="tbl_Access" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_Assoc__idCol__76969D2E" Association="Self.FK__tbl_Assoc__idCol__76969D2E">
+      <End Role="tbl_College" EntitySet="tbl_College" />
+      <End Role="tbl_AssociateProfessional" EntitySet="tbl_AssociateProfessional" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_Assoc__idPro__778AC167" Association="Self.FK__tbl_Assoc__idPro__778AC167">
+      <End Role="tbl_Professional" EntitySet="tbl_Professional" />
+      <End Role="tbl_AssociateProfessional" EntitySet="tbl_AssociateProfessional" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_Legal__idCus__787EE5A0" Association="Self.FK__tbl_Legal__idCus__787EE5A0">
+      <End Role="tbl_Customer" EntitySet="tbl_Customer" />
+      <End Role="tbl_LegalCustomer" EntitySet="tbl_LegalCustomer" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_Physi__idCus__797309D9" Association="Self.FK__tbl_Physi__idCus__797309D9">
+      <End Role="tbl_Customer" EntitySet="tbl_Customer" />
+      <End Role="tbl_PhysicalCustomer" EntitySet="tbl_PhysicalCustomer" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_Proje__cdTyp__7E37BEF6" Association="Self.FK__tbl_Proje__cdTyp__7E37BEF6">
+      <End Role="tbl_Classifications" EntitySet="tbl_Classifications" />
+      <End Role="tbl_ProjectClassification" EntitySet="tbl_ProjectClassification" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_Proje__idCus__7A672E12" Association="Self.FK__tbl_Proje__idCus__7A672E12">
+      <End Role="tbl_Customer" EntitySet="tbl_Customer" />
+      <End Role="tbl_Project" EntitySet="tbl_Project" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_Proje__idPro__00200768" Association="Self.FK__tbl_Proje__idPro__00200768">
+      <End Role="tbl_ProyectInfo" EntitySet="tbl_ProyectInfo" />
+      <End Role="tbl_ProjectDescription" EntitySet="tbl_ProjectDescription" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_Proje__idPro__01142BA1" Association="Self.FK__tbl_Proje__idPro__01142BA1">
+      <End Role="tbl_ProyectInfo" EntitySet="tbl_ProyectInfo" />
+      <End Role="tbl_ProjectLocation" EntitySet="tbl_ProjectLocation" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_Proje__idPro__7B5B524B" Association="Self.FK__tbl_Proje__idPro__7B5B524B">
+      <End Role="tbl_Professional" EntitySet="tbl_Professional" />
+      <End Role="tbl_Project" EntitySet="tbl_Project" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_Proje__idPro__7C4F7684" Association="Self.FK__tbl_Proje__idPro__7C4F7684">
+      <End Role="tbl_ProyectInfo" EntitySet="tbl_ProyectInfo" />
+      <End Role="tbl_Project" EntitySet="tbl_Project" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_Proje__idPro__7F2BE32F" Association="Self.FK__tbl_Proje__idPro__7F2BE32F">
+      <End Role="tbl_ProyectInfo" EntitySet="tbl_ProyectInfo" />
+      <End Role="tbl_ProjectClassification" EntitySet="tbl_ProjectClassification" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_Proje__idUse__7D439ABD" Association="Self.FK__tbl_Proje__idUse__7D439ABD">
+      <End Role="tbl_Users" EntitySet="tbl_Users" />
+      <End Role="tbl_Project" EntitySet="tbl_Project" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_Users__idUse__02084FDA" Association="Self.FK__tbl_Users__idUse__02084FDA">
+      <End Role="tbl_UserRole" EntitySet="tbl_UserRole" />
+      <End Role="tbl_Users" EntitySet="tbl_Users" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,411 @@
+﻿
+@{
+    ViewBag.Title = "InfoProfessionals";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<ol class="breadcrumb mb-4 mt-4">
+    <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">Inicio</a></li>
+    <li class="breadcrumb-item active">Colaboradores</li>
+</ol>
+
+<div class="card">
+    <div class="card-header">
+        <i class="fas fa-users me-1"></i> Colaboradores del CIVCO asociados a los proyectos registrados.
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12">
+                <button type="button" style="background: #151240; font-weight: bold;" class="btn btn-success" onclick="OpenModal(null)" @(ViewBag.UserRole == "Consulta" ? "disabled" : "")>Nuevo colaborador</button>
+            </div>
+        </div>
+        <hr />
+        <table id="table" class="display cell-border" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Cédula</th>
+                    <th>Nombre</th>
+                    <th>1°Apellido</th>
+                    <th>2°Apellido</th>
+                    <th>Correo</th>
+                    <th>Teléfono</th>
+                    <th>Profesión</th>
+                    <th>Grado</th>
+                    <th>Colegio</th>
+                    <th>Carné</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Modal to update Physical Customers info-->
+<div class="modal fade" id="FormModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header text-white" style="background: #151240;">
+                <h5 class="modal-title" id="exampleModalLabel">Información de colaboradores</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                @*This input has the ID of the project that will be update on the BBDD*@
+                <input id="txtID" type="hidden" value="0" />
+
+                <!-- Form to update project info-->
+
+                <div class="row g-2">
+
+                    <div class="col-sm-6">
+                        <label for="txtIdentification" class="form-label">Cédula</label>
+                        <input type="text" class="form-control" id="txtIdentification" placeholder="X0XXX0XXX" autocomplete="off">
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label for="txtProfessionalName" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="txtProfessionalName" placeholder="" autocomplete="off">
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label for="txtLastName" class="form-label">Primer Apellido</label>
+                        <input type="text" class="form-control" id="txtLastName" placeholder="" autocomplete="off">
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label for="txtSecondLastName" class="form-label">Segundo Apellido</label>
+                        <input type="text" class="form-control" id="txtSecondLastName" placeholder="" autocomplete="off">
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label for="txtMail" class="form-label">Correo</label>
+                        <input type="text" class="form-control" id="txtMail" placeholder="name@example.com" autocomplete="off">
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label for="txtPhone" class="form-label">Teléfono</label>
+                        <input type="text" class="form-control" id="txtPhone" placeholder="0000-0000" autocomplete="off">
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label for="txtProfession" class="form-label">Profesión</label>
+                        <input type="text" class="form-control" id="txtProfession" placeholder="" autocomplete="off">
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label for="txtAcademicDegree" class="form-label">Grado académico</label>
+                        <input type="text" class="form-control" id="txtAcademicDegree" placeholder="" autocomplete="off">
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label for="txtCollege" class="form-label">Colegio</label>
+                        <input type="text" class="form-control" id="txtCollege" placeholder="" autocomplete="off">
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label for="txtProfessionalCard" class="form-label">Carné</label>
+                        <input type="text" class="form-control" id="txtProfessionalCard" placeholder="" autocomplete="off">
+                    </div>
+                </div>
+
+                <div class="row mt-2">
+
+                    <div class="col-12">
+                        <div id="errorMessage" class="alert alert-danger" role="alert">
+                            A simple danger alert-check it out!
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" onclick="SaveProfessionalInfo()">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*Implementing AJAX method to view the BBDD professional info in the presentation layer*@
+
+@section scripts{
+
+    <script>
+
+        var tableData;
+        var rowSelected;
+
+        // to list
+
+        $(document).ready(function () {
+
+            tableData = $("#table").DataTable({
+
+                responsive: true,
+                ordering: false,
+                dom: 'lBfrtip',
+                buttons: [
+                    {
+                        extend: 'pdfHtml5',
+                        text: '<i class="fas fa-file-pdf"></i>',
+                        titleAttr: 'Exportar a PDF',
+                        className: 'btn btn-margin btn-colorPdf',
+                        orientation: 'landscape',
+                        attr: {
+                            id: 'btnPdf' // Agrega el ID 'btnPdf' al botón de PDF
+                        }
+                    },
+                    {
+                        extend: 'excelHtml5',
+                        text: '<i class="fas fa-file-excel"></i>',
+                        titleAttr: 'Exportar a Excel',
+                        className: 'btn btn-margin btn-colorExcel',
+                        attr: {
+                            id: 'btnExcel' // Agrega el ID 'btnExcel' al botón de Excel
+                        }
+                    }
+                ],
+                buttonContainer: '<div class="btn-group"></div>',
+                "ajax": {
+
+                    url:'@Url.Action("InfoProfessionalList", "Professionals")', /*retorna la url*/
+                    type: "GET",
+                    dataType: "json"
+
+                },
+                "columns": [
+
+                    { "data": "identification" },
+                    { "data": "professionalName" },
+                    { "data": "lastName" },
+                    { "data": "secondLastName" },
+                    { "data": "mail" },
+                    { "data": "phone" },
+                    { "data": "profession" },
+                    { "data": "academicDegree" },
+                    { "data": "college" },
+                    { "data": "professionalCard" },
+                    {
+                        "data": null,
+                        "render": function (data, type, row) {
+                            var userRole = '@ViewBag.UserRole';
+
+                            if (userRole === "Consulta" || userRole === "Registra") {
+                                // Si el rol es "Consulta" o "Registra", deshabilita los botones
+                                return '<button type="button" class="btn btn-primary btn-sm btn-edit" disabled><i class="fas fa-pen"></i></button>' +
+                                    '<button type="button" class="btn btn-danger btn-sm ms-2 btn-eliminar" disabled><i class="fas fa-trash"></i></button>';
+                            } else {
+                                // Si el rol no es "Consulta" ni "Registra", muestra los botones habilitados
+                                return '<button type="button" class="btn btn-primary btn-sm btn-edit"><i class="fas fa-pen"></i></button>' +
+                                    '<button type="button" class="btn btn-danger btn-sm ms-2 btn-eliminar"><i class="fas fa-trash"></i></button>';
+                            }
+                        },
+                        "orderable": false,
+                        "searchable": false,
+                        "width": "90px",
+                    }
+
+
+                ],
+                "language": { "url": "https://cdn.datatables.net/plug-ins/1.12.1/i18n/es-ES.json" }
+            });
+
+            var btnMarginStyle = document.createElement('style');
+            btnMarginStyle.innerHTML = '.btn-margin { margin-right: 5px; margin-left: 5px; }';
+            document.head.appendChild(btnMarginStyle);
+
+            var btnColorPdf = document.createElement('style');
+            btnColorPdf.innerHTML = '.btn-colorPdf { background-color: #151240 } .btn-colorPdf:hover { background-color: #151240 }';
+            document.head.appendChild(btnColorPdf);
+
+            var btnColorExcel = document.createElement('style');
+            btnColorExcel.innerHTML = '.btn-colorExcel { background-color: #151240 } .btn-colorExcel:hover { background-color: #151240 }';
+            document.head.appendChild(btnColorExcel);
+        });
+
+
+
+        //to open modal
+
+        function OpenModal(json) {
+
+            $("#txtID").val(0);
+            $("#txtIdentification").val("");
+            $("#txtProfessionalName").val("");
+            $("#txtLastName").val("");
+            $("#txtSecondLastName").val("");
+            $("#txtMail").val("");
+            $("#txtPhone").val("");
+            $("#txtProfession").val("");
+            $("#txtAcademicDegree").val("");
+            $("#txtCollege").val("");
+            $("#txtProfessionalCard").val("");
+            $("#errorMessage").hide();
+
+            if (json != null) {
+
+                $("#txtID").val(json.idProfessional);
+                $("#txtIdentification").val(json.identification);
+                $("#txtProfessionalName").val(json.professionalName);
+                $("#txtLastName").val(json.lastName);
+                $("#txtSecondLastName").val(json.secondLastName);
+                $("#txtMail").val(json.mail);
+                $("#txtPhone").val(json.phone);
+                $("#txtProfession").val(json.profession);
+                $("#txtAcademicDegree").val(json.academicDegree);
+                $("#txtCollege").val(json.college);
+                $("#txtProfessionalCard").val(json.professionalCard);
+            }
+
+            $("#FormModal").modal("show");
+        }
+
+        /*a method to show physical customer on the modal to edit their info*/
+
+        $("#table tbody").on("click", '.btn-edit', function () {
+
+            rowSelected = $(this).closest("tr");
+
+            var projectData = tableData.row(rowSelected).data();
+
+            OpenModal(projectData)
+
+        })
+
+        //to save or update
+
+        function SaveProfessionalInfo() {
+
+            var professionals = {
+
+                idProfessional: $("#txtID").val(),
+                identification: $("#txtIdentification").val(),
+                professionalName: $("#txtProfessionalName").val(),
+                lastName: $("#txtLastName").val(),
+                secondLastName: $("#txtSecondLastName").val(),
+                mail: $("#txtMail").val(),
+                phone: $("#txtPhone").val(),
+                profession: $("#txtProfession").val(),
+                academicDegree: $("#txtAcademicDegree").val(),
+                college: $("#txtCollege").val(),
+                professionalCard: $("#txtProfessionalCard").val()
+            }
+
+            jQuery.ajax({
+                url: '@Url.Action("SaveProfessionalInfo", "Professionals")',
+                type: "POST",
+                data: JSON.stringify({ objProfessional: professionals}),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+
+                    $(".modal-body").LoadingOverlay("hide");
+
+                    //When is a new project information
+                    if (professionals.idCustomer == 0) {
+
+                        if (data.result != 0) {
+
+                            professionals.idCustomer = data.result;
+                            tableData.row.add(professionals).draw(false);
+                            $("#FormModal").modal("hide");
+                        }
+                        else {
+
+                            $("#errorMessage").text(data.message);
+                            $("#errorMessage").show();
+                        }
+                    }
+                    //When update project location
+                    else {
+
+                        if (data.result) {
+
+                            tableData.row(rowSelected).data(professionals).draw(false);
+                            rowSelected = null;
+                            $("#FormModal").modal("hide");
+                        }
+                        else {
+
+                            $("#errorMessage").text(data.message);
+                            $("#errorMessage").show();
+                        }
+                    }
+                },
+                error: function (error) {
+
+                    $(".modal-body").LoadingOverlay("hide");
+                    $("#errorMessage").text("Error Ajax");
+                    $("#errorMessage").show();
+
+                },//beforeSend allow to do something during the success case is executing
+                beforeSend: function () {
+                    $(".modal-body").LoadingOverlay("show", {
+                        imageResizeFactor: 2,
+                        text: "Cargando...",
+                        size: 14
+                    })
+                }
+            });
+        }
+
+        //to delete
+
+        $("#table tbody").on("click", '.btn-eliminar', function () {
+
+            var professionalSelected = $(this).closest("tr");
+
+            var data = tableData.row(professionalSelected).data();
+
+            swal({
+                title: "Alerta",
+                text: "¿Seguro que deseas eliminar este registro?",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonClass: "btn-primary",
+                confirmButtonText: "Sí",
+                cancelButtonText: "No",
+                closeOnConfirm: true
+            },
+            function () {
+                jQuery.ajax({
+                    url: '@Url.Action("DeleteProfessional", "Professionals")',
+                    type: "POST",
+                    data: JSON.stringify({ id: data.idProfessional }),
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+
+                        if (data.result) {
+
+                            tableData.row(professionalSelected).remove().draw();
+                        }
+                        else {
+                            swal("Oh! Imposible eliminar el registro", data.message, "error")
+                        }
+                    },
+                    error: function (error) {
+
+                        console.log(error)
+                    }
+                });
+            });
+        })
+
+        window.onload = function () {
+            disableButtonsByUserRole('@ViewBag.UserRole');
+        };
+
+        function disableButtonsByUserRole(userRole) {
+            // Desactivar los botones según el rol del usuario
+            if (userRole === "Registra") {
+                document.getElementById('btnPdf').disabled = true;
+                document.getElementById('btnExcel').disabled = true;
+            }
+        }
+
+    </script>
+}

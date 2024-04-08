@@ -1,0 +1,63 @@
+﻿@*To Moni: mantener todas la etiquetas name con el nombre que tienen actualmente.*@
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en"> 
+<head>
+    <meta name="viewport" content="width=device-width"  charset="UTF-8">
+    <!---- Icons ---->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+    <title>Agronomi</title>
+
+    <!---- Title bar logo ---->
+    <link rel="icon" href="#" type="image/png">
+</head>
+<body>
+    <div class="container mt-5 pt-5">
+
+        <div class="row justify-content-center">
+            <div class="col-12 col-xl-4 col-md-6">
+
+                <div class="card">
+                    <div class="card-header">
+                        Iniciar Sesion
+                    </div>
+                    <div class="card-body">
+
+                        <form action="@Url.Action("Login", "Access")" method="post">
+
+                            <input class="form-control mb-3" type="text" placeholder="Correo" required name="mail" />
+                            <input class="form-control mb-3" type="password" placeholder="Contraseña" required name="password" />
+                            <div class="d-grid gap-2 mb-3">
+                                <button class="btn btn-primary" type="submit">Iniciar Sesion</button>
+                            </div>
+                            @if (ViewData["Mensaje"] != null)
+                            {
+
+                                <div class="form-group">
+                                    <div class="alert alert-danger" role="alert">
+                                        @ViewData["Mensaje"]
+                                    </div>
+                                </div>
+                            }
+                            ¿No tienes una cuenta? <a href="@Url.Action("Registrarse","Access")"> Registraste!</a>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/complementos")
+    @Scripts.Render("~/bundles/bootstrap")
+</body>
+</html>

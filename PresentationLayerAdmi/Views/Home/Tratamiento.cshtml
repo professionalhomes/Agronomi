@@ -1,0 +1,219 @@
+﻿
+@{
+    ViewBag.Title = "Tratamiento";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="color: #283618;">Tratamiento de hierba y malezas</h2>
+
+<div class="card">
+    <div class="card-header" style="color: #283618;">
+        Datos registrados
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12">
+                <button type="button" class="btn btn-success" style="background-color: #606C37; border-color: #606C37;" onclick="OpenModal(null)">Agregar</button>
+            </div>
+        </div>
+        <hr />
+        <table id="table" class="display cell-border" style="width:100%; color: #283618;">
+            <thead>
+                <tr>
+                    <th>Terreno</th>
+                    <th>Actividad</th>
+                    <th>Costo por cortar maleza</th>
+                    <th>Costo por hora</th>
+                    <th>Horas asignadas</th>
+                    <th>Coste de aplicación de hierbicidas </th>
+                    <th>Costo por hora</th>
+                    <th>Horas asignadas</th>
+                    <th>Resultado</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="modal fade" id="FormModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header text-white" style="background: #606C37;">
+                <h5 class="modal-title" id="exampleModalLabel">Registro de información para tratamiento del terreno</h5>
+            </div>
+            <div class="modal-body">
+
+                @*This input has the ID of the user that will be update on the BBDD*@
+                <input id="txtID" type="hidden" value="0" />
+                <form>
+                    <div class="row">
+                        <h6 class="modal-title" id="exampleModalLabel" style="color: #283618; text-align: center;">Datos del terreno</h6>
+                        <div class="col">
+                            <label for="txtCodigo" class="form-label" style="color: #283618;">Código del terreno</label>
+                            <input type="text" class="form-control" id="txtCodigo" placeholder="T-XXX" autocomplete="off" required>
+                        </div>
+                        <div class="col">
+                            <label for="txtActividad" class="form-label" style="color: #283618;">Actividad</label>
+                            <input type="text" class="form-control" id="txtActividad" placeholder="" autocomplete="off" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <h6 class="modal-title" id="exampleModalLabel" style="color: #283618; text-align: center;">Datos de corte de malezas</h6>
+                        <div class="col">
+                            <label for="txtCostoCortarMaleza" class="form-label" style="color: #283618;">Costo por cortar maleza ₡</label>
+                            <input type="number" id="txtCostoCortarMaleza" value="100000" required>
+                        </div>
+                        <div class="col">
+                            <label for="txtCostoPorHoraMaleza" class="form-label" style="color: #283618;">Costo por hora ₡</label>
+                            <input type="number" id="txtCostoPorHoraMaleza" value="100000" required>
+                        </div>
+                        <div class="col">
+                            <label for="txtHorasAsignadasMaleza" class="form-label" style="color: #283618;">Horas asignadas</label>
+                            <input type="number" id="txtHorasAsignadasMaleza" value="100000" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <h6 class="modal-title" id="exampleModalLabel" style="color: #283618; text-align: center;">Datos de aplicación de hierbicidas</h6>
+                        <div class="col">
+                            <label for="txtCostoPorAplicacionHibercidas" class="form-label" style="color: #283618;">Costo de aplicación de hierbicidas ₡</label>
+                            <input type="number" id="txtCostoPorAplicacionHibercidas" value="100000" required>
+                        </div>
+                        <div class="col">
+                            <label for="txtCostoPorHoraHibercidas" class="form-label" style="color: #283618;">Costo por hora ₡</label>
+                            <input type="number" id="txtCostoPorHoraHibercidas" value="100000" required>
+                        </div>
+                        <div class="col">
+                            <label for="txtHorasAsignadasHibercidas" class="form-label" style="color: #283618;">Horas asignadas</label>
+                            <input type="number" id="txtHorasAsignadasHibercidas" value="100000" required>
+                        </div>
+                    </div>
+                </form>
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <div id="errorMessage" class="alert alert-danger" role="alert">
+                            A simple danger alert-check it out!
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-success" style="background-color: #606C37; border-color: #606C37;" onclick="InsertarDatosTratamiento()">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+        var tableData;
+        var rowSelected;
+
+        $(document).ready(function () {
+            tableData = $("#table").DataTable({
+
+                responsive: true,
+                ordering: false,
+                dom: 'lfrtip',
+                "ajax": {
+
+                    url: '@Url.Action("TratamientoInfoList", "Home")',
+                    type: "GET",
+                    dataType: "json"
+                },
+                "columns": [
+                    { "data": "idTerreno" },
+                    { "data": "actividad" },
+                    { "data": "costoPorCortaMalezas" },
+                    { "data": "costoPorHoraCorteMalezas" },
+                    { "data": "horasAsignadasCorteMalezas" },
+                    { "data": "costoAplicacionHierbicidas" },
+                    { "data": "costoPorHoraAplicacionHierbicidas" },
+                    { "data": "horasAsignadasAplicacionHierbicidas" },
+                    { "data": "resultadoTratamientoHierbas" }
+
+                ],
+                "language": { "url": "https://cdn.datatables.net/plug-ins/1.12.1/i18n/es-ES.json" }
+            });
+        });
+
+        function OpenModal(json) {
+
+            $("#txtID").val(0);
+            $("#txtCodigo").val("");
+            $("#txtCostoCortarMaleza").val("");
+            $("#txtCostoPorHoraMaleza").val("");
+            $("#txtHorasAsignadasMaleza").val("");
+            $("#txtCostoPorAplicacionHibercidas").val("");
+            $("#txtCostoPorHoraHibercidas").val("");
+            $("#txtHorasAsignadasHibercidas").val("");
+            $("#txtActividad").val("");
+
+            $("#errorMessage").hide();
+
+            $("#FormModal").modal("show");
+        }
+
+        function InsertarDatosTratamiento() {
+
+            var tratamientoDatos = {
+
+                id: $("#txtID").val(),
+                idTerreno: $("#txtCodigo").val(),
+                costoPorCortaMalezas: parseFloat($("#txtCostoCortarMaleza").val()),
+                costoPorHoraCorteMalezas: parseFloat($("#txtCostoPorHoraMaleza").val()),
+                horasAsignadasCorteMalezas: parseFloat($("#txtHorasAsignadasMaleza").val()),
+                costoAplicacionHierbicidas: $("#txtCostoPorAplicacionHibercidas").val(),
+                horasAsignadasAplicacionHierbicidas: parseInt($("#txtCostoPorHoraHibercidas").val()),
+                costoPorHoraAplicacionHierbicidas: $("#txtHorasAsignadasHibercidas").val(),
+                actividad: $("#txtActividad").val()
+            }
+
+            jQuery.ajax({
+                url: '@Url.Action("InsertarDatosTratamiento", "Home")',
+                type: "POST",
+                data: JSON.stringify({ objTratamiento: tratamientoDatos }),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+
+                    $(".modal-body").LoadingOverlay("hide");
+
+                    //To register the new information in the table and hide the modal
+                    if (tratamientoDatos.id == 0) {
+
+                        if (data.result != 0) {
+
+                            tratamientoDatos.id = data.result;
+                            tableData.row.add(tratamientoDatos).draw(false);
+                            $("#FormModal").modal("hide");
+                        }
+                        else {
+
+                            $("#errorMessage").text(data.message);
+                            $("#errorMessage").show();
+                        }
+                    }
+                },
+                error: function (error) {
+
+                    $(".modal-body").LoadingOverlay("hide");
+                    $("#errorMessage").text("Error Ajax");
+                    $("#errorMessage").show();
+
+                },//beforeSend allow to do something during the success case is executing
+                beforeSend: function () {
+                    $(".modal-body").LoadingOverlay("show", {
+                        imageResizeFactor: 2,
+                        text: "Cargando...",
+                        size: 14
+                    })
+                }
+            });
+        }
+
+</script>

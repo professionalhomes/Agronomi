@@ -1,0 +1,122 @@
+﻿@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap");
+
+:root {
+    --header-height: 0;
+    --nav-width: 68px;
+    --first-color: #283618;
+    --first-color-light: #FEFAE1;
+    --white-color: #EFF0F4;
+    --body-font: 'Nunito', sans-serif;
+    --normal-font-size: 1rem;
+    --z-fixed: 100;
+    --body-bg: #EFF0F4;
+    --white-color-2: #fff;
+}
+
+*, ::before, ::after {
+    box-sizing: border-box;
+}
+
+body {
+    position: relative;
+    margin: var(--header-height) 0 0 0;
+    padding: 0;
+    font-family: var(--body-font);
+    font-size: var(--normal-font-size);
+    transition: .5s;
+    background: radial-gradient(circle, #606C37, #e2edbd);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+.body-pd {
+    background-color: #606C37;
+}
+
+a {
+    text-decoration: none;
+    color: #606C37;
+    padding-bottom: 1rem;
+}
+
+label {
+    color: #283618;
+}
+
+h1 {
+    color: #BC6C25;
+    margin: none;
+    padding: none;
+}
+
+input {
+    border: thin solid #606C37;
+    border-radius: 0.3rem;
+    background: transparent;
+    color: #283618;
+    width: 15rem;
+    height: 2.3125rem;
+}
+
+    input:focus {
+        border: thin solid #BC6C25;
+    }
+
+select {
+    border: none;
+    border-radius: 0.5rem;
+    background: rgba(96, 108, 55, 0.20);
+    width: 11rem;
+    height: 2.3125rem;
+}
+
+.container {
+    width: 30rem;
+    height: 32rem;
+    background-color: #eff0f43e;
+    border-radius: 1.5rem;
+}
+
+.tittle {
+    height: 5rem;
+    padding: 3rem;
+    padding-top: 5rem;
+    flex-direction: column;
+}
+
+    .tittle label {
+        margin-top: 4px;
+    }
+
+.tittle, .content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.inputContent, .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.inputContentOption {
+    margin: 0.5rem;
+    display: grid;
+}
+
+.btnAgronomi {
+    border: none;
+    border-radius: 0.5rem;
+    background: #BC6C25;
+    color: #FEFAE1;
+    font-weight: 500;
+    margin: 0.5rem;
+    width: 11rem;
+    height: 2.3125rem;
+}

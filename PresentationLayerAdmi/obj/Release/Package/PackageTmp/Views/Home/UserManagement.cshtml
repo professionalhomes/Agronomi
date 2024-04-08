@@ -1,0 +1,375 @@
+﻿
+@{
+    ViewBag.Title = "Usuarios";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<ol class="breadcrumb mb-4 mt-4">
+    <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">Inicio</a></li>
+    <li class="breadcrumb-item active">Usuarios</li>
+</ol>
+
+<div class="card">
+    <div class="card-header">
+        <i class="far fa-file-archive me-1"></i> Gestión de usuarios registrados
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12">
+                <button type="button" class="btn btn-success" onclick="OpenModal(null)">Registrar Usuarios</button>
+            </div>
+        </div>
+        <hr />
+        <table id="table" class="display cell-border" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Primer Apellido</th>
+                    <th>Segundo Apellido</th>
+                    <th>Correo</th>
+                    <th>Rol</th>
+                    <th>Activo</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Modal to update user info-->
+<div class="modal fade" id="FormModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header text-white" style="background: #151240;">
+                <h5 class="modal-title" id="exampleModalLabel">Información del Usuario</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                @*This input has the ID of the user that will be update on the BBDD*@
+                <input id="txtID" type="hidden" value="0" />
+
+                <!-- Form to update user info-->
+
+                <div class="row g-2">
+
+                    <div class="col-sm-6">
+                        <label for="txtName" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="txtName" autocomplete="off">
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label for="txtLastName" class="form-label">Primer Apellido</label>
+                        <input type="text" class="form-control" id="txtLastName" autocomplete="off">
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label for="txtSecondLastName" class="form-label">Segundo Apellido</label>
+                        <input type="text" class="form-control" id="txtSecondLastName" autocomplete="off">
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label for="txtMail" class="form-label">Correo</label>
+                        <input type="text" class="form-control" id="txtMail" placeholder="ejemplo@gmail.com" autocomplete="off">
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label for="txtPassword" class="form-label">Contraseña</label>
+                        <input type="password" class="form-control" id="txtPassword" autocomplete="off">
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label for="cboUserRole" class="form-label">Rol</label>
+                        <select id="cboUserRole" class="form-select">
+                            <option value="1">Administrador</option>
+                            <option value="2">Registra</option>
+                            <option value="3">Consulta</option>
+                        </select>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label for="cboCondition" class="form-label">Activo</label>
+                        <select id="cboCondition" class="form-select">
+                            <option value="1">Activo</option>
+                            <option value="0">No activo</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="row mt-2">
+
+                    <div class="col-12">
+                        <div id="errorMessage" class="alert alert-danger" role="alert">
+                            A simple danger alert-check it out!
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" onclick="SaveUser()">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*Implementing AJAX method to view the BBDD project info in the presentation layer*@
+
+@section scripts{
+
+    <script>
+
+        var tableData;
+        var rowSelected;
+
+        $(document).ready(function () {
+
+            tableData = $("#table").DataTable({
+
+                responsive: true,
+                ordering: false,
+                dom: 'lBfrtip',
+                buttons: [
+                    {
+                        extend: 'pdfHtml5',
+                        text: '<i class="fas fa-file-pdf"></i>',
+                        titleAttr: 'Exportar a PDF',
+                        className: 'btn btn-margin btn-colorPdf',
+                        orientation: 'landscape'
+                    },
+                    {
+                        extend: 'excelHtml5',
+                        text: '<i class="fas fa-file-excel"></i>',
+                        titleAttr: 'Exportar a Excel',
+                        className: 'btn btn-margin btn-colorExcel'
+                    }
+                ],
+                buttonContainer: '<div class="btn-group"></div>',
+                "ajax": {
+
+                    url:'@Url.Action("UserList", "Home")', /*retorna la url*/
+                    type: "GET",
+                    dataType: "json"
+
+                },
+                "columns": [
+
+                    { "data": "name" },
+                    { "data": "lastName" },
+                    { "data": "secondLastName" },
+                    { "data": "mail" },
+                    {
+                        "data": "roleName", "render": function (value) {
+
+                            if (value == "Administrador") {
+                                return '<span class="badge bg-dark">Administrador</span>'
+                            }
+                            else if (value == "Registra"){
+                                return '<span class="badge bg-warning">Registra</span>'
+                            }
+                            else if (value == "Consulta"){
+                                return '<span class="badge bg-secondary">Consulta</span>'
+                            }
+
+                        }
+                    },
+                    {
+                        "data": "condition", "render": function (value) {
+
+                            if (value) {
+                                return '<span class="badge bg-success">Sí</span>'
+                            }
+                            else {
+                                return '<span class="badge bg-danger">No</span>'
+                            }
+
+                        }
+                    },
+                    {
+                        "defaultContent": '<button type="button" class="btn btn-primary btn-sm btn-edit"><i class="fas fa-pen"></i></button>' +
+                            '<button type="button" class="btn btn-danger btn-sm ms-2 btn-eliminar"><i class="fas fa-trash"></i></button>',
+                        "orderable": false,
+                        "searchable": false,
+                        "width": "90px",
+                    }
+
+                ],
+                "language": { "url": "https://cdn.datatables.net/plug-ins/1.12.1/i18n/es-ES.json"}
+            });
+
+            var btnMarginStyle = document.createElement('style');
+            btnMarginStyle.innerHTML = '.btn-margin { margin-right: 5px; margin-left: 5px; }';
+            document.head.appendChild(btnMarginStyle);
+
+            var btnColorPdf = document.createElement('style');
+            btnColorPdf.innerHTML = '.btn-colorPdf { background-color: #151240 } .btn-colorPdf:hover { background-color: #151240 }';
+            document.head.appendChild(btnColorPdf);
+
+            var btnColorExcel = document.createElement('style');
+            btnColorExcel.innerHTML = '.btn-colorExcel { background-color: #151240 } .btn-colorExcel:hover { background-color: #151240 }';
+            document.head.appendChild(btnColorExcel);
+
+        });
+
+
+
+        function OpenModal(json) {
+
+            $("#txtID").val(0);
+            $("#txtName").val("");
+            $("#txtLastName").val("");
+            $("#txtSecondLastName").val("");
+            $("#txtMail").val("");
+            $("#txtPassword").val("");
+            $("#cboUserRole").val(1);
+            $("#cboCondition").val(1);
+            $("#errorMessage").hide();
+
+            if (json != null) {
+
+                $("#txtID").val(json.idUser);
+                $("#txtName").val(json.name);
+                $("#txtLastName").val(json.lastName);
+                $("#txtSecondLastName").val(json.secondLastName);
+                $("#txtMail").val(json.mail);
+                $("#txtPassword").val(json.userPassword);
+                $("#cboUserRole").val(json.roleName == "Administrador" ? 1 : json.roleName == "Registra" ? 2 : json.roleName == "Consulta" ? 3:1);
+                $("#cboCondition").val(json.condition == true ? 1 : 0);
+            }
+
+            $("#FormModal").modal("show");
+
+        }
+
+        /*a method to show users info on the modal to edit their info*/
+
+        $("#table tbody").on("click", '.btn-edit', function () {
+
+            rowSelected = $(this).closest("tr");
+
+            var projectData = tableData.row(rowSelected).data();
+
+            OpenModal(projectData)
+
+        })
+
+        $("#table tbody").on("click", '.btn-eliminar', function () {
+
+            var projectSelected = $(this).closest("tr");
+
+            var data = tableData.row(projectSelected).data();
+
+            swal({
+                title: "Alerta",
+                text: "¿Seguro que deseas eliminar este registro?",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonClass: "btn-primary",
+                confirmButtonText: "Sí",
+                cancelButtonText: "No",
+                closeOnConfirm: true
+            },
+            function () {
+                jQuery.ajax({
+                    url: '@Url.Action("DeleteUser", "Home")',
+                    type: "POST",
+                    data: JSON.stringify({ id: data.idUser }),
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+
+                        if (data.result == 1) {
+
+                            tableData.row(projectSelected).remove().draw();
+                        }
+                        else {
+                            swal("Oh! Imposible eliminar el registro", data.message, "error")
+                        }
+                    },
+                    error: function (error) {
+
+                        console.log(error)
+                    }
+                });
+            });
+        })
+
+        function SaveUser() {
+
+            var user = {
+
+                idUser: $("#txtID").val(),
+                name: $("#txtName").val(),
+                lastName: $("#txtLastName").val(),
+                secondLastName: $("#txtSecondLastName").val(),
+                mail: $("#txtMail").val(),
+                userPassword: $("#txtPassword").val(),
+                roleName: $("#cboUserRole").val() == 1 ? "Administrador" : $("#cboUserRole").val() == 2 ? "Registra" : $("#cboUserRole").val() == 3 ? "Consulta" : "",
+                condition: $("#cboCondition").val() == 1 ? true : false,
+            }
+
+            jQuery.ajax({
+                url: '@Url.Action("SaveUser", "Home")',
+                type: "POST",
+                data: JSON.stringify({ objUser: user}),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+
+                    $(".modal-body").LoadingOverlay("hide");
+
+                    //When is a new user
+                    if (user.idUser == 0) {
+
+                        if (data.result != 0) {
+
+                            user.idUser = data.result;
+                            tableData.row.add(user).draw(false);
+                            $("#FormModal").modal("hide");
+                        }
+                        else {
+
+                            $("#errorMessage").text(data.message);
+                            $("#errorMessage").show();
+                        }
+                    }
+                    //When update user
+                    else {
+
+                        if (data.result) {
+
+                            tableData.row(rowSelected).data(user).draw(false);
+                            rowSelected = null;
+                            $("#FormModal").modal("hide");
+                        }
+                        else {
+
+                            $("#errorMessage").text(data.message);
+                            $("#errorMessage").show();
+                        }
+                    }
+                },
+                error: function (error) {
+
+                    $(".modal-body").LoadingOverlay("hide");
+                    $("#errorMessage").text("Error Ajax");
+                    $("#errorMessage").show();
+
+                },//beforeSend allow to do something during the success case is executing
+                beforeSend: function () {
+                    $(".modal-body").LoadingOverlay("show", {
+                        imageResizeFactor: 2,
+                        text: "Cargando...",
+                        size: 14
+                    })
+                }
+            });
+        }
+
+    </script>
+}

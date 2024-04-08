@@ -1,0 +1,210 @@
+﻿
+@{
+    ViewBag.Title = "Labranza";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="color: #283618;">Labranza del terreno</h2>
+
+<div class="card">
+    <div class="card-header" style="color: #283618;">
+        Datos registrados
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12">
+                <button type="button" class="btn btn-success" style="background-color: #606C37; border-color: #606C37;" onclick="OpenModal(null)">Agregar</button>
+            </div>
+        </div>
+        <hr />
+        <table id="table" class="display cell-border" style="width:100%; color: #283618;">
+            <thead>
+                <tr>
+                    <th>Terreno</th>
+                    <th>Costo por arado</th>
+                    <th>Costo por enmiendas</th>
+                    <th>Costo por trazado</th>
+                    <th>Costo por camas</th>
+                    <th>Costo por murillo</th>
+                    <th>Costo por rastra</th>
+                    <th>Resultado</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="modal fade" id="FormModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header text-white" style="background: #606C37;">
+                <h5 class="modal-title" id="exampleModalLabel">Registro de información para labranza del terreno</h5>
+            </div>
+            <div class="modal-body">
+
+                @*This input has the ID of the user that will be update on the BBDD*@
+                <input id="txtID" type="hidden" value="0" />
+                <form>
+                    <div class="row">
+                        <h6 class="modal-title" id="exampleModalLabel" style="color: #283618; text-align: center;">Datos del terreno</h6>
+                        <div class="col">
+                            <label for="txtCodigo" class="form-label" style="color: #283618;">Código del terreno</label>
+                            <input type="text" class="form-control" id="txtCodigo" placeholder="T-XXX" autocomplete="off" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <h6 class="modal-title" id="exampleModalLabel" style="color: #ffffff; text-align: center;">.</h6>
+                        <div class="col">
+                            <label for="txtCostoArado" class="form-label" style="color: #283618;">Costo por arado ₡</label>
+                            <input type="number" id="txtCostoArado" value="100000" required>
+                        </div>
+                        <div class="col">
+                            <label for="txtCostoEnmiendas" class="form-label" style="color: #283618;">Costo por enmiendas ₡</label>
+                            <input type="number" id="txtCostoEnmiendas" value="100000" required>
+                        </div>
+                        <div class="col">
+                            <label for="txtCostoPorTrazado" class="form-label" style="color: #283618;">Costo por trazado ₡</label>
+                            <input type="number" id="txtCostoPorTrazado" value="100000" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <h6 class="modal-title" id="exampleModalLabel" style="color: #ffffff; text-align: center;">.</h6>
+                        <div class="col">
+                            <label for="txtCostoPorCamas" class="form-label" style="color: #283618;">Costo por camas</label>
+                            <input type="number" id="txtCostoPorCamas" value="100000" required>
+                        </div>
+                        <div class="col">
+                            <label for="txtCostoPorMurillo" class="form-label" style="color: #283618;">Costo por murillo ₡</label>
+                            <input type="number" id="txtCostoPorMurillo" value="100000" required>
+                        </div>
+                        <div class="col">
+                            <label for="txtCostoPorRastra" class="form-label" style="color: #283618;">Costo por rastra ₡</label>
+                            <input type="number" id="txtCostoPorRastra" value="100000" required>
+                        </div>
+                    </div>
+                </form>
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <div id="errorMessage" class="alert alert-danger" role="alert">
+                            A simple danger alert-check it out!
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-success" style="background-color: #606C37; border-color: #606C37;" onclick="InsertarDatosLabranza()">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+        var tableData;
+        var rowSelected;
+
+        $(document).ready(function () {
+            tableData = $("#table").DataTable({
+
+                responsive: true,
+                ordering: false,
+                dom: 'lfrtip',
+                "ajax": {
+
+                    url: '@Url.Action("LabranzaInfoList", "Home")',
+                    type: "GET",
+                    dataType: "json"
+                },
+                "columns": [
+                    { "data": "idTerreno" },
+                    { "data": "costoPorArado" },
+                    { "data": "costoPorEnmindas" },
+                    { "data": "costoPorTrazado" },
+                    { "data": "costoPorCamas" },
+                    { "data": "costoPorMurillo" },
+                    { "data": "costoPorRastra" },
+                    { "data": "resultadoLabranza" }
+
+                ],
+                "language": { "url": "https://cdn.datatables.net/plug-ins/1.12.1/i18n/es-ES.json" }
+            });
+        });
+
+    function OpenModal(json) {
+
+        $("#txtID").val(0);
+        $("#txtCodigo").val("");
+        $("#txtCostoArado").val("");
+        $("#txtCostoEnmiendas").val("");
+        $("#txtCostoPorTrazado").val("");
+        $("#txtCostoPorCamas").val("");
+        $("#txtCostoPorMurillo").val("");
+        $("#txtCostoPorRastra").val("");
+
+        $("#errorMessage").hide();
+
+        $("#FormModal").modal("show");
+    }
+
+    function InsertarDatosLabranza() {
+
+            var labranzaDatos = {
+
+                id: $("#txtID").val(),
+                idTerreno: $("#txtCodigo").val(),
+                costoPorArado: parseFloat($("#txtCostoArado").val()),
+                costoPorEnmindas: parseFloat($("#txtCostoEnmiendas").val()),
+                costoPorTrazado: parseFloat($("#txtCostoPorTrazado").val()),
+                costoPorCamas: $("#txtCostoPorCamas").val(),
+                costoPorMurillo: parseInt($("#txtCostoPorMurillo").val()),
+                costoPorRastra: $("#txtCostoPorRastra").val()
+            }
+
+            jQuery.ajax({
+                url: '@Url.Action("InsertarDatosLabranza", "Home")',
+                type: "POST",
+                data: JSON.stringify({ objLabranza: labranzaDatos }),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+
+                    $(".modal-body").LoadingOverlay("hide");
+
+                    //To register the new information in the table and hide the modal
+                    if (labranzaDatos.id == 0) {
+
+                        if (data.result != 0) {
+
+                            labranzaDatos.id = data.result;
+                            tableData.row.add(labranzaDatos).draw(false);
+                            $("#FormModal").modal("hide");
+                        }
+                        else {
+
+                            $("#errorMessage").text(data.message);
+                            $("#errorMessage").show();
+                        }
+                    }
+                },
+                error: function (error) {
+
+                    $(".modal-body").LoadingOverlay("hide");
+                    $("#errorMessage").text("Error Ajax");
+                    $("#errorMessage").show();
+
+                },//beforeSend allow to do something during the success case is executing
+                beforeSend: function () {
+                    $(".modal-body").LoadingOverlay("show", {
+                        imageResizeFactor: 2,
+                        text: "Cargando...",
+                        size: 14
+                    })
+                }
+            });
+        }
+</script>

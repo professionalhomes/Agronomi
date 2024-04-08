@@ -1,0 +1,226 @@
+﻿
+@{
+    ViewBag.Title = "Bactericidas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="color: #283618;">Bactericidas del terreno</h2>
+
+<div class="card">
+    <div class="card-header" style="color: #283618;">
+        Datos registrados
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12">
+                <button type="button" class="btn btn-success" style="background-color: #606C37; border-color: #606C37;" onclick="OpenModal(null)">Agregar</button>
+            </div>
+        </div>
+        <hr />
+        <table id="table" class="display cell-border" style="width:100%; color: #283618;">
+            <thead>
+                <tr>
+                    <th>Terreno</th>
+                    <th>Nombre Producto</th>
+                    <th>Costo Producto</th>
+                    <th>Cantidad Producto</th>
+                    <th>Cantidad Aplicada</th>
+                    <th>Costo Por Aplicacion</th>
+                    <th>Ciclos</th>
+                    <th>Duracion Ciclo</th>
+                    <th>Duracion Total</th>
+                    <th>Resultado</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="modal fade" id="FormModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header text-white" style="background: #606C37;">
+                <h5 class="modal-title" id="exampleModalLabel">Registro de información para tratamiento del terreno</h5>
+            </div>
+            <div class="modal-body">
+
+                @*This input has the ID of the user that will be update on the BBDD*@
+                <input id="txtID" type="hidden" value="0" />
+                <form>
+                    <div class="row">
+                        <h6 class="modal-title" id="exampleModalLabel" style="color: #283618; text-align: center;">Datos del terreno</h6>
+                        <div class="col">
+                            <label for="txtCodigo" class="form-label" style="color: #283618;">Código del terreno</label>
+                            <input type="text" class="form-control" id="txtCodigo" placeholder="T-XXX" autocomplete="off" required>
+                        </div>
+                        <div class="col">
+                            <label for="txtNombreProducto" class="form-label" style="color: #283618;">Nombre Producto</label>
+                            <input type="text" class="form-control" id="txtNombreProducto" placeholder="" autocomplete="off" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <h6 class="modal-title" id="exampleModalLabel" style="color: #ffffff; text-align: center;">.</h6>
+                        <div class="col">
+                            <label for="txtCostoProducto" class="form-label" style="color: #283618;">Costo Producto ₡</label>
+                            <input type="number" id="txtCostoProducto" value="" required>
+                        </div>
+                        <div class="col">
+                            <label for="txtCantidadProducto" class="form-label" style="color: #283618;">Cantidad Producto</label>
+                            <input type="number" id="txtCantidadProducto" value="100000" required>
+                        </div>
+                        <div class="col">
+                            <label for="txtCantidadAplicada" class="form-label" style="color: #283618;">Cantidad Aplicada</label>
+                            <input type="number" id="txtCantidadAplicada" value="100000" required>
+                        </div>
+                        <div class="col">
+                            <label for="txtCostoPorAplicacion" class="form-label" style="color: #283618;">Costo Por Aplicacion ₡</label>
+                            <input type="number" id="txtCostoPorAplicacion" value="100000" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <h6 class="modal-title" id="exampleModalLabel" style="color: #ffffff; text-align: center;">.</h6>
+                        <div class="col">
+                            <label for="txtCiclos" class="form-label" style="color: #283618;">Cantidad Ciclos</label>
+                            <input type="number" id="txtCiclos" value="100000" required>
+                        </div>
+                        <div class="col">
+                            <label for="txtDuracionCiclo" class="form-label" style="color: #283618;">Duracion Ciclo</label>
+                            <input type="number" id="txtDuracionCiclo" value="100000" required>
+                        </div>
+                        <div class="col">
+                            <label for="txtDuracionTotal" class="form-label" style="color: #283618;">Duracion Total</label>
+                            <input type="number" id="txtDuracionTotal" value="100000" required>
+                        </div>
+                    </div>
+                </form>
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <div id="errorMessage" class="alert alert-danger" role="alert">
+                            A simple danger alert-check it out!
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-success" style="background-color: #606C37; border-color: #606C37;" onclick="InsertarDatosBactericidas()">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+        var tableData;
+        var rowSelected;
+
+        $(document).ready(function () {
+            tableData = $("#table").DataTable({
+
+                responsive: true,
+                ordering: false,
+                dom: 'lfrtip',
+                "ajax": {
+
+                    url: '@Url.Action("BactericidasInfoList", "Home")',
+                    type: "GET",
+                    dataType: "json"
+                },
+                "columns": [
+                    { "data": "idTerreno" },
+                    { "data": "NombreProducto" },
+                    { "data": "costoProducto" },
+                    { "data": "cantidadProducto" },
+                    { "data": "cantidadAplicada" },
+                    { "data": "costoPorAplicacion" },
+                    { "data": "ciclos" },
+                    { "data": "duracionCiclo" },
+                    { "data": "duracionTotal" },
+                    { "data": "resultadoBactericidas" }
+
+                ],
+                "language": { "url": "https://cdn.datatables.net/plug-ins/1.12.1/i18n/es-ES.json" }
+            });
+        });
+
+    function OpenModal(json) {
+
+        $("#txtID").val(0);
+        $("#txtCodigo").val("");
+        $("#txtNombreProducto").val("");
+        $("#txtCostoProducto").val("");
+        $("#txtCantidadProducto").val("");
+        $("#txtCantidadAplicada").val("");
+        $("#txtCostoPorAplicacion").val("");
+        $("#txtCiclos").val("");
+        $("#txtDuracionCiclo").val("");
+        $("#txtDuracionTotal").val("");
+
+        $("#errorMessage").hide();
+
+        $("#FormModal").modal("show");
+    }
+
+    function InsertarDatosBactericidas() {
+
+            var BactericidasDatos = {
+
+                id: $("#txtID").val(),
+                idTerreno: $("#txtCodigo").val(),
+                NombreProducto: $("#txtNombreProducto").val(),
+                costoProducto: $("#txtCostoProducto").val(),
+                cantidadProducto: $("#txtCantidadProducto").val(),
+                cantidadAplicada: $("#txtCantidadAplicada").val(),
+                costoPorAplicacion: $("#txtCostoPorAplicacion").val(),
+                ciclos: $("#txtCiclos").val(),
+                duracionCiclo: $("#txtDuracionCiclo").val(),
+                duracionTotal: $("#txtDuracionTotal").val(),
+            }
+
+            jQuery.ajax({
+                url: '@Url.Action("InsertarDatosBactericidas", "Home")',
+                type: "POST",
+                data: JSON.stringify({ objBactericidas: BactericidasDatos }),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+
+                    $(".modal-body").LoadingOverlay("hide");
+
+                    //To register the new information in the table and hide the modal
+                    if (BactericidasDatos.id == 0) {
+
+                        if (data.result != 0) {
+
+                            BactericidasDatos.id = data.result;
+                            tableData.row.add(BactericidasDatos).draw(false);
+                            $("#FormModal").modal("hide");
+                        }
+                        else {
+
+                            $("#errorMessage").text(data.message);
+                            $("#errorMessage").show();
+                        }
+                    }
+                },
+                error: function (error) {
+
+                    $(".modal-body").LoadingOverlay("hide");
+                    $("#errorMessage").text("Error Ajax");
+                    $("#errorMessage").show();
+
+                },//beforeSend allow to do something during the success case is executing
+                beforeSend: function () {
+                    $(".modal-body").LoadingOverlay("show", {
+                        imageResizeFactor: 2,
+                        text: "Cargando...",
+                        size: 14
+                    })
+                }
+            });
+    }
+
+</script>

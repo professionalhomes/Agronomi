@@ -1,0 +1,12 @@
+C:\Users\Luis Antonio Jimenez\OneDrive - Estudiantes ITCR\TEC\ATI\CIVCO\Sistema_Proyectos_CIVCO\Sistema_BD_CIVCO\DataLayer\bin\Release\DataLayer.dll
+C:\Users\Luis Antonio Jimenez\OneDrive - Estudiantes ITCR\TEC\ATI\CIVCO\Sistema_Proyectos_CIVCO\Sistema_BD_CIVCO\DataLayer\bin\Release\DataLayer.pdb
+C:\Users\Luis Antonio Jimenez\OneDrive - Estudiantes ITCR\TEC\ATI\CIVCO\Sistema_Proyectos_CIVCO\Sistema_BD_CIVCO\DataLayer\bin\Release\EntityLayer.dll
+C:\Users\Luis Antonio Jimenez\OneDrive - Estudiantes ITCR\TEC\ATI\CIVCO\Sistema_Proyectos_CIVCO\Sistema_BD_CIVCO\DataLayer\bin\Release\EntityLayer.pdb
+C:\Users\Luis Antonio Jimenez\OneDrive - Estudiantes ITCR\TEC\ATI\CIVCO\Sistema_Proyectos_CIVCO\Sistema_BD_CIVCO\DataLayer\obj\Release\DataLayer.csproj.AssemblyReference.cache
+C:\Users\Luis Antonio Jimenez\OneDrive - Estudiantes ITCR\TEC\ATI\CIVCO\Sistema_Proyectos_CIVCO\Sistema_BD_CIVCO\DataLayer\obj\Release\DataLayer.csproj.CoreCompileInputs.cache
+C:\Users\Luis Antonio Jimenez\OneDrive - Estudiantes ITCR\TEC\ATI\CIVCO\Sistema_Proyectos_CIVCO\Sistema_BD_CIVCO\DataLayer\obj\Release\DataLayer.csproj.CopyComplete
+C:\Users\Luis Antonio Jimenez\OneDrive - Estudiantes ITCR\TEC\ATI\CIVCO\Sistema_Proyectos_CIVCO\Sistema_BD_CIVCO\DataLayer\obj\Release\DataLayer.dll
+C:\Users\Luis Antonio Jimenez\OneDrive - Estudiantes ITCR\TEC\ATI\CIVCO\Sistema_Proyectos_CIVCO\Sistema_BD_CIVCO\DataLayer\obj\Release\DataLayer.pdb
+C:\Users\Luis Antonio Jimenez\OneDrive - Estudiantes ITCR\TEC\ATI\CIVCO\Sistema_Proyectos_CIVCO\Sistema_BD_CIVCO\DataLayer\bin\Release\BouncyCastle.Crypto.dll
+C:\Users\Luis Antonio Jimenez\OneDrive - Estudiantes ITCR\TEC\ATI\CIVCO\Sistema_Proyectos_CIVCO\Sistema_BD_CIVCO\DataLayer\bin\Release\itextsharp.dll
+C:\Users\Luis Antonio Jimenez\OneDrive - Estudiantes ITCR\TEC\ATI\CIVCO\Sistema_Proyectos_CIVCO\Sistema_BD_CIVCO\DataLayer\bin\Release\itextsharp.xml

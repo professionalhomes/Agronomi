@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="DefaultConnection-Web.config Connection String" description="DefaultConnection Connection String used in web.config by the application to access the database." defaultValue="Data Source=tcp:server-sistema-gestion-proyectos.database.windows.net,1433;Initial Catalog=BD_SistemaGestionProyectos;&#xD;&#xA;     User Id=giannina@server-sistema-gestion-proyectos;Password=Xs@7rKp3wLzE;&#xD;&#xA;         Encrypt=true;Trusted_Connection=false;&#xD;&#xA;         MultipleActiveResultSets=True" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\Luis\ Antonio\ Jimenez\\OneDrive\ -\ Estudiantes\ ITCR\\TEC\\ATI\\CIVCO\\Sistema_Proyectos_CIVCO\\Sistema_BD_CIVCO\\PresentationLayerAdmi\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
+  </parameter>
+</parameters>

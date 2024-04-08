@@ -1,0 +1,304 @@
+﻿@{
+    ViewBag.Title = "Ubicaciones";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<ol class="breadcrumb mb-4 mt-4">
+    <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">Inicio</a></li>
+    <li class="breadcrumb-item active">Ubicaciones</li>
+</ol>
+
+<div class="card">
+    <div class="card-header">
+        <i class="far fa-file-archive me-1"></i> Ubicación de los proyectos registrados
+    </div>
+    <div class="card-body">
+        <hr />
+        <table id="table" class="display cell-border" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>País</th>
+                    <th>Provincia</th>
+                    <th>Cantón</th>
+                    <th>Distrito</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Modal to update project info-->
+<div class="modal fade" id="FormModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header text-white" style="background: #151240;">
+                <h5 class="modal-title" id="exampleModalLabel">Ubicación de Proyectos</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                @*This input has the ID of the project that will be update on the BBDD*@
+                <input id="txtID" type="hidden" value="0" />
+
+                <!-- Form to update project info-->
+
+                <div class="row g-2">
+
+                    <div class="col-sm-6">
+                        <label for="txtProjectCode" class="form-label">Código</label>
+                        <input type="text" class="form-control" id="txtProjectCode" placeholder="PS-XXX-XX" autocomplete="off">
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label for="txtCountry" class="form-label">País</label>
+                        <input type="text" class="form-control" id="txtCountry" autocomplete="off">
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label for="txtProvince" class="form-label">Provincia</label>
+                        <input type="text" class="form-control" id="txtProvince" placeholder="" autocomplete="off">
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label for="txtCity" class="form-label">Ciudad</label>
+                        <input type="text" class="form-control" id="txtCity" placeholder="" autocomplete="off">
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label for="txtDistrict" class="form-label">Distrito</label>
+                        <input type="text" class="form-control" id="txtDistrict" placeholder="" autocomplete="off">
+                    </div>
+                </div>
+
+                <div class="row mt-2">
+
+                    <div class="col-12">
+                        <div id="errorMessage" class="alert alert-danger" role="alert">
+                            A simple danger alert-check it out!
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" onclick="SaveProjectsLocation()">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*Implementing AJAX method to view the BBDD project location in the presentation layer*@
+
+@section scripts{
+
+    <script>
+
+        var tableData;
+        var rowSelected;
+
+        $(document).ready(function () {
+
+            tableData = $("#table").DataTable({
+
+                responsive: true,
+                ordering: false,
+                dom: 'lBfrtip',
+                buttons: [
+                    {
+                        extend: 'pdfHtml5',
+                        text: '<i class="fas fa-file-pdf"></i>',
+                        titleAttr: 'Exportar a PDF',
+                        className: 'btn btn-margin btn-colorPdf',
+                        orientation: 'landscape',
+                        attr: {
+                            id: 'btnPdf' // Agrega el ID 'btnPdf' al botón de PDF
+                        }
+                    },
+                    {
+                        extend: 'excelHtml5',
+                        text: '<i class="fas fa-file-excel"></i>',
+                        titleAttr: 'Exportar a Excel',
+                        className: 'btn btn-margin btn-colorExcel',
+                        attr: {
+                            id: 'btnExcel' // Agrega el ID 'btnExcel' al botón de Excel
+                        }
+                    }
+                ],
+                buttonContainer: '<div class="btn-group"></div>',
+                "ajax": {
+
+                    url:'@Url.Action("ProjectsLocationList", "Home")', /*retorna la url*/
+                    type: "GET",
+                    dataType: "json"
+
+                },
+                "columns": [
+
+                    { "data": "projectCode" },
+                    { "data": "country" },
+                    { "data": "province" },
+                    { "data": "city" },
+                    { "data": "district" },
+                    {
+                        "data": null,
+                        "render": function (data, type, row) {
+                            var userRole = '@ViewBag.UserRole';
+
+                            if (userRole === "Consulta" || userRole === "Registra") {
+                                // Si el rol es "Consulta" o "Registra", deshabilita los botones
+                                return '<button type="button" class="btn btn-primary btn-sm btn-edit" disabled><i class="fas fa-pen"></i></button>';
+                            } else {
+                                // Si el rol no es "Consulta" ni "Registra", muestra los botones habilitados
+                                return '<button type="button" class="btn btn-primary btn-sm btn-edit"><i class="fas fa-pen"></i></button>';
+                            }
+                        },
+                        "orderable": false,
+                        "searchable": false,
+                        "width": "90px",
+                    }
+
+                ],
+                "language": { "url": "https://cdn.datatables.net/plug-ins/1.12.1/i18n/es-ES.json"}
+            });
+
+            var btnMarginStyle = document.createElement('style');
+            btnMarginStyle.innerHTML = '.btn-margin { margin-right: 5px; margin-left: 5px; }';
+            document.head.appendChild(btnMarginStyle);
+
+            var btnColorPdf = document.createElement('style');
+            btnColorPdf.innerHTML = '.btn-colorPdf { background-color: #151240 } .btn-colorPdf:hover { background-color: #151240 }';
+            document.head.appendChild(btnColorPdf);
+
+            var btnColorExcel = document.createElement('style');
+            btnColorExcel.innerHTML = '.btn-colorExcel { background-color: #151240 } .btn-colorExcel:hover { background-color: #151240 }';
+            document.head.appendChild(btnColorExcel);
+
+        });
+
+        function OpenModal(json) {
+
+            $("#txtID").val(0);
+            $("#txtProjectCode").val("");
+            $("#txtCountry").val("");
+            $("#txtProvince").val("");
+            $("#txtCity").val("");
+            $("#txtDistrict").val("");
+            $("#errorMessage").hide();
+
+            if (json != null) {
+
+                $("#txtID").val(json.idProject);
+                $("#txtProjectCode").val(json.projectCode);
+                $("#txtCountry").val(json.country);
+                $("#txtProvince").val(json.province);
+                $("#txtCity").val(json.city);
+                $("#txtDistrict").val(json.district);
+            }
+
+            $("#FormModal").modal("show");
+
+        }
+
+        /*a method to show projects location on the modal to edit their info*/
+
+        $("#table tbody").on("click", '.btn-edit', function () {
+
+            rowSelected = $(this).closest("tr");
+
+            var projectData = tableData.row(rowSelected).data();
+
+            OpenModal(projectData)
+
+        })
+
+        function SaveProjectsLocation() {
+
+            var projectLocation = {
+
+                idProject: $("#txtID").val(),
+                projectCode: $("#txtProjectCode").val(),
+                country: $("#txtCountry").val(),
+                province: $("#txtProvince").val(),
+                city: $("#txtCity").val(),
+                district: $("#txtDistrict").val()
+            }
+
+            jQuery.ajax({
+                url: '@Url.Action("SaveProjectsLocation", "Home")',
+                type: "POST",
+                data: JSON.stringify({ objProject: projectLocation}),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+
+                    $(".modal-body").LoadingOverlay("hide");
+
+                    //When is a new project information
+                    if (projectLocation.idProject == 0) {
+
+                        if (data.result != 0) {
+
+                            projectLocation.idProject = data.result;
+                            tableData.row.add(projectLocation).draw(false);
+                            $("#FormModal").modal("hide");
+                        }
+                        else {
+
+                            $("#errorMessage").text(data.message);
+                            $("#errorMessage").show();
+                        }
+                    }
+                    //When update project location
+                    else {
+
+                        if (data.result) {
+
+                            tableData.row(rowSelected).data(projectLocation).draw(false);
+                            rowSelected = null;
+                            $("#FormModal").modal("hide");
+                        }
+                        else {
+
+                            $("#errorMessage").text(data.message);
+                            $("#errorMessage").show();
+                        }
+                    }
+                },
+                error: function (error) {
+
+                    $(".modal-body").LoadingOverlay("hide");
+                    $("#errorMessage").text("Error Ajax");
+                    $("#errorMessage").show();
+
+                },//beforeSend allow to do something during the success case is executing
+                beforeSend: function () {
+                    $(".modal-body").LoadingOverlay("show", {
+                        imageResizeFactor: 2,
+                        text: "Cargando...",
+                        size: 14
+                    })
+                }
+            });
+        }
+
+        window.onload = function () {
+        disableButtonsByUserRole('@ViewBag.UserRole');
+        };
+
+        function disableButtonsByUserRole(userRole) {
+            // Desactivar los botones según el rol del usuario
+            if (userRole === "Registra") {
+                document.getElementById('btnPdf').disabled = true;
+                document.getElementById('btnExcel').disabled = true;
+            }
+        }
+
+    </script>
+
+} 

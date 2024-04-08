@@ -1,0 +1,193 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DB_CIVCO_TESTModelStoreContainer" CdmEntityContainer="DB_CIVCO_TESTEntities">
+    <EntitySetMapping Name="tbl_Access">
+      <EntityTypeMapping TypeName="DB_CIVCO_TESTModel.tbl_Access">
+        <MappingFragment StoreEntitySet="tbl_Access">
+          <ScalarProperty Name="idAccess" ColumnName="idAccess" />
+          <ScalarProperty Name="idUserRole" ColumnName="idUserRole" />
+          <ScalarProperty Name="access" ColumnName="access" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_Classifications">
+      <EntityTypeMapping TypeName="DB_CIVCO_TESTModel.tbl_Classifications">
+        <MappingFragment StoreEntitySet="tbl_Classifications">
+          <ScalarProperty Name="cdType" ColumnName="cdType" />
+          <ScalarProperty Name="classificationType" ColumnName="classificationType" />
+          <ScalarProperty Name="area" ColumnName="area" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_College">
+      <EntityTypeMapping TypeName="DB_CIVCO_TESTModel.tbl_College">
+        <MappingFragment StoreEntitySet="tbl_College">
+          <ScalarProperty Name="idCollege" ColumnName="idCollege" />
+          <ScalarProperty Name="collegeName" ColumnName="collegeName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_Contact">
+      <EntityTypeMapping TypeName="DB_CIVCO_TESTModel.tbl_Contact">
+        <MappingFragment StoreEntitySet="tbl_Contact">
+          <ScalarProperty Name="idContact" ColumnName="idContact" />
+          <ScalarProperty Name="contactName" ColumnName="contactName" />
+          <ScalarProperty Name="lastName" ColumnName="lastName" />
+          <ScalarProperty Name="secondLastName" ColumnName="secondLastName" />
+          <ScalarProperty Name="contactRole" ColumnName="contactRole" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_Customer">
+      <EntityTypeMapping TypeName="DB_CIVCO_TESTModel.tbl_Customer">
+        <MappingFragment StoreEntitySet="tbl_Customer">
+          <ScalarProperty Name="idCustomer" ColumnName="idCustomer" />
+          <ScalarProperty Name="mail" ColumnName="mail" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="country" ColumnName="country" />
+          <ScalarProperty Name="typeCustomer" ColumnName="typeCustomer" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_Professional">
+      <EntityTypeMapping TypeName="DB_CIVCO_TESTModel.tbl_Professional">
+        <MappingFragment StoreEntitySet="tbl_Professional">
+          <ScalarProperty Name="idProfessional" ColumnName="idProfessional" />
+          <ScalarProperty Name="identification" ColumnName="identification" />
+          <ScalarProperty Name="professionalName" ColumnName="professionalName" />
+          <ScalarProperty Name="lastName" ColumnName="lastName" />
+          <ScalarProperty Name="secondLastName" ColumnName="secondLastName" />
+          <ScalarProperty Name="mail" ColumnName="mail" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="profession" ColumnName="profession" />
+          <ScalarProperty Name="academicDegree" ColumnName="academicDegree" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_ProyectInfo">
+      <EntityTypeMapping TypeName="DB_CIVCO_TESTModel.tbl_ProyectInfo">
+        <MappingFragment StoreEntitySet="tbl_ProyectInfo">
+          <ScalarProperty Name="idProject" ColumnName="idProject" />
+          <ScalarProperty Name="projectCode" ColumnName="projectCode" />
+          <ScalarProperty Name="nameProject" ColumnName="nameProject" />
+          <ScalarProperty Name="startDate" ColumnName="startDate" />
+          <ScalarProperty Name="endDate" ColumnName="endDate" />
+          <ScalarProperty Name="costInColones" ColumnName="costInColones" />
+          <ScalarProperty Name="costInDollars" ColumnName="costInDollars" />
+          <ScalarProperty Name="accreditedProject" ColumnName="accreditedProject" />
+          <ScalarProperty Name="adhonoremProject" ColumnName="adhonoremProject" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_UserRole">
+      <EntityTypeMapping TypeName="DB_CIVCO_TESTModel.tbl_UserRole">
+        <MappingFragment StoreEntitySet="tbl_UserRole">
+          <ScalarProperty Name="idUserRole" ColumnName="idUserRole" />
+          <ScalarProperty Name="userRole" ColumnName="userRole" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_Users">
+      <EntityTypeMapping TypeName="DB_CIVCO_TESTModel.tbl_Users">
+        <MappingFragment StoreEntitySet="tbl_Users">
+          <ScalarProperty Name="idUser" ColumnName="idUser" />
+          <ScalarProperty Name="idUserRole" ColumnName="idUserRole" />
+          <ScalarProperty Name="condition" ColumnName="condition" />
+          <ScalarProperty Name="userName" ColumnName="userName" />
+          <ScalarProperty Name="lastName" ColumnName="lastName" />
+          <ScalarProperty Name="secondLastName" ColumnName="secondLastName" />
+          <ScalarProperty Name="mail" ColumnName="mail" />
+          <ScalarProperty Name="userPassword" ColumnName="userPassword" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_AssociateProfessional">
+      <EntityTypeMapping TypeName="DB_CIVCO_TESTModel.tbl_AssociateProfessional">
+        <MappingFragment StoreEntitySet="tbl_AssociateProfessional">
+          <ScalarProperty Name="idCollege" ColumnName="idCollege" />
+          <ScalarProperty Name="idProfessional" ColumnName="idProfessional" />
+          <ScalarProperty Name="professionalCard" ColumnName="professionalCard" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_LegalCustomer">
+      <EntityTypeMapping TypeName="DB_CIVCO_TESTModel.tbl_LegalCustomer">
+        <MappingFragment StoreEntitySet="tbl_LegalCustomer">
+          <ScalarProperty Name="idCustomer" ColumnName="idCustomer" />
+          <ScalarProperty Name="legalIdentity" ColumnName="legalIdentity" />
+          <ScalarProperty Name="customerName" ColumnName="customerName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_PhysicalCustomer">
+      <EntityTypeMapping TypeName="DB_CIVCO_TESTModel.tbl_PhysicalCustomer">
+        <MappingFragment StoreEntitySet="tbl_PhysicalCustomer">
+          <ScalarProperty Name="idCustomer" ColumnName="idCustomer" />
+          <ScalarProperty Name="identification" ColumnName="identification" />
+          <ScalarProperty Name="customerName" ColumnName="customerName" />
+          <ScalarProperty Name="lastName" ColumnName="lastName" />
+          <ScalarProperty Name="secondLastName" ColumnName="secondLastName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_Project">
+      <EntityTypeMapping TypeName="DB_CIVCO_TESTModel.tbl_Project">
+        <MappingFragment StoreEntitySet="tbl_Project">
+          <ScalarProperty Name="idProject" ColumnName="idProject" />
+          <ScalarProperty Name="idCustomer" ColumnName="idCustomer" />
+          <ScalarProperty Name="idProfessional" ColumnName="idProfessional" />
+          <ScalarProperty Name="professionalRole" ColumnName="professionalRole" />
+          <ScalarProperty Name="idUser" ColumnName="idUser" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_ProjectClassification">
+      <EntityTypeMapping TypeName="DB_CIVCO_TESTModel.tbl_ProjectClassification">
+        <MappingFragment StoreEntitySet="tbl_ProjectClassification">
+          <ScalarProperty Name="idProject" ColumnName="idProject" />
+          <ScalarProperty Name="cdType" ColumnName="cdType" />
+          <ScalarProperty Name="projectType" ColumnName="projectType" />
+          <ScalarProperty Name="projectArea" ColumnName="projectArea" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_ProjectDescription">
+      <EntityTypeMapping TypeName="DB_CIVCO_TESTModel.tbl_ProjectDescription">
+        <MappingFragment StoreEntitySet="tbl_ProjectDescription">
+          <ScalarProperty Name="idProject" ColumnName="idProject" />
+          <ScalarProperty Name="projectDescription" ColumnName="projectDescription" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_ProjectLocation">
+      <EntityTypeMapping TypeName="DB_CIVCO_TESTModel.tbl_ProjectLocation">
+        <MappingFragment StoreEntitySet="tbl_ProjectLocation">
+          <ScalarProperty Name="idProject" ColumnName="idProject" />
+          <ScalarProperty Name="country" ColumnName="country" />
+          <ScalarProperty Name="province" ColumnName="province" />
+          <ScalarProperty Name="city" ColumnName="city" />
+          <ScalarProperty Name="district" ColumnName="district" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="database_firewall_rules">
+      <EntityTypeMapping TypeName="DB_CIVCO_TESTModel.database_firewall_rules">
+        <MappingFragment StoreEntitySet="database_firewall_rules">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="start_ip_address" ColumnName="start_ip_address" />
+          <ScalarProperty Name="end_ip_address" ColumnName="end_ip_address" />
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
+          <ScalarProperty Name="modify_date" ColumnName="modify_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="SP_Delete_ProjectInfo" FunctionName="DB_CIVCO_TESTModel.Store.SP_Delete_ProjectInfo" />
+    <FunctionImportMapping FunctionImportName="SP_Insert_ProjectDescription" FunctionName="DB_CIVCO_TESTModel.Store.SP_Insert_ProjectDescription" />
+    <FunctionImportMapping FunctionImportName="SP_Insert_ProjectInfo" FunctionName="DB_CIVCO_TESTModel.Store.SP_Insert_ProjectInfo" />
+    <FunctionImportMapping FunctionImportName="SP_Insert_ProjectLocation" FunctionName="DB_CIVCO_TESTModel.Store.SP_Insert_ProjectLocation" />
+    <FunctionImportMapping FunctionImportName="SP_Update_ProjectDescription" FunctionName="DB_CIVCO_TESTModel.Store.SP_Update_ProjectDescription" />
+    <FunctionImportMapping FunctionImportName="SP_Update_ProjectInfo" FunctionName="DB_CIVCO_TESTModel.Store.SP_Update_ProjectInfo" />
+    <FunctionImportMapping FunctionImportName="SP_Update_ProjectLocation" FunctionName="DB_CIVCO_TESTModel.Store.SP_Update_ProjectLocation" />
+  </EntityContainerMapping>
+</Mapping>

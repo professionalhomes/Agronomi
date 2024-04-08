@@ -1,0 +1,1264 @@
+﻿@{
+    ViewBag.Title = "Proyectos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<ol class="breadcrumb mb-4 mt-4">
+    <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">Inicio</a></li>
+    <li class="breadcrumb-item active">Proyectos</li>
+</ol>
+
+<div class="card">
+    <div class="card-header">
+        <i class="far fa-file-archive me-1"></i> Información general de proyectos registrados
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12">
+                <button type="button" class="btn btn-success" onclick="OpenModal(null)" @(ViewBag.UserRole == "Consulta" ? "disabled" : "")>Registrar Proyecto</button>
+            </div>
+        </div>
+        <hr />
+        <table id="table" class="display cell-border" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Nombre</th>
+                    <th>Fecha inicio</th>
+                    <th>Fecha fin</th>
+                    <th>Costo colones</th>
+                    <th>Costo dólares</th>
+                    <th>Cantidad estudiantes</th>
+                    <th>Acreditado</th>
+                    <th>Colaboración</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Modal to update project info-->
+<div class="modal fade" id="FormModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header text-white" style="background: #151240;">
+                <h5 class="modal-title" id="exampleModalLabel">Información del Proyecto</h5>
+            </div>
+            <div class="modal-body">
+
+                @*This input has the ID of the user that will be update on the BBDD*@
+                <input id="txtID" type="hidden" value="0" />
+
+                <!-- Form to insert or update project info-->
+
+                <form>
+                    <div class="row">
+                        <h6 class="modal-title" id="exampleModalLabel" style="color: #DEA626; text-align:center;">Datos del proyecto</h6>
+                        <div class="col">
+                            @*Columnas de información general del proyecto*@
+                            <label for="txtProjectCode" class="form-label">Código</label>
+                            <input type="text" class="form-control" id="txtProjectCode" placeholder="PS-XXX-XXXX" autocomplete="off" required>
+                        </div>
+                        <div class="col">
+                            <label for="txtName" class="form-label">Nombre proyecto</label>
+                            <input type="text" class="form-control" id="txtName" autocomplete="off">
+                        </div>
+                        <div class="col">
+                            <label for="txtStartDate" class="form-label">Fecha de inicio</label>
+                            <input type="text" class="form-control" id="txtStartDate" required>
+                        </div>
+                        <div class="col">
+                            <label for="txtEndDate" class="form-label">Fecha de finalización</label>
+                            <input type="text" class="form-control" id="txtEndDate" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        @*Columnas de información general del proyecto*@
+                        <div class="col">
+                            <label for="txtCostInColones" class="form-label">Costo colones</label>
+                            <input type="text" class="form-control" id="txtCostInColones" placeholder="" autocomplete="off" required>
+                        </div>
+                        <div class="col">
+                            <label for="txtCostInDollars" class="form-label">Costo dólares</label>
+                            <input type="text" class="form-control" id="txtCostInDollars" placeholder="" autocomplete="off" required>
+                        </div>
+                        @*<div class="col">
+                                <label for="txtStudentsQuantity" class="form-label">Cantidad estudiantes</label>
+                                <input type="text" class="form-control" id="txtStudentsQuantity" placeholder="" autocomplete="off" required>
+                            </div>*@
+                        <div class="col">
+                            <label for="cboStudentsQuantity" class="form-label">Cantidad estudiantes</label>
+                            <select id="cboStudentsQuantity" class="form-select">
+                                <option value="11">Seleccione</option>
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                            </select>
+                        </div>
+                        <div class="col">
+                            <label for="cboAccreditecProject" class="form-label">Acreditado</label>
+                            <select id="cboAccreditecProject" class="form-select">
+                                <option value="2">Seleccione</option>
+                                <option value="1">Sí</option>
+                                <option value="0">No</option>
+                            </select>
+                        </div>
+                        <div class="col">
+                            <label for="cboAdhonoremProject" class="form-label">Colaboración</label>
+                            <select id="cboAdhonoremProject" class="form-select">
+                                <option value="2">Seleccione</option>
+                                <option value="1">Sí</option>
+                                <option value="0">No</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        @*Columnas de ubicación del proyecto*@
+                        <h6 class="modal-title" id="locationTitle" style="color: #DEA626; text-align: center;">Ubicación del proyecto</h6>
+                        <div class="col">
+                            <label id="lblCountry" for="txtCountry" class="form-label">País</label>
+                            <input type="text" class="form-control" id="txtCountry" autocomplete="off" disabled>
+                        </div>
+                        @*<div class="col">
+                                <label for="txtProvince" class="form-label">Provincia</label>
+                                <input type="text" class="form-control" id="txtProvince" placeholder="" autocomplete="off" required>
+                            </div>*@
+
+                        <div class="col">
+                            <label id="lblProvince" for="cboProvince" class="form-label">Provincia</label>
+                            <select id="cboProvince" class="form-select">
+                                <option value="0">Seleccione</option>
+                            </select>
+                        </div>
+
+                        @*<div class="col">
+                                <label for="txtCity" class="form-label">Cantón</label>
+                                <input type="text" class="form-control" id="txtCity" placeholder="" autocomplete="off" required>
+                            </div>*@
+
+                        <div class="col">
+                            <label id="lblCity" for="cboCity" class="form-label">Cantón</label>
+                            <select id="cboCity" class="form-select">
+                                <option value="0">Seleccione</option>
+                            </select>
+                        </div>
+
+                        @*<div class="col">
+                                <label for="txtDistrict" class="form-label">Distrito</label>
+                                <input type="text" class="form-control" id="txtDistrict" placeholder="" autocomplete="off" required>
+                            </div>*@
+
+                        <div class="col">
+                            <label id="lblDistrict" for="cboDistrict" class="form-label">Distrito</label>
+                            <select id="cboDistrict" class="form-select">
+                                <option value="0">Seleccione</option>
+                            </select>
+                        </div>
+
+                    </div>
+                    @*Columnas de clasificación del proyecto*@
+                    <div class="row">
+                        <h6 class="modal-title" id="typeProjectTitle" style="color: #DEA626; text-align: center;">Tipo de proyecto</h6>
+                        <div class="col">
+                            <label id="lblClassificationType" for="cboClassificationType" class="form-label">Tipo</label>
+                            <select id="cboClassificationType" class="form-select">
+                                <option value="0">Seleccione</option>
+                            </select>
+                        </div>
+                        <div class="col">
+                            <label id="lblcboAreas" for="cboAreas" class="form-label">Área</label>
+                            <select id="cboAreas" class="form-select">
+                                <option value="0">Selecccione</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="txtAddProjectClassificationBoxesAutomatically" class="form-label" style="color: #fff;">.</label>
+                            <input type="button" class="form-control btn btn-success" id="btnAddProjectClassificationBoxesAutomatically" onClick="addProjectClassificationBoxesAutomatically()" value="Asociar clasificación extra">
+                        </div>
+                        <div class="row" id="extraClassification"></div>
+                    </div>
+                    <div class="row">
+                        @*Columnas de descripción del proyecto*@
+                        <div class="col">
+                            <label id="lblDescription" for="txtDescription" class="form-label">Descripción</label>
+                            <textarea class="form-control" id="txtDescription" rows="3" required></textarea>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <h6 class="modal-title" id="customerTitle" style="color: #DEA626; text-align: center;">Datos del cliente</h6>
+                        @*Columnas de cliente del proyecto*@
+
+                        <div class="col">
+                            <label id="lblCustomerType" for="cboCustomerType" class="form-label">Tipo de cliente</label>
+                            <select id="cboCustomerType" class="form-select">
+                                <option value="0">Seleccione</option>
+                                <option value="1">Persona</option>
+                                <option value="2">Empresa</option>
+                            </select>
+                        </div>
+
+                        @*<div class="col">
+                                <label for="txtIdentification" class="form-label">DNI o cédula jurídica del cliente</label>
+                                <input type="text" class="form-control" id="txtIdentification" autocomplete="off" required>
+                            </div>*@
+
+                        <div class="col">
+                            <label id="CustomerName" for="cboCustomerName" class="form-label">Nombre del cliente</label>
+                            <select id="cboCustomerName" class="form-select">
+                                <option value="0">Seleccione</option>
+                            </select>
+                        </div>
+
+                        @*<div class="col">
+                                <label for="txtContactIdentification" class="form-label">Cédula del contacto</label>
+                                <input type="text" class="form-control" id="txtContactIdentification" autocomplete="off" required>
+                            </div>*@
+
+                        <div class="col">
+                            <label id="lblContactName" for="cboContactName" class="form-label">Nombre del contacto</label>
+                            <select id="cboContactName" class="form-select">
+                                <option value="0">Seleccione</option>
+                            </select>
+                        </div>
+                        <div class="col">
+                            <label for="txtProfessionalIdentification" class="form-label" style="color: #fff;">.</label>
+                            <input type="button" class="form-control btn btn-success" id="btnAddCustomerBoxesAutomatically" onClick="addCustomerBoxesAutomatically()" value="Asociar otro cliente">
+                        </div>
+                        <div class="row" id="extraCustomer"> </div>
+
+                    </div>
+                    <div class="row">
+                        <h6 class="modal-title" id="professionalTitle" style="color: #DEA626; text-align: center;">Datos del colaborador</h6>
+                        @*Columnas de colaborador del proyecto*@
+                        @*<div class="col-md-3 mb-3">
+                                <label for="txtProfessionalIdentification" class="form-label">Cédula del colaborador</label>
+                                <input type="text" class="form-control" id="txtProfessionalIdentification" autocomplete="off" required>
+                            </div>*@
+
+                        <div class="col-md-3 mb-3">
+                            <label id="lblProfessionalName" for="cboProfessionalName" class="form-label">Nombre del colaborador</label>
+                            <select id="cboProfessionalName" class="form-select">
+                                <option value="0">Seleccione</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </form>
+
+                <div class="row mt-2">
+
+                    <div class="col-12">
+                        <div id="errorMessage" class="alert alert-danger" role="alert">
+                            A simple danger alert-check it out!
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" onclick="SaveProjectsInfo()">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*Implementing AJAX method to view the BBDD project info in the presentation layer*@
+
+@section scripts{
+
+    @*for datepicker*@
+
+    <script src="~/Scripts/jquery-ui-1.13.2.min.js"></script>
+
+    <script>
+        $(function () {
+            $("#txtStartDate").datepicker({
+                dateFormat: "yy-mm-dd",
+                changeMonth: true,
+                changeYear: true
+            });
+        });
+        $(function () {
+            $("#txtEndDate").datepicker({
+                dateFormat: "yy-mm-dd",
+                changeMonth: true,
+                changeYear: true
+            });
+        });
+    </script>
+
+    <script>
+
+        /*method to add new boxes on form to insert or update project information where user needs to insert new customer to a project*/
+        a = 0; /*just a counter*/
+        b = 0; /*just a counter*/
+
+        function addCustomerBoxesAutomatically() {
+            a++;
+
+            var div = document.createElement('div');
+            div.setAttribute('class', 'row');
+            div.setAttribute('id', 'extras');
+
+            div.innerHTML =
+                ' <div class="col">' +
+                ' <label for="cboExtraCustomerType" class="form-label">Tipo de cliente</label>' +
+                ' <select id="cboExtraCustomerType_' + a + '"class="form-select cboExtraCustomerType" onchange="AddExtraCustomer(this)">' +
+                ' <option value="0">Seleccione</option>' +
+                ' <option value="1">Persona</option>' +
+                ' <option value="2">Empresa</option>' +
+                ' </select>' +
+                ' </div>' +
+                ' <div class="col">' +
+                ' <label for="cboExtraCustomerName" class="form-label">Nombre del cliente</label>' +
+                ' <select id="cboExtraCustomerName_' + a + '"class="form-select cboExtraCustomerName" onchange="AddExtraContact(this)">' +
+                ' <option value="0">Seleccione</option>' +
+                ' </select>' +
+                ' </div>' +
+                ' <div class="col">' +
+                ' <label for="cboExtraContactName" class="form-label">Nombre del contacto</label>' +
+                ' <select id="cboExtraContactName_' + a + '"class="form-select cboExtraContactName">' +
+                ' <option value="0">Seleccione</option>' +
+                ' </select>' +
+                ' </div>';
+
+            document.getElementById('extraCustomer').appendChild(div); document.getElementById('extraCustomer').appendChild(div);
+        }
+
+        function addProjectClassificationBoxesAutomatically() {
+            b++;
+
+            var div = document.createElement('div');
+            div.setAttribute('class', 'row');
+            div.setAttribute('id', 'extrasClassifications');
+
+            div.innerHTML =
+                ' <div class="col">' +
+                ' <label for="lblExtraClassificationType" class="form-label">Tipo de proyecto</label>' +
+                ' <select id="cboExtraClassificationType_' + b + '"class="form-select">' +
+                ' <option value="0">Seleccione</option>' +
+                ' <option value="1">Laboratorio</option>' +
+                ' <option value="2">Especializados</option>' +
+                ' <option value="3">Inspección</option>' +
+                ' <option value="4">Investigación</option>' +
+                ' <option value="5">No aplica</option>' +
+                ' </select>' +
+                ' </div>' +
+                ' <div class="col">' +
+                ' <label for="lblExtraAreas" class="form-label">Área</label>' +
+                ' <select id="cboExtraAreas_' + b + '"class="form-select">' +
+                ' <option value="0">Seleccione</option>' +
+                ' </select>' +
+                ' </div>';
+
+            document.getElementById('extraClassification').appendChild(div); document.getElementById('extraClassification').appendChild(div);
+
+            AddClassificationValue(b);
+
+        }
+
+
+
+        function AddExtraCustomer(opcion) {
+
+            for (i = 0; i < a; i++) {
+
+                if (document.getElementsByClassName("cboExtraCustomerType")[i].id == opcion.id) {
+
+                    var extraCustomerTypeSelected = document.getElementById(opcion.id);
+                    var extraCustomerSelected = document.getElementsByClassName("cboExtraCustomerName")[i].id;
+                    extraCustomerSelected = document.getElementById(extraCustomerSelected);
+
+                    extraCustomerSelected.options.length = 1;
+                    var selected = extraCustomerTypeSelected.options[extraCustomerTypeSelected.selectedIndex];
+
+                    $.ajax({
+                        url:'@Url.Action("CustomersList", "Home")', /*retorna la url*/
+                        type: "POST",
+                        data: JSON.stringify({ customerType: selected.value }),
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        success: function (data) {
+                            var datosCustomer = data.data;
+                            $(datosCustomer).each(function (i, v) {
+                                let option = document.createElement('option')
+                                option.value = v.customerIdentification
+                                option.text = v.customerName
+                                extraCustomerSelected.add(option);
+                            });
+                        },
+                        error: function () {
+                            console.log('error con el dropDownList de extra clientes :(')
+                        }
+                    });
+                }
+            }
+        }
+
+        function AddExtraContact(opcion) {
+
+            for (i = 0; i < a; i++) {
+
+                if (document.getElementsByClassName("cboExtraCustomerName")[i].id == opcion.id) {
+
+                    var extraCustomerSelected = document.getElementById(opcion.id);
+                    var extraContactSelected = document.getElementsByClassName("cboExtraContactName")[i].id;
+                    extraContactSelected = document.getElementById(extraContactSelected);
+
+                    extraContactSelected.options.length = 1;
+                    var selected = extraCustomerSelected.options[extraCustomerSelected.selectedIndex];
+
+                    $.ajax({
+                        url:'@Url.Action("ContactsList", "Home")', /*retorna la url*/
+                        type: "POST",
+                        data: JSON.stringify({ customerIdentification: selected.value }),
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        success: function (data) {
+                            var datosContact = data.data;
+                            $(datosContact).each(function (i, v) {
+                                let option = document.createElement('option')
+                                option.value = v.contactIdentification
+                                option.text = v.contactName
+                                extraContactSelected.add(option);
+                            });
+                        },
+                        error: function () {
+                            console.log('error con el dropDownList de extra contactos :(')
+                        }
+                    });
+                }
+
+            }
+        }
+
+        function AddExtraClassification(opcion) {
+
+            for (i = 0; i < b; i++) {
+
+                if (document.getElementsByClassName("cboExtraClassificationType")[i].id == opcion.id) {
+
+                    var extraClassificationTypeSelected = document.getElementById(opcion.id);
+                    var extraAreasSelected = document.getElementsByClassName("cboExtraAreas")[i].id;
+                    extraAreasSelected = document.getElementById(extraAreasSelected);
+
+                    extraAreasSelected.options.length = 1;
+                    var selected = extraClassificationTypeSelected.options[extraClassificationTypeSelected.selectedIndex];
+
+                    $.ajax({
+                        url:'@Url.Action("ClassificationList", "Home")', /*retorna la url*/
+                        type: "POST",
+                        data: JSON.stringify({ ClassificationType: selected.value }),
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        success: function (data) {
+                            var datosClassification = data.data;
+                            $(datosClassification).each(function (i, v) {
+                                let option = document.createElement('option')
+                                option.value = v.classificationType
+                                option.text = v.classificationArea
+                                extraAreasSelected.add(option);
+                            });
+                        },
+                        error: function () {
+                            console.log('error con el dropDownList de extra clasificaciones :(')
+                        }
+                    });
+                }
+            }
+        }
+
+        var tipos = [
+            { id: 1, name: "Laboratorio" },
+            { id: 2, name: "Especializados" },
+            { id: 3, name: "Inspección" },
+            { id: 4, name: "Investigación" },
+            { id: 5, name: "No aplica" }
+        ]
+
+        var areas = [
+            /*areas del tipo laboratorio*/
+            { id: 1, name: "SAR", idTipo: 1 },
+            { id: 2, name: "CON", idTipo: 1 },
+            { id: 3, name: "EST", idTipo: 1 },
+            { id: 4, name: "NDT", idTipo: 1 },
+            { id: 5, name: "DAV", idTipo: 1 },
+            { id: 6, name: "HID", idTipo: 1 },
+            { id: 7, name: "MET", idTipo: 1 },
+            { id: 8, name: "TRA", idTipo: 1 },
+            /*areas del tipo especializados*/
+            { id: 9, name: "Construcción", idTipo: 2 },
+            { id: 10, name: "Estructurales", idTipo: 2 },
+            { id: 11, name: "Geotecnia", idTipo: 2 },
+            { id: 12, name: "Recurso ambiental", idTipo: 2 },
+            { id: 13, name: "Recurso hídrico", idTipo: 2 },
+            /*areas del tipo inspección*/
+            { id: 14, name: "Edificaciones", idTipo: 3 },
+            { id: 15, name: "Infraestructura vial", idTipo: 3 },
+            { id: 16, name: "Infraestructura agua sanitaria", idTipo: 3 },
+            { id: 17, name: "Puentes", idTipo: 3 },
+            /*areas del tipo investigación*/
+            { id: 18, name: "AD-Construcción", idTipo: 4 },
+            { id: 19, name: "EV-Estructuras", idTipo: 4 },
+            { id: 20, name: "Planificación", idTipo: 4 },
+            { id: 21, name: "No aplica", idTipo: 5 },
+        ]
+
+        /*creando los options de area*/
+        var tiposSelect = document.getElementById('cboClassificationType');
+        var areasSelect = document.getElementById('cboAreas');
+
+        tiposSelect.addEventListener("change", cargarAreas);
+
+        tipos.forEach(function (tipo) {
+            let opcion = document.createElement('option')
+            opcion.value = tipo.id
+            opcion.text = tipo.name
+            tiposSelect.add(opcion)
+        })
+
+        function cargarAreas() {
+            areasSelect.options.length = 1;
+            areas
+                .filter(function (area) {
+                    return area.idTipo == this;
+                }, tiposSelect.value)
+                .forEach(function (area) {
+                    let opcion = document.createElement('option')
+                    opcion.value = area.id
+                    opcion.text = area.name
+                    areasSelect.add(opcion);
+                });
+        }
+
+        function AddClassificationValue(b) {
+
+            // Obtener los elementos select
+            var cboClassificationType = document.getElementById('cboExtraClassificationType_' + b);
+            var cboAreas = document.getElementById('cboExtraAreas_' + b);
+
+            // Asignar el evento onChange al select de clasificación
+            cboClassificationType.addEventListener('change', function () {
+                // Obtener el valor del select de clasificación
+                var classificationType = parseInt(cboClassificationType.value);
+
+                // Filtrar las áreas correspondientes al tipo seleccionado
+                var filteredAreas = areas.filter(function (area) {
+                    return area.idTipo === classificationType;
+                });
+
+                // Limpiar las opciones actuales del select de áreas
+                cboAreas.innerHTML = '<option value="0">Seleccione</option>';
+
+                // Crear las opciones para el select de áreas
+                filteredAreas.forEach(function (area) {
+                    var option = document.createElement('option');
+                    option.value = area.id;
+                    option.text = area.name;
+                    cboAreas.appendChild(option);
+                });
+            });
+        }
+
+        /*dropDownList para Provincia*/
+
+        $.ajax({
+            url:'@Url.Action("ProvinceList", "Home")', /*retorna la url*/
+            type: "GET",
+            dataType: "json",
+            success: function (data) {
+                var province = $("#cboProvince");
+                var datos = data.data;
+                $(datos).each(function (i, v) {
+                province.append('<option value="' + v.idProvince + '">' + v.provinceName + '</option>');
+                });
+            },
+            error: function () {
+                console.log('error con el dropDownList de provincias :(')
+            }
+        });
+
+        /*dropDownList para Ciudad*/
+
+        var provinceSelected = document.getElementById('cboProvince');
+        var citySelected = document.getElementById('cboCity');
+        var districtSelected = document.getElementById('cboDistrict');
+
+        provinceSelected.addEventListener("change",
+            function () {
+                citySelected.options.length = 1;
+                var selected = this.options[provinceSelected.selectedIndex];
+                $.ajax({
+                    url:'@Url.Action("CityList", "Home")', /*retorna la url*/
+                    type: "POST",
+                    data: JSON.stringify({ provinceID: selected.value }),
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        var datosCity = data.data;
+                        $(datosCity).each(function (i, v) {
+                            let option = document.createElement('option')
+                            option.value = v.code
+                            option.text = v.cityName
+                            citySelected.add(option);
+                        });
+                    },
+                    error: function () {
+                        console.log('error con el dropDownList de ciudades :(')
+                    }
+                });
+            }
+        );
+
+        /*dropDownList para Distrito*/
+
+        citySelected.addEventListener("change",
+            function () {
+                districtSelected.options.length = 1;
+                var selected = this.options[citySelected.selectedIndex];
+                $.ajax({
+                    url:'@Url.Action("DistrictList", "Home")', /*retorna la url*/
+                    type: "POST",
+                    data: JSON.stringify({ cityID: selected.value }),
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        var datosDistrict = data.data;
+                        $(datosDistrict).each(function (i, v) {
+                            let option = document.createElement('option')
+                            option.value = v.code
+                            option.text = v.districtName
+                            districtSelected.add(option);
+                        });
+                    },
+                    error: function () {
+                        console.log('error con el dropDownList de distritos :(')
+                    }
+                });
+            }
+        );
+
+        /*dropDownList para Clientes*/
+
+        var customerTypeSelected = document.getElementById('cboCustomerType');
+        var customerSelected = document.getElementById('cboCustomerName');
+        var contactSelected = document.getElementById('cboContactName');
+
+        customerTypeSelected.addEventListener("change",
+            function () {
+                customerSelected.options.length = 1;
+                var selected = this.options[customerTypeSelected.selectedIndex];
+                $.ajax({
+                    url:'@Url.Action("CustomersList", "Home")', /*retorna la url*/
+                    type: "POST",
+                    data: JSON.stringify({ customerType: selected.value }),
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        var datosCustomer = data.data;
+                        $(datosCustomer).each(function (i, v) {
+                            let option = document.createElement('option')
+                            option.value = v.customerIdentification
+                            option.text = v.customerName
+                            customerSelected.add(option);
+                        });
+                    },
+                    error: function () {
+                        console.log('error con el dropDownList de clientes :(')
+                    }
+                });
+            }
+        );
+
+        /*dropDownList para Contactos*/
+
+        customerSelected.addEventListener("change",
+            function () {
+                contactSelected.options.length = 1;
+                var selected = this.options[customerSelected.selectedIndex];
+                $.ajax({
+                    url:'@Url.Action("ContactsList", "Home")', /*retorna la url*/
+                    type: "POST",
+                    data: JSON.stringify({ customerIdentification: selected.value }),
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        var datosContact = data.data;
+                        $(datosContact).each(function (i, v) {
+                            let option = document.createElement('option')
+                            option.value = v.contactIdentification
+                            option.text = v.contactName
+                            contactSelected.add(option);
+                        });
+                    },
+                    error: function () {
+                        console.log('error con el dropDownList de contactos :(')
+                    }
+                });
+            }
+        );
+
+        /*dropDownList para Colaboradores*/
+
+        $.ajax({
+            url:'@Url.Action("ProfessionalsList", "Home")', /*retorna la url*/
+            type: "GET",
+            dataType: "json",
+            success: function (data) {
+                var professional = $("#cboProfessionalName");
+                var datos = data.data;
+                $(datos).each(function (i, v) {
+                    professional.append('<option value="' + v.professionalIdentification + '">' + v.professionalName + '</option>');
+                });
+            },
+            error: function () {
+                console.log('error con el dropDownList de colaboradores :(')
+            }
+        });
+
+        var tableData;
+        var rowSelected;
+
+        $(document).ready(function () {
+            tableData = $("#table").DataTable({
+
+                responsive: true,
+                ordering: false,
+                dom: 'lBfrtip',
+                buttons: [
+                    {
+                        extend: 'pdfHtml5',
+                        text: '<i class="fas fa-file-pdf"></i>',
+                        titleAttr: 'Exportar a PDF',
+                        className: 'btn btn-margin btn-colorPdf',
+                        orientation: 'landscape',
+                        attr: {
+                            id: 'btnPdf' // Agrega el ID 'btnPdf' al botón de PDF
+                        }
+                    },
+                    {
+                        extend: 'excelHtml5',
+                        text: '<i class="fas fa-file-excel"></i>',
+                        titleAttr: 'Exportar a Excel',
+                        className: 'btn btn-margin btn-colorExcel',
+                        attr: {
+                            id: 'btnExcel' // Agrega el ID 'btnExcel' al botón de Excel
+                        }
+                    }
+                ],
+                buttonContainer: '<div class="btn-group"></div>',
+                "ajax": {
+
+                    url: '@Url.Action("ProjectsInfoList", "Home")', /*retorna la url*/
+                    type: "GET",
+                    dataType: "json"
+                },
+                "columns": [
+
+                    { "data": "projectCode" },
+                    { "data": "nameProject" },
+                    { "data": "startDate" },
+                    { "data": "endDate" },
+                    { "data": "costInColones" },
+                    { "data": "costInDollars" },
+                    { "data": "studentsQuantity" },
+                    {
+                        "data": "accreditedProject", "render": function (value) {
+
+                            if (value) {
+                                return '<span class="badge bg-success">Sí</span>'
+                            }
+                            else {
+                                return '<span class="badge bg-danger">No</span>'
+                            }
+
+                        }
+                    },
+                    {
+                        "data": "adhonoremProject", "render": function (value) {
+
+                            if (value) {
+                                return '<span class="badge bg-success">Sí</span>'
+                            }
+                            else {
+                                return '<span class="badge bg-danger">No</span>'
+                            }
+
+                        }
+                    },
+                    {
+                        "data": null,
+                        "render": function (data, type, row) {
+                            var userRole = '@ViewBag.UserRole';
+
+                            if (userRole === "Consulta" || userRole === "Registra") {
+                                // Si el rol es "Consulta" o "Registra", deshabilita los botones
+                                return '<button type="button" class="btn btn-primary btn-sm btn-edit" disabled><i class="fas fa-pen"></i></button>' +
+                                    '<button type="button" class="btn btn-danger btn-sm ms-2 btn-eliminar" disabled><i class="fas fa-trash"></i></button>';
+                            } else {
+                                // Si el rol no es "Consulta" ni "Registra", muestra los botones habilitados
+                                return '<button type="button" class="btn btn-primary btn-sm btn-edit"><i class="fas fa-pen"></i></button>' +
+                                    '<button type="button" class="btn btn-danger btn-sm ms-2 btn-eliminar"><i class="fas fa-trash"></i></button>';
+                            }
+                        },
+                        "orderable": false,
+                        "searchable": false,
+                        "width": "90px"
+                    }
+
+                ],
+                "language": { "url": "https://cdn.datatables.net/plug-ins/1.12.1/i18n/es-ES.json" }
+            });
+            var btnMarginStyle = document.createElement('style');
+            btnMarginStyle.innerHTML = '.btn-margin { margin-right: 5px; margin-left: 5px; }';
+            document.head.appendChild(btnMarginStyle);
+            var btnColorPdf = document.createElement('style');
+            btnColorPdf.innerHTML = '.btn-colorPdf { background-color: #151240 } .btn-colorPdf:hover { background-color: #151240 }';
+            document.head.appendChild(btnColorPdf);
+            var btnColorExcel = document.createElement('style');
+            btnColorExcel.innerHTML = '.btn-colorExcel { background-color: #151240 } .btn-colorExcel:hover { background-color: #151240 }';
+            document.head.appendChild(btnColorExcel);
+        });
+
+        function OpenModal(json) {
+
+            $("#lblCountry").show();
+            $("#txtCountry").show();
+            $("#cboProvince").show();
+            $("#lblProvince").show();
+            $("#lblCity").show();
+            $("#cboCity").show();
+            $("#lblDistrict").show();
+            $('#cboDistrict').show();
+            $('#lblClassificationType').show();
+            $('#cboClassificationType').show();
+            $('#lblcboAreas').show();
+            $('#cboAreas').show();
+            $('#lblDescription').show();
+            $('#txtDescription').show();
+            $('#lblCustomerType').show();
+            $('#cboCustomerType').show();
+            $('#CustomerName').show();
+            $('#cboCustomerName').show();
+            $('#lblContactName').show();
+            $('#cboContactName').show();
+            $('#lblProfessionalName').show();
+            $('#cboProfessionalName').show();
+            $('#btnAddCustomerBoxesAutomatically').show();
+            $('#locationTitle').show();
+            $('#typeProjectTitle').show();
+            $('#customerTitle').show();
+            $('#professionalTitle').show();
+
+            $("#txtID").val(0);
+            $("#txtProjectCode").val("");
+            $("#txtName").val("");
+            $("#txtStartDate").val("");
+            $("#txtEndDate").val("");
+            $("#txtCostInColones").val("");
+            $("#txtCostInDollars").val("");
+            $("#txtStudentsQuantity").val("");
+            $("#cboAccreditecProject").val(2);
+            $("#cboAdhonoremProject").val(2);
+            $("#cboStudentsQuantity").val(11);
+            $("#txtCountry").val("Costa Rica");
+
+            $("#cboProvince").val(0);
+            $("#cboCity").val(0);
+            $("#cboDistrict").val(0);
+            $("#cboCustomerName").val(0);
+            $("#cboContactName").val(0);
+            $("#cboProfessionalName").val(0);
+
+            $("#cboClassificationType").val(0);
+            $("#cboAreas").val(0);
+            $("#txtDescription").val("");
+            $("#cboCustomerType").val(0);
+
+            for (i = 0; i < a; i++) {
+                $('#extras').remove();
+            }
+
+            for (i = 0; i < b; i++) {
+                $('#extrasClassifications').remove();
+            }
+
+            $("#errorMessage").hide();
+
+            if (json != null) {
+
+                $("#lblCountry").hide();
+                $("#txtCountry").hide();
+                $("#cboProvince").hide();
+                $("#lblProvince").hide();
+                $("#lblCity").hide();
+                $("#cboCity").hide();
+                $("#lblDistrict").hide();
+                $('#cboDistrict').hide();
+                $('#lblClassificationType').hide();
+                $('#cboClassificationType').hide();
+                $('#lblcboAreas').hide();
+                $('#cboAreas').hide();
+                $('#lblDescription').hide();
+                $('#txtDescription').hide();
+                $('#lblCustomerType').hide();
+                $('#cboCustomerType').hide();
+                $('#CustomerName').hide();
+                $('#cboCustomerName').hide();
+                $('#lblContactName').hide();
+                $('#cboContactName').hide();
+                $('#lblProfessionalName').hide();
+                $('#cboProfessionalName').hide();
+                $('#btnAddCustomerBoxesAutomatically').hide();
+                $('#locationTitle').hide();
+                $('#typeProjectTitle').hide();
+                $('#customerTitle').hide();
+                $('#professionalTitle').hide();
+
+                $("#txtID").val(json.idProject);
+                $("#txtProjectCode").val(json.projectCode);
+                $("#txtName").val(json.nameProject);
+                $("#txtStartDate").val(json.startDate);
+                $("#txtEndDate").val(json.endDate);
+                $("#txtCostInColones").val(json.costInColones);
+                $("#txtCostInDollars").val(json.costInDollars);
+                $("#cboStudentsQuantity").val(json.studentsQuantity);
+                $("#cboAccreditecProject").val(json.active == true ? 1 : 0);
+                $("#cboAdhonoremProject").val(json.active == true ? 1 : 0);
+                $("#txtCountry").val(json.country);
+                $("#cboProvince").val(json.province);
+                $("#cboCity").val(json.city);
+                $("#cboDistrict").val(json.district);
+                $("#cboClassificationType").val(json.projectType);
+                $("#cboAreas").val(json.projectArea);
+                $("#txtDescription").val(json.description);
+            }
+
+            $("#FormModal").modal("show");
+
+        }
+
+        /*a method to show projects info on the modal to edit their info*/
+
+        $("#table tbody").on("click", '.btn-edit', function () {
+
+            rowSelected = $(this).closest("tr");
+
+            var projectData = tableData.row(rowSelected).data();
+
+            OpenModal(projectData)
+
+        })
+
+        $("#table tbody").on("click", '.btn-eliminar', function () {
+
+            var projectSelected = $(this).closest("tr");
+
+            var data = tableData.row(projectSelected).data();
+
+            swal({
+                title: "Alerta",
+                text: "¿Seguro que deseas eliminar este registro?",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonClass: "btn-primary",
+                confirmButtonText: "Sí",
+                cancelButtonText: "No",
+                closeOnConfirm: true
+            },
+            function () {
+                jQuery.ajax({
+                    url: '@Url.Action("DeleteProjectsInfo", "Home")',
+                    type: "POST",
+                    data: JSON.stringify({ id: data.idProject }),
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+
+                        if (data.result) {
+
+                            tableData.row(projectSelected).remove().draw();
+                        }
+                        else {
+                            swal("Oh! Imposible eliminar el registro", data.message, "error")
+                        }
+                    },
+                    error: function (error) {
+
+                        console.log(error)
+                    },//beforeSend allow to do something during the success case is executing
+                    beforeSend: function () {
+                        $(".modal-body").LoadingOverlay("show", {
+                            imageResizeFactor: 2,
+                            text: "Cargando...",
+                            size: 14
+                        })
+                    }
+                });
+            });
+        })
+
+        function SaveCustomer(array) {
+            for (i = 0; i < array.length; i++) {
+
+                jQuery.ajax({
+                url: '@Url.Action("SaveCustomers", "Home")',
+                type: "POST",
+                data: JSON.stringify({ objCustomerOnProject: array[i]}),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+
+                    $(".modal-body").LoadingOverlay("hide");
+
+                    //When is a new contact information
+
+                    if (data.result == 0) {
+                        $("#errorMessage").text(data.message);
+                        $("#errorMessage").show();
+                        /*flag = false;*/
+                    }
+                    else {
+                        console.log("NICE en customer array");
+                        /*flag = true;*/
+                    }
+                },
+                error: function (error) {
+
+                    $(".modal-body").LoadingOverlay("hide");
+                    $("#errorMessage").text("Error Ajax al guardar el contacto");
+                    $("#errorMessage").show();
+                    /*flag = false;*/
+
+                }
+                });
+            }
+        }
+
+        function SaveClassification(classificationArray) {
+            for (k = 0; k < classificationArray.length; k++) {
+
+                console.log(k);
+                console.log(classificationArray[k]);
+
+                jQuery.ajax({
+                url: '@Url.Action("SaveClassification", "Home")',
+                type: "POST",
+                data: JSON.stringify({ objClassification: classificationArray[k]}),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+
+                    $(".modal-body").LoadingOverlay("hide");
+
+                    //When is a new contact information
+
+                    if (data.result == 0) {
+                        $("#errorMessage").text(data.message);
+                        $("#errorMessage").show();
+                        /*flag = false;*/
+                    }
+                    else {
+                        console.log("NICE en classification array");
+                        /*flag = true;*/
+                    }
+                },
+                error: function (error) {
+
+                    $(".modal-body").LoadingOverlay("hide");
+                    $("#errorMessage").text("Error Ajax al guardar la clasificacion");
+                    $("#errorMessage").show();
+                    /*flag = false;*/
+
+                }
+                });
+            }
+        }
+
+        function SaveProjectsInfo() {
+
+            var projectInfo = {
+
+                idProject: $("#txtID").val(),
+                projectCode: $("#txtProjectCode").val(),
+                nameProject: $("#txtName").val(),
+                startDate: $("#txtStartDate").val(),
+                endDate: $("#txtEndDate").val(),
+                costInColones: $("#txtCostInColones").val(),
+                costInDollars: $("#txtCostInDollars").val(),
+                studentsQuantity: $("#cboStudentsQuantity").val(),
+                accreditedProject: $("#cboAccreditecProject").val() == 1 ? true : false,
+                adhonoremProject: $("#cboAdhonoremProject").val() == 1 ? true : false,
+                country: $("#txtCountry").val(),
+                province: $("#cboProvince option:selected").text(),
+                city: $("#cboCity option:selected").text(),
+                district: $("#cboDistrict option:selected").text(),
+                //projectType: $("#cboClassificationType option:selected").text(),
+                //projectArea: $("#cboAreas option:selected").text(),
+                description: $("#txtDescription").val(),
+
+            }
+            console.log(projectInfo);
+
+            if (projectInfo.idProject == 0) {
+
+                var customerArray = [];
+
+                var customer = {
+
+                    projectCode: $("#txtProjectCode").val(),
+                    customerType: $("#cboCustomerType").val(),
+                    customerIdentification: $("#cboCustomerName").val(),
+                    contactIdentification: $("#cboContactName").val(),
+                    professionalIdentification: $("#cboProfessionalName").val(),
+                }
+                console.log(customer);
+
+                customerArray.push(customer); /*borrar*/
+
+                var classificationArray = [];
+
+                var classification = {
+
+                    projectCode: $("#txtProjectCode").val(),
+                    classificationType: $("#cboClassificationType option:selected").text(),
+                    classificationArea: $("#cboAreas option:selected").text(),
+                }
+                console.log(classification);
+
+                classificationArray.push(classification); /*borrar*/
+
+                if (a != 0) {
+                    for (i = 1; i <= a; i++) {
+
+                        var customer = {
+
+                            projectCode: $("#txtProjectCode").val(),
+                            customerType: $('#cboExtraCustomerType_' + i).val(),
+                            customerIdentification: $('#cboExtraCustomerName_' + i).val(),
+                            contactIdentification: $('#cboExtraContactName_' + i).val(),
+                            professionalIdentification: $('#cboProfessionalName').val(),
+                        }
+
+                        customerArray.push(customer);
+                        console.log(customer);
+                    }
+                }
+                console.log(customerArray); /*borrar*/
+
+                if (b != 0) {
+                    for (i = 1; i <= b; i++) {
+
+                        var classification = {
+
+                            projectCode: $("#txtProjectCode").val(),
+                            classificationType: $('#cboExtraClassificationType_' + i + ' option:selected').text(),
+                            classificationArea: $('#cboExtraAreas_' + i + ' option:selected').text(),
+                        }
+
+                        classificationArray.push(classification);
+                        console.log("esta es una calificacion individual: ");
+                        console.log(classification);
+                    }
+                }
+                console.log("este es el array de clasificaciones: ");
+                console.log(classificationArray); /*borrar*/
+                //console.log("Bandera en función saveCustomer: ");
+                //console.log(flag);
+
+                //if (!flag) {
+                //    return;
+                //}
+            }
+
+            jQuery.ajax({
+                url: '@Url.Action("SaveProjectsInfo", "Home")',
+                type: "POST",
+                data: JSON.stringify({ objProject: projectInfo}),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+
+                    $(".modal-body").LoadingOverlay("hide");
+
+                    //When is a new project information
+                    if (projectInfo.idProject == 0) {
+
+                        if (data.result != 0) {
+
+                            projectInfo.idProject = data.result;
+                            tableData.row.add(projectInfo).draw(false);
+                            $("#FormModal").modal("hide");
+                        }
+                        else {
+
+                            $("#errorMessage").text(data.message);
+                            $("#errorMessage").show();
+                        }
+                    }
+                    //When update project information
+                    else {
+
+                        if (data.result) {
+
+                            tableData.row(rowSelected).data(projectInfo).draw(false);
+                            rowSelected = null;
+                            $("#FormModal").modal("hide");
+                        }
+                        else {
+
+                            $("#errorMessage").text(data.message);
+                            $("#errorMessage").show();
+                        }
+                    }
+                },
+                error: function (error) {
+
+                    $(".modal-body").LoadingOverlay("hide");
+                    $("#errorMessage").text("Error Ajax");
+                    $("#errorMessage").show();
+
+                },//beforeSend allow to do something during the success case is executing
+                beforeSend: function () {
+                    $(".modal-body").LoadingOverlay("show", {
+                        imageResizeFactor: 2,
+                        text: "Cargando...",
+                        size: 14
+                    })
+                }
+            });
+
+            if (projectInfo.idProject == 0) {
+                SaveClassification(classificationArray);
+                SaveCustomer(customerArray);
+            }
+        }
+
+        window.onload = function () {
+        disableButtonsByUserRole('@ViewBag.UserRole');
+        };
+
+        function disableButtonsByUserRole(userRole) {
+            // Desactivar los botones según el rol del usuario
+            if (userRole === "Registra") {
+                document.getElementById('btnPdf').disabled = true;
+                document.getElementById('btnExcel').disabled = true;
+            }
+        }
+
+    </script>
+
+}

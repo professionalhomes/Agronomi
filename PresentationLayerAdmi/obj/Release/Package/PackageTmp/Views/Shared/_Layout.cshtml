@@ -1,0 +1,131 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - SGP-CIVCO</title>
+    @Styles.Render("~/Content/css")
+    <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" /> @*for datepicker styles*@
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.js"></script>
+
+    @*@Scripts.Render("~/bundles/modernizr")*@
+</head>
+<body class="sb-nav-fixed">
+    <nav class="sb-topnav navbar navbar-expand navbar-dark" style="background: #151240;">
+        <!-- Navbar Brand-->
+        <a class="navbar-brand ps-3" href=""> <img src="~/img/logos_Rediseño_logo_2-sin-fondo.png" style="position: absolute; width: 130px; height: 60.17px; left: 35px; top: 1px;"></a>
+        <!-- Sidebar Toggle-->
+        <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+        <!-- Navbar Search-->
+        @*<form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+                <div class="input-group">
+                    <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
+                    <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+                </div>
+            </form>*@
+        <!-- Navbar-->
+        <ul class="navbar-nav ms-auto me-0 me-md-3 my-2 my-md-0">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                    @*<li><a class="dropdown-item" href="#!">Perfil</a></li>*@
+                    @*<li><hr class="dropdown-divider" /></li>*@
+                    <li><a class="dropdown-item" href="@Url.Action("SignOut", "Access")">Cerrar sesión</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                <div class="sb-sidenav-menu">
+                    <div class="nav">
+                        <a class="nav-link" style="font-weight: bold; font-size: 18px; color: #DEA626; " href="@Url.Action("InfoClients", "Clients")">
+                            CLIENTES
+                        </a>
+                        <a class="nav-link" style="font-weight: bold; font-size: 18px; color: #DEA626;" href="@Url.Action("InfoProfessionals", "Professionals")">
+                            @*<div class="sb-nav-link-icon" style="color: #fff;"><i class="fas fa-address-card"></i></div>*@
+                            COLABORADORES
+                        </a>
+                        <a class="nav-link" style="font-weight: bold; font-size: 18px; color: #DEA626;" href="@Url.Action("Project", "Home")">
+                            @*<div class="sb-nav-link-icon" style="color: #fff;"><i class="fas fa-address-card"></i></div>*@
+                            PROYECTOS
+                        </a>
+                        @*<div class="sb-sidenav-menu-heading" style="font-size: 18px; color: #DEA626;"><i></i> Proyectos</div>*@
+                        <a class="nav-link" style="color: #fff;" href="@Url.Action("ProjectsInfo", "Home")">
+                            <div class="sb-nav-link-icon" style="color: #fff;"><i class="fas fa-info-circle"></i></div>
+                            Información general
+                        </a>
+                        <a class="nav-link" style="color: #fff;" href="@Url.Action("ProjectsLocation", "Home")">
+                            <div class="sb-nav-link-icon" style="color: #fff;"><i class="fas fa-search-location"></i></div>
+                            Ubicaciones
+                        </a>
+                        <a class="nav-link" style="color: #fff;" href="@Url.Action("ProjectsClassification", "Home")">
+                            <div class="sb-nav-link-icon" style="color: #fff;"><i class="fas fa-bookmark"></i></div>
+                            Clasificaciones
+                        </a>
+                        <a class="nav-link" style="color: #fff;" href="@Url.Action("ProjectsDescription", "Home")">
+                            <div class="sb-nav-link-icon" style="color: #fff;"><i class="fas fa-sticky-note"></i></div>
+                            Descripción del proyecto
+                        </a>
+
+                        @if (ViewBag.UserRole == "Administrador")
+                        {
+                            <a class="nav-link" style="font-weight: bold; font-size: 18px; color: #DEA626;"
+                               href="@Url.Action("UserManagement", "Home")">
+                                USUARIOS DEL SISTEMA
+                            </a>
+                        }
+
+                    </div>
+                </div>
+                <div style="color: #fff;" class="sb-sidenav-footer">
+                    <div style="color: #fff;" class="small">Sesión iniciada por:</div>
+                    @ViewBag.UserName
+                </div>
+            </nav>
+        </div>
+        <div id="layoutSidenav_content">
+            <main>
+                <div class="container-fluid px-4">
+                    @RenderBody()
+                </div>
+            </main>
+            <footer class="py-4 bg-light mt-auto">
+                <div class="container-fluid px-4">
+                    <div class="d-flex align-items-center justify-content-between small">
+                        @*<div class="text-muted">Derechos de autor &copy; Your Website 2022</div>*@
+                        <div>
+                            <a style="color: black;">Este Sistema de Gestión de Proyectos es propiedad intelectual del CIVCO, Escuela de Ingeniería en Construcción, TEC</a> @*mandar a este sistema es propiedad intelectual del CIVCO, Escuela de Ingeniería en Construcción, TEC*@
+                            @*&middot;*@
+                            @*<a href="#">Terminos &amp; Condiciones</a>*@
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    @*
+        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+        <li>@Html.ActionLink("About", "About", "Home")</li>
+        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/complementos")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.13/jspdf.plugin.autotable.min.js"></script>
+<link href="~/Content/DataTables/Buttons-2.3.6/css/buttons.bootstrap4.min.css" rel="stylesheet" />
+<script src="~/Content/DataTables/JSZip-2.5.0/jszip.min.js"></script>
+<script src="~/Content/DataTables/pdfmake-0.2.7/pdfmake.min.js"></script>
+<script src="~/Content/DataTables/pdfmake-0.2.7/vfs_fonts.js"></script>
+<script src="~/Content/DataTables/Buttons-2.3.6/js/dataTables.buttons.min.js"></script>
+<script src="~/Content/DataTables/Buttons-2.3.6/js/buttons.bootstrap4.min.js"></script>
+<script src="~/Content/DataTables/Buttons-2.3.6/js/buttons.html5.min.js"></script>

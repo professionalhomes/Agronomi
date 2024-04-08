@@ -1,0 +1,123 @@
+﻿
+@{
+    ViewBag.Title = "InfoContact";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<ol class="breadcrumb mb-4 mt-4">
+    <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">Inicio</a></li>
+    <li class="breadcrumb-item"><a href="@Url.Action("InfoClients", "Clients")">Clientes</a></li>
+    <li class="breadcrumb-item active">Contactos</li>
+</ol>
+
+<div class="card">
+    <div class="card-header">
+        <i class="fas fa-users me-1"></i> Información de contactos de los clientes.
+    </div>
+    <div class="card-body">
+        <hr />
+        <table id="table" class="display cell-border" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Cliente</th>
+                    <th>Nombre Contacto</th>
+                    <th>1°Apellido</th>
+                    <th>2°Apellido</th>
+                    <th>1°Teléfono</th>
+                    <th>2°Teléfono</th>
+                    <th>Correo</th>
+                    <th>Rol</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@*Implementing AJAX method to view the BBDD contact info on the presentation layer*@
+
+@section scripts{
+
+    <script>
+
+        var tableData;
+        var rowSelected;
+
+        $(document).ready(function () {
+
+            tableData = $("#table").DataTable({
+
+                responsive: true,
+                ordering: false,
+                dom: 'lBfrtip',
+                buttons: [
+                    {
+                        extend: 'pdfHtml5',
+                        text: '<i class="fas fa-file-pdf"></i>',
+                        titleAttr: 'Exportar a PDF',
+                        className: 'btn btn-margin btn-colorPdf',
+                        orientation: 'landscape',
+                        attr: {
+                            id: 'btnPdf' // Agrega el ID 'btnPdf' al botón de PDF
+                        }
+                    },
+                    {
+                        extend: 'excelHtml5',
+                        text: '<i class="fas fa-file-excel"></i>',
+                        titleAttr: 'Exportar a Excel',
+                        className: 'btn btn-margin btn-colorExcel',
+                        attr: {
+                            id: 'btnExcel' // Agrega el ID 'btnExcel' al botón de Excel
+                        }
+                    }
+                ],
+                buttonContainer: '<div class="btn-group"></div>',
+                "ajax": {
+
+                    url:'@Url.Action("InfoContactList", "Clients")', /*retorna la url*/
+                    type: "GET",
+                    dataType: "json"
+
+                },
+                "columns": [
+
+                    { "data": "customerName" },
+                    { "data": "contactName" },
+                    { "data": "lastName" },
+                    { "data": "secondLastName" },
+                    { "data": "contactPhone" },
+                    { "data": "secondaryPhone" },
+                    { "data": "contactMail" },
+                    { "data": "contactRole" }
+
+                ],
+                "language": { "url": "https://cdn.datatables.net/plug-ins/1.12.1/i18n/es-ES.json"}
+            });
+
+            var btnMarginStyle = document.createElement('style');
+            btnMarginStyle.innerHTML = '.btn-margin { margin-right: 5px; margin-left: 5px; }';
+            document.head.appendChild(btnMarginStyle);
+
+            var btnColorPdf = document.createElement('style');
+            btnColorPdf.innerHTML = '.btn-colorPdf { background-color: #151240 } .btn-colorPdf:hover { background-color: #151240 }';
+            document.head.appendChild(btnColorPdf);
+
+            var btnColorExcel = document.createElement('style');
+            btnColorExcel.innerHTML = '.btn-colorExcel { background-color: #151240 } .btn-colorExcel:hover { background-color: #151240 }';
+            document.head.appendChild(btnColorExcel);
+        });
+
+        window.onload = function () {
+            disableButtonsByUserRole('@ViewBag.UserRole');
+        };
+
+        function disableButtonsByUserRole(userRole) {
+            // Desactivar los botones según el rol del usuario
+            if (userRole === "Registra") {
+                document.getElementById('btnPdf').disabled = true;
+                document.getElementById('btnExcel').disabled = true;
+            }
+        }
+    </script>
+}

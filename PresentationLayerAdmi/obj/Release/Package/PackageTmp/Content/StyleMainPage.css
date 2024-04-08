@@ -1,0 +1,261 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Helvetica';
+}
+
+body{
+    height:100vh;
+    display: block;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+
+    --main-color: #DEA626;
+    --secundary-color: #151240;
+    --gray: #9ea0ac;
+}
+
+/*logo*/
+img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 65%;
+}
+
+h1{
+    font-family: 'Aileron';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 2vw;
+    line-height: 38px;
+    text-align: center;
+
+    color: var(--main-color);
+}
+
+h2{
+    font-family: 'Helvetica';
+    font-style: normal;
+    font-weight: 550;
+    font-size: 1.5vw;
+    text-align: center;
+    color: var(--secundary-color);
+}
+
+h3{
+    font-family: 'Aileron';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1.5vw;
+
+    color: var(--main-color);
+
+    position: relative;
+    right: 35%;
+}
+
+p{
+    font-family: 'Helvetica';
+    font-style: normal;
+    font-weight: 550;
+    line-height: 20px;
+    font-size: 1vw;
+    text-align: center;
+    color: var(--secundary-color);    
+}
+
+.p2{
+    font-family: 'Helvetica';
+    font-style: normal;
+    font-weight: 450;
+    line-height: 20px;
+    font-size: 0.8vw;
+    text-align: center;
+    margin-top: 10px;
+    color: var(--secundary-color);    
+}
+
+hr{
+    width: 100%;
+    border: 1px solid var(--main-color);
+    border-radius: 5px;
+    align-self: center;
+}
+
+.container{
+    display: flex;
+    position: relative;
+    
+    width: 30%;
+    overflow: hidden;
+
+    background: #fff;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+
+    margin-left: 35%;
+    margin-top: 8.7%;
+}
+
+.container .forms{
+    align-items: center;
+    height: 352px;
+    display: flex;
+    width: 200%;
+    transition: height 0.2s ease;
+}
+
+.container .form{
+    width: 100%;
+    padding: 50px;
+    transition: margin-left 0.18s ease;
+}
+
+.container.active .login{
+    margin-left: -50%;
+    opacity: 0;
+    transition: margin-left 0.18s ease,opacity 0.15s ease;
+}
+
+.container .signup{
+    opacity: 0;
+    transition: opacity 0.09s ease;
+}
+
+.container.active .signup{
+    opacity: 1;
+    transition: opacity 0.2s ease ;
+}
+
+.container.active .forms{
+    height:510px ;
+}
+
+.form .input-field{
+    margin-top: 30px;
+    width: 100%;
+    height: 50px;
+    position: relative;
+}
+
+.input-field input{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    outline: 0;
+    font-size: 1.2vw;
+    border: none;
+    border-bottom: 2px solid var(--gray);
+    border-top: 2px solid transparent;
+    background: none;
+    color: var(--secundary-color);
+}
+
+.input-field input:is(:focus,:valid){
+    border-bottom-color: var(--secundary-color);
+}
+
+.input-field i{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--secundary-color);
+    font-size: 1.7vw;
+}
+
+.input-field i.showHidePw{
+    right: 0;
+    cursor: pointer;
+    padding: 10px;
+}
+
+
+.form .text{
+    color: var(--gray);
+    font-size: 1vw;
+}
+
+.form a.text{
+    font-weight: 800;
+    text-decoration: none;
+}
+
+.form a:hover{
+    text-decoration: underline;
+}
+
+.form .button{
+    margin-top: 35px;
+}
+
+.form .button input{
+    border: none;
+    color: #fff;
+    border-radius: 30px;
+    background-color: var(--main-color);
+    font-size: 1.3vw;
+    font-weight: 700;
+    cursor: pointer;
+    width: 50%;
+    transition: all 0,3s ease;
+    margin-left: 25%;
+}
+
+.form .button2 input{
+    border: none;
+    color: #fff;
+    border-radius: 30px;
+    background-color: var(--main-color);
+    font-size: 1.3vw;
+    font-weight: 700;
+    cursor: pointer;
+    width: 80%;
+    transition: all 0,3s ease;
+    margin-left: 10%;
+}
+
+
+.button input:hover{
+    background-color: var(--gray);
+}
+
+.button2 input:hover{
+    background-color: var(--gray);
+}
+
+.form .login-signup{
+    margin-top: 20px;
+    text-align: center;
+}
+
+.footer{
+    padding: 10px;
+    font-size: 30px;
+    width: 100%;
+    height: 18%;
+}
+
+.logoFooter{
+    width: 10%;
+    height: auto;
+    padding: 1%;
+    float: right;
+    padding-top: 3%;
+    image-rendering: high-quality;
+
+    margin-right: 1%;
+    margin-top: 1%;
+}
+
+.loginBox{
+    padding: 10px;
+    font-size: 30px;
+    width: 100%;
+    height: 82%;
+}
+

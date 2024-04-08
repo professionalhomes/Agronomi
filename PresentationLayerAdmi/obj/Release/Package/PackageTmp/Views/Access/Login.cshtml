@@ -1,0 +1,93 @@
+﻿@*To Moni: mantener todas la etiquetas name con el nombre que tienen actualmente.*@
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en"> 
+<head>
+    <meta charset="UTF-8">
+    <!---- Icons ---->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+
+    <!--- Style CSS-->
+    <link href="~/Content/StyleMainPage.css" rel="stylesheet" />
+
+    <title>Gestión de Proyectos</title>
+
+    <!---- Title bar logo ---->
+    <link rel="icon" href="~/img/logoCivco.png" type="image/png">
+</head>
+    <body>
+        <div class="loginBox">
+            <!-- Main body -->
+            <div class="container">
+                <!--- Login --->
+                <div class = "form login">
+
+                    <h1>Sistema de Gestión de Proyectos del CIVCO</h1><br>
+
+                    <hr><br>
+
+                    <h2>Iniciar sesión</h2>
+
+                    <form action = "@Url.Action("Login", "Access")" method="post">
+
+                    <!---User input---->
+                    <div class = "input-field">
+                        <input name="mail" type="text" placeholder="Correo electrónico" required>
+                    </div>
+
+                    <!---Password input---->
+                    <div class ="input-field">
+                        <input name="password" type="password" class ="password" placeholder="Contraseña" required>
+                        <i class ="uil uil-eye-slash showHidePw"></i>
+                    </div>
+
+                    <!---Login button---->
+                    <div class = "input-field button">
+                        <input type="submit" value="Ingresar" href="@Url.Action("Login", "Access")">
+                    </div>
+
+                    </form>
+
+                    <!---Change password shorcut---->
+                    <div class ="login-signup">
+                        <span class = "text">¿Olvidó su contraseña?
+                            <a href="@Url.Action("ResetPassword", "Access")" class ="text signup-link">Click aquí</a>
+                        </span>
+                    </div>
+                                        @{
+                                            if (ViewBag.Error != null)
+                                            {
+                                                <div class="form-floating mb-3">
+                                                    <div class="alert alert-danger" role="alert">
+                                                        @ViewBag.Error
+                                                    </div>
+                                                </div>
+                                            }
+                                        }
+                </div>
+            </div>
+            <p class="p2">Este Sistema de Gestión de Proyectos es propiedad intelectual 
+                <br> del CIVCO, Escuela de Ingeniería en Construcción, TEC </p>
+        </div>
+        <!-- Background image -->
+        <style>
+            body {
+                background-image: url('../../img/backgroundAImg.png');
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-size: 100% 100%;
+            }
+        </style> 
+
+        <div class="footer">
+            <!-- Logos footer -->
+            <img class="logoFooter" src="~/img/logoBlancoCIVCO.png"/>
+        </div>
+
+        <!-- Additional functions -->
+        <script src="~/Scripts/ScriptMainPage.js"></script>
+    </body>
+</html>

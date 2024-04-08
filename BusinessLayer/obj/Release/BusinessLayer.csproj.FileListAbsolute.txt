@@ -1,0 +1,14 @@
+C:\Users\Luis Antonio Jimenez\OneDrive - Estudiantes ITCR\TEC\ATI\CIVCO\Sistema_Proyectos_CIVCO\Sistema_BD_CIVCO\BusinessLayer\bin\Release\BusinessLayer.dll
+C:\Users\Luis Antonio Jimenez\OneDrive - Estudiantes ITCR\TEC\ATI\CIVCO\Sistema_Proyectos_CIVCO\Sistema_BD_CIVCO\BusinessLayer\bin\Release\BusinessLayer.pdb
+C:\Users\Luis Antonio Jimenez\OneDrive - Estudiantes ITCR\TEC\ATI\CIVCO\Sistema_Proyectos_CIVCO\Sistema_BD_CIVCO\BusinessLayer\bin\Release\DataLayer.dll
+C:\Users\Luis Antonio Jimenez\OneDrive - Estudiantes ITCR\TEC\ATI\CIVCO\Sistema_Proyectos_CIVCO\Sistema_BD_CIVCO\BusinessLayer\bin\Release\EntityLayer.dll
+C:\Users\Luis Antonio Jimenez\OneDrive - Estudiantes ITCR\TEC\ATI\CIVCO\Sistema_Proyectos_CIVCO\Sistema_BD_CIVCO\BusinessLayer\bin\Release\DataLayer.pdb
+C:\Users\Luis Antonio Jimenez\OneDrive - Estudiantes ITCR\TEC\ATI\CIVCO\Sistema_Proyectos_CIVCO\Sistema_BD_CIVCO\BusinessLayer\bin\Release\EntityLayer.pdb
+C:\Users\Luis Antonio Jimenez\OneDrive - Estudiantes ITCR\TEC\ATI\CIVCO\Sistema_Proyectos_CIVCO\Sistema_BD_CIVCO\BusinessLayer\obj\Release\BusinessLayer.csproj.AssemblyReference.cache
+C:\Users\Luis Antonio Jimenez\OneDrive - Estudiantes ITCR\TEC\ATI\CIVCO\Sistema_Proyectos_CIVCO\Sistema_BD_CIVCO\BusinessLayer\obj\Release\BusinessLayer.csproj.CoreCompileInputs.cache
+C:\Users\Luis Antonio Jimenez\OneDrive - Estudiantes ITCR\TEC\ATI\CIVCO\Sistema_Proyectos_CIVCO\Sistema_BD_CIVCO\BusinessLayer\obj\Release\BusinessLayer.csproj.CopyComplete
+C:\Users\Luis Antonio Jimenez\OneDrive - Estudiantes ITCR\TEC\ATI\CIVCO\Sistema_Proyectos_CIVCO\Sistema_BD_CIVCO\BusinessLayer\obj\Release\BusinessLayer.dll
+C:\Users\Luis Antonio Jimenez\OneDrive - Estudiantes ITCR\TEC\ATI\CIVCO\Sistema_Proyectos_CIVCO\Sistema_BD_CIVCO\BusinessLayer\obj\Release\BusinessLayer.pdb
+C:\Users\Luis Antonio Jimenez\OneDrive - Estudiantes ITCR\TEC\ATI\CIVCO\Sistema_Proyectos_CIVCO\Sistema_BD_CIVCO\BusinessLayer\bin\Release\BouncyCastle.Crypto.dll
+C:\Users\Luis Antonio Jimenez\OneDrive - Estudiantes ITCR\TEC\ATI\CIVCO\Sistema_Proyectos_CIVCO\Sistema_BD_CIVCO\BusinessLayer\bin\Release\itextsharp.dll
+C:\Users\Luis Antonio Jimenez\OneDrive - Estudiantes ITCR\TEC\ATI\CIVCO\Sistema_Proyectos_CIVCO\Sistema_BD_CIVCO\BusinessLayer\bin\Release\itextsharp.xml

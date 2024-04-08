@@ -1,0 +1,317 @@
+﻿@{
+    ViewBag.Title = "Seleccion";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="color: #283618;">Selección del terreno</h2>
+
+<div class="card">
+    <div class="card-header" style="color: #283618;">
+        Datos registrados
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12">
+                <button type="button" class="btn btn-success" style="background-color: #606C37; border-color: #606C37;" onclick="OpenModal(null)">Agregar</button>
+            </div>
+        </div>
+        <hr />
+        <table id="table" class="display cell-border" style="width:100%; color: #283618;">
+            <thead>
+                <tr>
+                    <th>Terreno</th>
+                    <th>Tamaño</th>
+                    <th>Área de cultivo</th>
+                    <th>Análisis</th>
+                    <th>Costo de oportunidad</th>
+                    <th>Análisis Patológico</th>
+                    <th>Ubicación</th>
+                    <th>Resultado</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="modal fade" id="FormModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header text-white" style="background: #606C37;">
+                <h5 class="modal-title" id="exampleModalLabel">Registro de información para selección del terreno</h5>
+            </div>
+            <div class="modal-body">
+
+                @*This input has the ID of the user that will be update on the BBDD*@
+                <input id="txtID" type="hidden" value="0" />
+                <form>
+                    <div class="row">
+                        <h6 class="modal-title" id="exampleModalLabel" style="color: #283618; text-align: center;">Datos del terreno</h6>
+                        <div class="col">
+                            <label for="txtCodigo" class="form-label" style="color: #283618;">Código del terreno</label>
+                            <input type="text" class="form-control" id="txtCodigo" placeholder="T-XXX" autocomplete="off" required>
+                        </div>
+                        <div class="col">
+                            <label for="txtTamanio" class="form-label" style="color: #283618;">Tamaño en hectáreas</label>
+                            <input type="number" id="txtTamanio" value="100000" required>
+          
+                        </div>
+                        <div class="col">
+                            <label for="txtAreaCultivo" class="form-label" style="color: #283618;">Área de cultivo en hectáreas</label>
+                            <input type="number" id="txtAreaCultivo" value="100000" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label for="txtAnalisisTerreno" class="form-label" style="color: #283618;">Análisis del terreno</label>
+                            <input type="text" id="txtAnalisisTerreno" value="100000" required>
+                        </div>
+                        <div class="col">
+                            <label for="txtCostoOportunidad" class="form-label" style="color: #283618;">Costo de Oportunidad</label>
+                            <input type="number" id="txtCostoOportunidad" value="100000" required>
+                        </div>
+                        <div class="col">
+                            <label for="txtAnalisisPatologico" class="form-label" style="color: #283618;">Análisis patológico</label>
+                            <input type="text" id="txtAnalisisPatologico" value="100000" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label id="lblProvince" for="cboProvince" class="form-label" style="color: #283618;">Provincia</label>
+                            <select id="cboProvince" class="form-select">
+                                <option value="0">Seleccione</option>
+                            </select>
+                        </div>
+
+                        <div class="col">
+                            <label id="lblCity" for="cboCity" class="form-label" style="color: #283618;">Cantón</label>
+                            <select id="cboCity" class="form-select">
+                                <option value="0">Seleccione</option>
+                            </select>
+                        </div>
+
+                        <div class="col">
+                            <label id="lblDistrict" for="cboDistrict" class="form-label" style="color: #283618;">Distrito</label>
+                            <select id="cboDistrict" class="form-select">
+                                <option value="0">Seleccione</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <div id="errorMessage" class="alert alert-danger" role="alert">
+                            A simple danger alert-check it out!
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-success"  style="background-color: #606C37; border-color: #606C37;" onclick="SaveSeleccionData()">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+        var tableData;
+        var rowSelected;
+
+        $(document).ready(function () {
+            tableData = $("#table").DataTable({
+
+                responsive: true,
+                ordering: false,
+                dom: 'lfrtip',
+                "ajax": {
+
+                    url: '@Url.Action("SeleccionInfoList", "Home")',
+                    type: "GET",
+                    dataType: "json"
+                },
+                "columns": [
+                    { "data": "idTerreno" },
+                    { "data": "tamanioTerreno" },
+                    { "data": "areaCultivo" },
+                    { "data": "analisisTerreno" },
+                    { "data": "costoOportunidad" },
+                    { "data": "analisisPatologico" },
+                    { "data": "ubicacionTerrno" },
+                    { "data": "resultadoSeleccionTerreno" }
+                ],
+                "language": { "url": "https://cdn.datatables.net/plug-ins/1.12.1/i18n/es-ES.json" }
+            });
+        });
+
+        function OpenModal(json) {
+
+            $("#lblCountry").show();
+            $("#txtCountry").show();
+            $("#cboProvince").show();
+            $("#lblProvince").show();
+            $("#lblCity").show();
+            $("#cboCity").show();
+            $("#lblDistrict").show();
+            $('#cboDistrict').show();
+
+            $("#txtID").val(0);
+            $("#txtCodigo").val("");
+            $("#txtTamanio").val("");
+            $("#txtAreaCultivo").val("");
+            $("#txtAnalisisTerreno").val("");
+            $("#txtCostoOportunidad").val("");
+            $("#txtAnalisisPatologico").val("");
+
+            $("#cboProvince").val(0);
+            $("#cboCity").val(0);
+            $("#cboDistrict").val(0);
+
+            $("#errorMessage").hide();
+
+            $("#FormModal").modal("show");
+
+        }
+
+        /*dropDownList para Provincia*/
+
+        $.ajax({
+            url:'@Url.Action("ProvinceList", "Home")',
+            type: "GET",
+            dataType: "json",
+            success: function (data) {
+                var province = $("#cboProvince");
+                var datos = data.data;
+                $(datos).each(function (i, v) {
+                province.append('<option value="' + v.idProvince + '">' + v.provinceName + '</option>');
+                });
+            },
+            error: function () {
+                console.log('error con el dropDownList de provincias :(')
+            }
+        });
+
+        /*dropDownList para Ciudad*/
+
+        var provinceSelected = document.getElementById('cboProvince');
+        var citySelected = document.getElementById('cboCity');
+        var districtSelected = document.getElementById('cboDistrict');
+
+        provinceSelected.addEventListener("change",
+            function () {
+                citySelected.options.length = 1;
+                var selected = this.options[provinceSelected.selectedIndex];
+                $.ajax({
+                    url:'@Url.Action("CityList", "Home")',
+                    type: "POST",
+                    data: JSON.stringify({ provinceID: selected.value }),
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        var datosCity = data.data;
+                        $(datosCity).each(function (i, v) {
+                            let option = document.createElement('option')
+                            option.value = v.code
+                            option.text = v.cityName
+                            citySelected.add(option);
+                        });
+                    },
+                    error: function () {
+                        console.log('error con el dropDownList de ciudades :(')
+                    }
+                });
+            }
+        );
+
+        /*dropDownList para Distrito*/
+
+        citySelected.addEventListener("change",
+            function () {
+                districtSelected.options.length = 1;
+                var selected = this.options[citySelected.selectedIndex];
+                $.ajax({
+                    url:'@Url.Action("DistrictList", "Home")',
+                    type: "POST",
+                    data: JSON.stringify({ cityID: selected.value }),
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        var datosDistrict = data.data;
+                        $(datosDistrict).each(function (i, v) {
+                            let option = document.createElement('option')
+                            option.value = v.code
+                            option.text = v.districtName
+                            districtSelected.add(option);
+                        });
+                    },
+                    error: function () {
+                        console.log('error con el dropDownList de distritos :(')
+                    }
+                });
+            }
+        );
+
+        function SaveSeleccionData() {
+
+            // Concatenate province, city, and district into one variable string
+            var fullLocation = `${$("#cboProvince option:selected").text()}, ${$("#cboCity option:selected").text()}, ${$("#cboDistrict option:selected").text()}`;
+
+            var seleccionInfo = {
+
+                id: $("#txtID").val(),
+                idTerreno: $("#txtCodigo").val(),
+                tamanioTerreno: parseFloat($("#txtTamanio").val()),
+                areaCultivo: parseFloat($("#txtAreaCultivo").val()),
+                analisisTerreno: $("#txtAnalisisTerreno").val(),
+                costoOportunidad: parseInt($("#txtCostoOportunidad").val()),
+                analisisPatologico: $("#txtAnalisisPatologico").val(),
+                ubicacionTerrno: fullLocation
+            }
+
+            jQuery.ajax({
+                url: '@Url.Action("SaveSeleccionData", "Home")',
+                type: "POST",
+                data: JSON.stringify({ objSeleccion: seleccionInfo }),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+
+                    $(".modal-body").LoadingOverlay("hide");
+
+                    //To register the new information in the table and hide the modal
+                    if (seleccionInfo.id == 0) {
+
+                        if (data.result != 0) {
+
+                            seleccionInfo.id = data.result;
+                            tableData.row.add(seleccionInfo).draw(false);
+                            $("#FormModal").modal("hide");
+                        }
+                        else {
+
+                            $("#errorMessage").text(data.message);
+                            $("#errorMessage").show();
+                        }
+                    }
+                },
+                error: function (error) {
+
+                    $(".modal-body").LoadingOverlay("hide");
+                    $("#errorMessage").text("Error Ajax");
+                    $("#errorMessage").show();
+
+                },//beforeSend allow to do something during the success case is executing
+                beforeSend: function () {
+                    $(".modal-body").LoadingOverlay("show", {
+                        imageResizeFactor: 2,
+                        text: "Cargando...",
+                        size: 14
+                    })
+                }
+            });
+        }
+</script>

@@ -1,0 +1,509 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DB_CIVCO_TESTModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="tbl_Access">
+    <Key>
+      <PropertyRef Name="idAccess" />
+    </Key>
+    <Property Name="idAccess" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idUserRole" Type="Int32" />
+    <Property Name="access" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="tbl_UserRole" Relationship="Self.FK__tbl_Acces__idUse__73BA3083" FromRole="tbl_Access" ToRole="tbl_UserRole" />
+  </EntityType>
+  <EntityType Name="tbl_Classifications">
+    <Key>
+      <PropertyRef Name="cdType" />
+    </Key>
+    <Property Name="cdType" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="classificationType" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="area" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tbl_ProjectClassification" Relationship="Self.FK__tbl_Proje__cdTyp__7E37BEF6" FromRole="tbl_Classifications" ToRole="tbl_ProjectClassification" />
+  </EntityType>
+  <EntityType Name="tbl_College">
+    <Key>
+      <PropertyRef Name="idCollege" />
+    </Key>
+    <Property Name="idCollege" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="collegeName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="tbl_AssociateProfessional" Relationship="Self.FK__tbl_Assoc__idCol__76969D2E" FromRole="tbl_College" ToRole="tbl_AssociateProfessional" />
+  </EntityType>
+  <EntityType Name="tbl_Contact">
+    <Key>
+      <PropertyRef Name="idContact" />
+    </Key>
+    <Property Name="idContact" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="contactName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="lastName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="secondLastName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="contactRole" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbl_Customer">
+    <Key>
+      <PropertyRef Name="idCustomer" />
+    </Key>
+    <Property Name="idCustomer" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="mail" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="phone" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="country" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="typeCustomer" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tbl_LegalCustomer" Relationship="Self.FK__tbl_Legal__idCus__787EE5A0" FromRole="tbl_Customer" ToRole="tbl_LegalCustomer" />
+    <NavigationProperty Name="tbl_PhysicalCustomer" Relationship="Self.FK__tbl_Physi__idCus__797309D9" FromRole="tbl_Customer" ToRole="tbl_PhysicalCustomer" />
+    <NavigationProperty Name="tbl_Project" Relationship="Self.FK__tbl_Proje__idCus__7A672E12" FromRole="tbl_Customer" ToRole="tbl_Project" />
+  </EntityType>
+  <EntityType Name="tbl_Professional">
+    <Key>
+      <PropertyRef Name="idProfessional" />
+    </Key>
+    <Property Name="idProfessional" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="identification" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="professionalName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="lastName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="secondLastName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="mail" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="phone" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="profession" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="academicDegree" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="tbl_AssociateProfessional" Relationship="Self.FK__tbl_Assoc__idPro__778AC167" FromRole="tbl_Professional" ToRole="tbl_AssociateProfessional" />
+    <NavigationProperty Name="tbl_Project" Relationship="Self.FK__tbl_Proje__idPro__7B5B524B" FromRole="tbl_Professional" ToRole="tbl_Project" />
+  </EntityType>
+  <EntityType Name="tbl_ProyectInfo">
+    <Key>
+      <PropertyRef Name="idProject" />
+    </Key>
+    <Property Name="idProject" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="projectCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="nameProject" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="startDate" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="endDate" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="costInColones" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="costInDollars" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="accreditedProject" Type="Boolean" Nullable="false" />
+    <Property Name="adhonoremProject" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="tbl_ProjectDescription" Relationship="Self.FK__tbl_Proje__idPro__00200768" FromRole="tbl_ProyectInfo" ToRole="tbl_ProjectDescription" />
+    <NavigationProperty Name="tbl_ProjectLocation" Relationship="Self.FK__tbl_Proje__idPro__01142BA1" FromRole="tbl_ProyectInfo" ToRole="tbl_ProjectLocation" />
+    <NavigationProperty Name="tbl_Project" Relationship="Self.FK__tbl_Proje__idPro__7C4F7684" FromRole="tbl_ProyectInfo" ToRole="tbl_Project" />
+    <NavigationProperty Name="tbl_ProjectClassification" Relationship="Self.FK__tbl_Proje__idPro__7F2BE32F" FromRole="tbl_ProyectInfo" ToRole="tbl_ProjectClassification" />
+  </EntityType>
+  <EntityType Name="tbl_UserRole">
+    <Key>
+      <PropertyRef Name="idUserRole" />
+    </Key>
+    <Property Name="idUserRole" Type="Int32" Nullable="false" />
+    <Property Name="userRole" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="tbl_Access" Relationship="Self.FK__tbl_Acces__idUse__73BA3083" FromRole="tbl_UserRole" ToRole="tbl_Access" />
+    <NavigationProperty Name="tbl_Users" Relationship="Self.FK__tbl_Users__idUse__02084FDA" FromRole="tbl_UserRole" ToRole="tbl_Users" />
+  </EntityType>
+  <EntityType Name="tbl_Users">
+    <Key>
+      <PropertyRef Name="idUser" />
+    </Key>
+    <Property Name="idUser" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idUserRole" Type="Int32" />
+    <Property Name="condition" Type="Boolean" Nullable="false" />
+    <Property Name="userName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="lastName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="secondLastName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="mail" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="userPassword" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="tbl_UserRole" Relationship="Self.FK__tbl_Users__idUse__02084FDA" FromRole="tbl_Users" ToRole="tbl_UserRole" />
+    <NavigationProperty Name="tbl_Project" Relationship="Self.FK__tbl_Proje__idUse__7D439ABD" FromRole="tbl_Users" ToRole="tbl_Project" />
+  </EntityType>
+  <EntityType Name="tbl_AssociateProfessional">
+    <Key>
+      <PropertyRef Name="professionalCard" />
+    </Key>
+    <Property Name="idCollege" Type="Int32" />
+    <Property Name="idProfessional" Type="Int32" />
+    <Property Name="professionalCard" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="tbl_College" Relationship="Self.FK__tbl_Assoc__idCol__76969D2E" FromRole="tbl_AssociateProfessional" ToRole="tbl_College" />
+    <NavigationProperty Name="tbl_Professional" Relationship="Self.FK__tbl_Assoc__idPro__778AC167" FromRole="tbl_AssociateProfessional" ToRole="tbl_Professional" />
+  </EntityType>
+  <EntityType Name="tbl_LegalCustomer">
+    <Key>
+      <PropertyRef Name="legalIdentity" />
+      <PropertyRef Name="customerName" />
+    </Key>
+    <Property Name="idCustomer" Type="Int32" />
+    <Property Name="legalIdentity" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="customerName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="tbl_Customer" Relationship="Self.FK__tbl_Legal__idCus__787EE5A0" FromRole="tbl_LegalCustomer" ToRole="tbl_Customer" />
+  </EntityType>
+  <EntityType Name="tbl_PhysicalCustomer">
+    <Key>
+      <PropertyRef Name="identification" />
+      <PropertyRef Name="customerName" />
+      <PropertyRef Name="lastName" />
+      <PropertyRef Name="secondLastName" />
+    </Key>
+    <Property Name="idCustomer" Type="Int32" />
+    <Property Name="identification" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="customerName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="lastName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="secondLastName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="tbl_Customer" Relationship="Self.FK__tbl_Physi__idCus__797309D9" FromRole="tbl_PhysicalCustomer" ToRole="tbl_Customer" />
+  </EntityType>
+  <EntityType Name="tbl_Project">
+    <Key>
+      <PropertyRef Name="professionalRole" />
+    </Key>
+    <Property Name="idProject" Type="Int32" />
+    <Property Name="idCustomer" Type="Int32" />
+    <Property Name="idProfessional" Type="Int32" />
+    <Property Name="professionalRole" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="idUser" Type="Int32" />
+    <NavigationProperty Name="tbl_Customer" Relationship="Self.FK__tbl_Proje__idCus__7A672E12" FromRole="tbl_Project" ToRole="tbl_Customer" />
+    <NavigationProperty Name="tbl_Professional" Relationship="Self.FK__tbl_Proje__idPro__7B5B524B" FromRole="tbl_Project" ToRole="tbl_Professional" />
+    <NavigationProperty Name="tbl_ProyectInfo" Relationship="Self.FK__tbl_Proje__idPro__7C4F7684" FromRole="tbl_Project" ToRole="tbl_ProyectInfo" />
+    <NavigationProperty Name="tbl_Users" Relationship="Self.FK__tbl_Proje__idUse__7D439ABD" FromRole="tbl_Project" ToRole="tbl_Users" />
+  </EntityType>
+  <EntityType Name="tbl_ProjectClassification">
+    <Key>
+      <PropertyRef Name="projectType" />
+    </Key>
+    <Property Name="idProject" Type="Int32" />
+    <Property Name="cdType" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="projectType" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="projectArea" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tbl_Classifications" Relationship="Self.FK__tbl_Proje__cdTyp__7E37BEF6" FromRole="tbl_ProjectClassification" ToRole="tbl_Classifications" />
+    <NavigationProperty Name="tbl_ProyectInfo" Relationship="Self.FK__tbl_Proje__idPro__7F2BE32F" FromRole="tbl_ProjectClassification" ToRole="tbl_ProyectInfo" />
+  </EntityType>
+  <EntityType Name="tbl_ProjectDescription">
+    <Key>
+      <PropertyRef Name="projectDescription" />
+    </Key>
+    <Property Name="idProject" Type="Int32" />
+    <Property Name="projectDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="tbl_ProyectInfo" Relationship="Self.FK__tbl_Proje__idPro__00200768" FromRole="tbl_ProjectDescription" ToRole="tbl_ProyectInfo" />
+  </EntityType>
+  <EntityType Name="tbl_ProjectLocation">
+    <Key>
+      <PropertyRef Name="country" />
+      <PropertyRef Name="province" />
+      <PropertyRef Name="city" />
+      <PropertyRef Name="district" />
+    </Key>
+    <Property Name="idProject" Type="Int32" />
+    <Property Name="country" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="province" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="city" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="district" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="tbl_ProyectInfo" Relationship="Self.FK__tbl_Proje__idPro__01142BA1" FromRole="tbl_ProjectLocation" ToRole="tbl_ProyectInfo" />
+  </EntityType>
+  <EntityType Name="database_firewall_rules">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="name" />
+      <PropertyRef Name="start_ip_address" />
+      <PropertyRef Name="end_ip_address" />
+      <PropertyRef Name="create_date" />
+      <PropertyRef Name="modify_date" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="start_ip_address" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="end_ip_address" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="modify_date" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <Association Name="FK__tbl_Acces__idUse__73BA3083">
+    <End Role="tbl_UserRole" Type="Self.tbl_UserRole" Multiplicity="0..1" />
+    <End Role="tbl_Access" Type="Self.tbl_Access" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_UserRole">
+        <PropertyRef Name="idUserRole" />
+      </Principal>
+      <Dependent Role="tbl_Access">
+        <PropertyRef Name="idUserRole" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_Proje__cdTyp__7E37BEF6">
+    <End Role="tbl_Classifications" Type="Self.tbl_Classifications" Multiplicity="0..1" />
+    <End Role="tbl_ProjectClassification" Type="Self.tbl_ProjectClassification" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Classifications">
+        <PropertyRef Name="cdType" />
+      </Principal>
+      <Dependent Role="tbl_ProjectClassification">
+        <PropertyRef Name="cdType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_Assoc__idCol__76969D2E">
+    <End Role="tbl_College" Type="Self.tbl_College" Multiplicity="0..1" />
+    <End Role="tbl_AssociateProfessional" Type="Self.tbl_AssociateProfessional" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_College">
+        <PropertyRef Name="idCollege" />
+      </Principal>
+      <Dependent Role="tbl_AssociateProfessional">
+        <PropertyRef Name="idCollege" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_Legal__idCus__787EE5A0">
+    <End Role="tbl_Customer" Type="Self.tbl_Customer" Multiplicity="0..1" />
+    <End Role="tbl_LegalCustomer" Type="Self.tbl_LegalCustomer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Customer">
+        <PropertyRef Name="idCustomer" />
+      </Principal>
+      <Dependent Role="tbl_LegalCustomer">
+        <PropertyRef Name="idCustomer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_Physi__idCus__797309D9">
+    <End Role="tbl_Customer" Type="Self.tbl_Customer" Multiplicity="0..1" />
+    <End Role="tbl_PhysicalCustomer" Type="Self.tbl_PhysicalCustomer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Customer">
+        <PropertyRef Name="idCustomer" />
+      </Principal>
+      <Dependent Role="tbl_PhysicalCustomer">
+        <PropertyRef Name="idCustomer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_Proje__idCus__7A672E12">
+    <End Role="tbl_Customer" Type="Self.tbl_Customer" Multiplicity="0..1" />
+    <End Role="tbl_Project" Type="Self.tbl_Project" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Customer">
+        <PropertyRef Name="idCustomer" />
+      </Principal>
+      <Dependent Role="tbl_Project">
+        <PropertyRef Name="idCustomer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_Assoc__idPro__778AC167">
+    <End Role="tbl_Professional" Type="Self.tbl_Professional" Multiplicity="0..1" />
+    <End Role="tbl_AssociateProfessional" Type="Self.tbl_AssociateProfessional" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Professional">
+        <PropertyRef Name="idProfessional" />
+      </Principal>
+      <Dependent Role="tbl_AssociateProfessional">
+        <PropertyRef Name="idProfessional" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_Proje__idPro__7B5B524B">
+    <End Role="tbl_Professional" Type="Self.tbl_Professional" Multiplicity="0..1" />
+    <End Role="tbl_Project" Type="Self.tbl_Project" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Professional">
+        <PropertyRef Name="idProfessional" />
+      </Principal>
+      <Dependent Role="tbl_Project">
+        <PropertyRef Name="idProfessional" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_Proje__idPro__00200768">
+    <End Role="tbl_ProyectInfo" Type="Self.tbl_ProyectInfo" Multiplicity="0..1" />
+    <End Role="tbl_ProjectDescription" Type="Self.tbl_ProjectDescription" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_ProyectInfo">
+        <PropertyRef Name="idProject" />
+      </Principal>
+      <Dependent Role="tbl_ProjectDescription">
+        <PropertyRef Name="idProject" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_Proje__idPro__01142BA1">
+    <End Role="tbl_ProyectInfo" Type="Self.tbl_ProyectInfo" Multiplicity="0..1" />
+    <End Role="tbl_ProjectLocation" Type="Self.tbl_ProjectLocation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_ProyectInfo">
+        <PropertyRef Name="idProject" />
+      </Principal>
+      <Dependent Role="tbl_ProjectLocation">
+        <PropertyRef Name="idProject" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_Proje__idPro__7C4F7684">
+    <End Role="tbl_ProyectInfo" Type="Self.tbl_ProyectInfo" Multiplicity="0..1" />
+    <End Role="tbl_Project" Type="Self.tbl_Project" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_ProyectInfo">
+        <PropertyRef Name="idProject" />
+      </Principal>
+      <Dependent Role="tbl_Project">
+        <PropertyRef Name="idProject" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_Proje__idPro__7F2BE32F">
+    <End Role="tbl_ProyectInfo" Type="Self.tbl_ProyectInfo" Multiplicity="0..1" />
+    <End Role="tbl_ProjectClassification" Type="Self.tbl_ProjectClassification" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_ProyectInfo">
+        <PropertyRef Name="idProject" />
+      </Principal>
+      <Dependent Role="tbl_ProjectClassification">
+        <PropertyRef Name="idProject" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_Users__idUse__02084FDA">
+    <End Role="tbl_UserRole" Type="Self.tbl_UserRole" Multiplicity="0..1" />
+    <End Role="tbl_Users" Type="Self.tbl_Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_UserRole">
+        <PropertyRef Name="idUserRole" />
+      </Principal>
+      <Dependent Role="tbl_Users">
+        <PropertyRef Name="idUserRole" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_Proje__idUse__7D439ABD">
+    <End Role="tbl_Users" Type="Self.tbl_Users" Multiplicity="0..1" />
+    <End Role="tbl_Project" Type="Self.tbl_Project" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Users">
+        <PropertyRef Name="idUser" />
+      </Principal>
+      <Dependent Role="tbl_Project">
+        <PropertyRef Name="idUser" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="conectionToDataBaseCIVCO" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tbl_Access" EntityType="Self.tbl_Access" />
+    <EntitySet Name="tbl_Classifications" EntityType="Self.tbl_Classifications" />
+    <EntitySet Name="tbl_College" EntityType="Self.tbl_College" />
+    <EntitySet Name="tbl_Contact" EntityType="Self.tbl_Contact" />
+    <EntitySet Name="tbl_Customer" EntityType="Self.tbl_Customer" />
+    <EntitySet Name="tbl_Professional" EntityType="Self.tbl_Professional" />
+    <EntitySet Name="tbl_ProyectInfo" EntityType="Self.tbl_ProyectInfo" />
+    <EntitySet Name="tbl_UserRole" EntityType="Self.tbl_UserRole" />
+    <EntitySet Name="tbl_Users" EntityType="Self.tbl_Users" />
+    <EntitySet Name="tbl_AssociateProfessional" EntityType="Self.tbl_AssociateProfessional" />
+    <EntitySet Name="tbl_LegalCustomer" EntityType="Self.tbl_LegalCustomer" />
+    <EntitySet Name="tbl_PhysicalCustomer" EntityType="Self.tbl_PhysicalCustomer" />
+    <EntitySet Name="tbl_Project" EntityType="Self.tbl_Project" />
+    <EntitySet Name="tbl_ProjectClassification" EntityType="Self.tbl_ProjectClassification" />
+    <EntitySet Name="tbl_ProjectDescription" EntityType="Self.tbl_ProjectDescription" />
+    <EntitySet Name="tbl_ProjectLocation" EntityType="Self.tbl_ProjectLocation" />
+    <EntitySet Name="database_firewall_rules" EntityType="Self.database_firewall_rules" />
+    <AssociationSet Name="FK__tbl_Acces__idUse__73BA3083" Association="Self.FK__tbl_Acces__idUse__73BA3083">
+      <End Role="tbl_UserRole" EntitySet="tbl_UserRole" />
+      <End Role="tbl_Access" EntitySet="tbl_Access" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_Proje__cdTyp__7E37BEF6" Association="Self.FK__tbl_Proje__cdTyp__7E37BEF6">
+      <End Role="tbl_Classifications" EntitySet="tbl_Classifications" />
+      <End Role="tbl_ProjectClassification" EntitySet="tbl_ProjectClassification" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_Assoc__idCol__76969D2E" Association="Self.FK__tbl_Assoc__idCol__76969D2E">
+      <End Role="tbl_College" EntitySet="tbl_College" />
+      <End Role="tbl_AssociateProfessional" EntitySet="tbl_AssociateProfessional" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_Legal__idCus__787EE5A0" Association="Self.FK__tbl_Legal__idCus__787EE5A0">
+      <End Role="tbl_Customer" EntitySet="tbl_Customer" />
+      <End Role="tbl_LegalCustomer" EntitySet="tbl_LegalCustomer" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_Physi__idCus__797309D9" Association="Self.FK__tbl_Physi__idCus__797309D9">
+      <End Role="tbl_Customer" EntitySet="tbl_Customer" />
+      <End Role="tbl_PhysicalCustomer" EntitySet="tbl_PhysicalCustomer" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_Proje__idCus__7A672E12" Association="Self.FK__tbl_Proje__idCus__7A672E12">
+      <End Role="tbl_Customer" EntitySet="tbl_Customer" />
+      <End Role="tbl_Project" EntitySet="tbl_Project" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_Assoc__idPro__778AC167" Association="Self.FK__tbl_Assoc__idPro__778AC167">
+      <End Role="tbl_Professional" EntitySet="tbl_Professional" />
+      <End Role="tbl_AssociateProfessional" EntitySet="tbl_AssociateProfessional" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_Proje__idPro__7B5B524B" Association="Self.FK__tbl_Proje__idPro__7B5B524B">
+      <End Role="tbl_Professional" EntitySet="tbl_Professional" />
+      <End Role="tbl_Project" EntitySet="tbl_Project" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_Proje__idPro__00200768" Association="Self.FK__tbl_Proje__idPro__00200768">
+      <End Role="tbl_ProyectInfo" EntitySet="tbl_ProyectInfo" />
+      <End Role="tbl_ProjectDescription" EntitySet="tbl_ProjectDescription" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_Proje__idPro__01142BA1" Association="Self.FK__tbl_Proje__idPro__01142BA1">
+      <End Role="tbl_ProyectInfo" EntitySet="tbl_ProyectInfo" />
+      <End Role="tbl_ProjectLocation" EntitySet="tbl_ProjectLocation" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_Proje__idPro__7C4F7684" Association="Self.FK__tbl_Proje__idPro__7C4F7684">
+      <End Role="tbl_ProyectInfo" EntitySet="tbl_ProyectInfo" />
+      <End Role="tbl_Project" EntitySet="tbl_Project" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_Proje__idPro__7F2BE32F" Association="Self.FK__tbl_Proje__idPro__7F2BE32F">
+      <End Role="tbl_ProyectInfo" EntitySet="tbl_ProyectInfo" />
+      <End Role="tbl_ProjectClassification" EntitySet="tbl_ProjectClassification" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_Users__idUse__02084FDA" Association="Self.FK__tbl_Users__idUse__02084FDA">
+      <End Role="tbl_UserRole" EntitySet="tbl_UserRole" />
+      <End Role="tbl_Users" EntitySet="tbl_Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_Proje__idUse__7D439ABD" Association="Self.FK__tbl_Proje__idUse__7D439ABD">
+      <End Role="tbl_Users" EntitySet="tbl_Users" />
+      <End Role="tbl_Project" EntitySet="tbl_Project" />
+    </AssociationSet>
+    <FunctionImport Name="SP_Delete_ProjectInfo">
+      <Parameter Name="idProject" Mode="In" Type="Int32" />
+      <Parameter Name="result" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="SP_Insert_ProjectDescription">
+      <Parameter Name="idProject" Mode="In" Type="Int32" />
+      <Parameter Name="description" Mode="In" Type="String" />
+      <Parameter Name="message" Mode="InOut" Type="String" />
+      <Parameter Name="result" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="SP_Insert_ProjectInfo">
+      <Parameter Name="projectCode" Mode="In" Type="String" />
+      <Parameter Name="nameProject" Mode="In" Type="String" />
+      <Parameter Name="startDate" Mode="In" Type="DateTime" />
+      <Parameter Name="endDate" Mode="In" Type="DateTime" />
+      <Parameter Name="costInColones" Mode="In" Type="Decimal" />
+      <Parameter Name="costInDollars" Mode="In" Type="Decimal" />
+      <Parameter Name="accreditedProject" Mode="In" Type="Boolean" />
+      <Parameter Name="adhonoremProject" Mode="In" Type="Boolean" />
+      <Parameter Name="message" Mode="InOut" Type="String" />
+      <Parameter Name="result" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="SP_Insert_ProjectLocation">
+      <Parameter Name="idProject" Mode="In" Type="Int32" />
+      <Parameter Name="country" Mode="In" Type="String" />
+      <Parameter Name="province" Mode="In" Type="String" />
+      <Parameter Name="city" Mode="In" Type="String" />
+      <Parameter Name="district" Mode="In" Type="String" />
+      <Parameter Name="message" Mode="InOut" Type="String" />
+      <Parameter Name="result" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="SP_Update_ProjectDescription">
+      <Parameter Name="idProject" Mode="In" Type="Int32" />
+      <Parameter Name="description" Mode="In" Type="String" />
+      <Parameter Name="message" Mode="InOut" Type="String" />
+      <Parameter Name="result" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="SP_Update_ProjectInfo">
+      <Parameter Name="idProject" Mode="In" Type="Int32" />
+      <Parameter Name="projectCode" Mode="In" Type="String" />
+      <Parameter Name="nameProject" Mode="In" Type="String" />
+      <Parameter Name="startDate" Mode="In" Type="DateTime" />
+      <Parameter Name="endDate" Mode="In" Type="DateTime" />
+      <Parameter Name="costInColones" Mode="In" Type="Decimal" />
+      <Parameter Name="costInDollars" Mode="In" Type="Decimal" />
+      <Parameter Name="accreditedProject" Mode="In" Type="Boolean" />
+      <Parameter Name="adhonoremProject" Mode="In" Type="Boolean" />
+      <Parameter Name="message" Mode="InOut" Type="String" />
+      <Parameter Name="result" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="SP_Update_ProjectLocation">
+      <Parameter Name="idProject" Mode="In" Type="Int32" />
+      <Parameter Name="country" Mode="In" Type="String" />
+      <Parameter Name="province" Mode="In" Type="String" />
+      <Parameter Name="city" Mode="In" Type="String" />
+      <Parameter Name="district" Mode="In" Type="String" />
+      <Parameter Name="message" Mode="InOut" Type="String" />
+      <Parameter Name="result" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+  </EntityContainer>
+</Schema>

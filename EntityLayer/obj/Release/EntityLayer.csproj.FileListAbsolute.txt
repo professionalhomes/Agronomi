@@ -1,0 +1,10 @@
+C:\Users\Luis Antonio Jimenez\OneDrive - Estudiantes ITCR\TEC\ATI\CIVCO\Sistema_Proyectos_CIVCO\Sistema_BD_CIVCO\EntityLayer\bin\Release\EntityLayer.dll
+C:\Users\Luis Antonio Jimenez\OneDrive - Estudiantes ITCR\TEC\ATI\CIVCO\Sistema_Proyectos_CIVCO\Sistema_BD_CIVCO\EntityLayer\bin\Release\EntityLayer.pdb
+C:\Users\Luis Antonio Jimenez\OneDrive - Estudiantes ITCR\TEC\ATI\CIVCO\Sistema_Proyectos_CIVCO\Sistema_BD_CIVCO\EntityLayer\obj\Release\EntityLayer.csproj.AssemblyReference.cache
+C:\Users\Luis Antonio Jimenez\OneDrive - Estudiantes ITCR\TEC\ATI\CIVCO\Sistema_Proyectos_CIVCO\Sistema_BD_CIVCO\EntityLayer\obj\Release\EntityLayer.csproj.CoreCompileInputs.cache
+C:\Users\Luis Antonio Jimenez\OneDrive - Estudiantes ITCR\TEC\ATI\CIVCO\Sistema_Proyectos_CIVCO\Sistema_BD_CIVCO\EntityLayer\obj\Release\EntityLayer.dll
+C:\Users\Luis Antonio Jimenez\OneDrive - Estudiantes ITCR\TEC\ATI\CIVCO\Sistema_Proyectos_CIVCO\Sistema_BD_CIVCO\EntityLayer\obj\Release\EntityLayer.pdb
+C:\Users\Luis Antonio Jimenez\OneDrive - Estudiantes ITCR\TEC\ATI\CIVCO\Sistema_Proyectos_CIVCO\Sistema_BD_CIVCO\EntityLayer\bin\Release\BouncyCastle.Crypto.dll
+C:\Users\Luis Antonio Jimenez\OneDrive - Estudiantes ITCR\TEC\ATI\CIVCO\Sistema_Proyectos_CIVCO\Sistema_BD_CIVCO\EntityLayer\bin\Release\itextsharp.dll
+C:\Users\Luis Antonio Jimenez\OneDrive - Estudiantes ITCR\TEC\ATI\CIVCO\Sistema_Proyectos_CIVCO\Sistema_BD_CIVCO\EntityLayer\bin\Release\itextsharp.xml
+C:\Users\Luis Antonio Jimenez\OneDrive - Estudiantes ITCR\TEC\ATI\CIVCO\Sistema_Proyectos_CIVCO\Sistema_BD_CIVCO\EntityLayer\obj\Release\EntityLayer.csproj.CopyComplete

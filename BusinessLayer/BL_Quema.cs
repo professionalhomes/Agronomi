@@ -1,0 +1,22 @@
+﻿using DataLayer;
+using EntityLayer;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace BusinessLayer
+{
+    public class BL_Quema
+    {
+        private DL_Quema objDL_Quema = new DL_Quema();
+
+        //This method allow to list the seleccion data
+        public List<Quema> ToList(int usuario)
+        {
+            return objDL_Quema.ToList(usuario);
+        }
+    }
+}

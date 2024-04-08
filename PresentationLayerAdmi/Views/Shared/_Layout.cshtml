@@ -1,0 +1,121 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Agronomi</title>
+    @Styles.Render("~/Content/css")
+    <link href="~/Content/FrontendStyles/LayoutSyles.css" rel="stylesheet" />
+    <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" /> @*for datepicker styles*@
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.js"></script>
+    <!--========== BOX ICONS ==========-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+
+    @*@Scripts.Render("~/bundles/modernizr")*@
+</head>
+<body>
+    <!--========== NAV ==========-->
+    <div class="nav" id="navbar">
+        <nav class="nav__container">
+            <div>
+                <a href="#" class="nav__link nav__logo">
+                    <i class='bx bx-leaf nav__icon'></i>
+                    <span class="nav__logo-name">Agronomi</span>
+                </a>
+
+                <div class="nav__list">
+                    <div class="nav__items">
+
+                        <div class="nav__dropdown">
+                            <a href="#" class="nav__link">
+                                <i class='bx bx-landscape nav__icon'></i>
+                                <span class="nav__name">Preparación del terreno</span>
+                                <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
+                            </a>
+
+                            <div class="nav__dropdown-collapse">
+                                <div class="nav__dropdown-content">
+                                    <a href="@Url.Action("Seleccion", "Home")" class="nav__dropdown-item">Selección</a>
+                                    <a href="@Url.Action("Tratamiento", "Home")" class="nav__dropdown-item">Tratamiento</a>
+                                    <a href="@Url.Action("Labranza", "Home")" class="nav__dropdown-item">Labranza</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <a href="@Url.Action("Siembra", "Home")" class="nav__link">
+                            <i class='bx bx-sun nav__icon'></i>
+                            <span class="nav__name">Siembra</span>
+                        </a>
+                    </div>
+
+                    <div class="nav__items">
+
+                        <div class="nav__dropdown">
+                            <a href="#" class="nav__link">
+                                <i class='bx bx-donate-heart nav__icon'></i>
+                                <span class="nav__name">Mantenimiento del terreno</span>
+                                <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
+                            </a>
+
+                            <div class="nav__dropdown-collapse">
+                                <div class="nav__dropdown-content">
+                                    <a href="@Url.Action("Aporca", "Home")" class="nav__dropdown-item">Aporca</a>
+                                    <a href="@Url.Action("Bactericidas", "Home")" class="nav__dropdown-item">Bactericidas</a>
+                                    <a href="@Url.Action("Fungicidas", "Home")" class="nav__dropdown-item">Fungicidas</a>
+                                    <a href="@Url.Action("Insecticidas", "Home")" class="nav__dropdown-item">Insecticidas</a>
+                                    <a href="@Url.Action("Nematicidas", "Home")" class="nav__dropdown-item">Nematicidas</a>
+                                    <a href="@Url.Action("Estimulador", "Home")" class="nav__dropdown-item">Estimulador</a>
+                                    <a href="@Url.Action("Quema", "Home")" class="nav__dropdown-item">Quema</a>
+                                    <a href="@Url.Action("CombateMalezas", "Home")" class="nav__dropdown-item">Combate Malezas</a>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <a href="@Url.Action("Cosecha", "Home")" class="nav__link">
+                            <i class='bx bx-spa nav__icon'></i>
+                            <span class="nav__name">Cosecha</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <a href="@Url.Action("SignOut", "Access")" class="nav__link nav__logout">
+                <i class='bx bx-log-out nav__icon'></i>
+                <div class="nav__name">
+                    Cerrar sesión de:
+                    <br />
+                    @ViewBag.UserName
+                </div>
+            </a>
+        </nav>
+    </div>
+
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid px-4">
+                @RenderBody()
+            </div>
+        </main>
+    </div>
+
+        <script src="~/Scripts/FrontendScripts/LayoutScript.js"></script>
+
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/complementos")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+</body>
+</html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.13/jspdf.plugin.autotable.min.js"></script>
+<link href="~/Content/DataTables/Buttons-2.3.6/css/buttons.bootstrap4.min.css" rel="stylesheet" />
+<script src="~/Content/DataTables/JSZip-2.5.0/jszip.min.js"></script>
+<script src="~/Content/DataTables/pdfmake-0.2.7/pdfmake.min.js"></script>
+<script src="~/Content/DataTables/pdfmake-0.2.7/vfs_fonts.js"></script>
+<script src="~/Content/DataTables/Buttons-2.3.6/js/dataTables.buttons.min.js"></script>
+<script src="~/Content/DataTables/Buttons-2.3.6/js/buttons.bootstrap4.min.js"></script>
+<script src="~/Content/DataTables/Buttons-2.3.6/js/buttons.html5.min.js"></script>
