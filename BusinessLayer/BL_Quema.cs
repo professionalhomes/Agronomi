@@ -18,5 +18,13 @@ namespace BusinessLayer
         {
             return objDL_Quema.ToList(usuario);
         }
+
+        //This method allow to insert data
+        public int InsertarDatosQuema(Quema objQuema, out string message)
+        {
+            //Falta validación de datos
+
+            return objDL_Quema.InsertarDatosQuema(objQuema, out message);
+        }
     }
 }

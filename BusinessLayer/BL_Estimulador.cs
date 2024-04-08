@@ -17,5 +17,13 @@ namespace BusinessLayer
         {
             return objDL_Estimulador.ToList(usuario);
         }
+
+        //This method allow to insert data
+        public int InsertarDatosEstimulador(Estimulador objEstimulador, out string message)
+        {
+            //Falta validación de datos
+
+            return objDL_Estimulador.InsertarDatosEstimulador(objEstimulador, out message);
+        }
     }
 }

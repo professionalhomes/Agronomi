@@ -430,5 +430,47 @@ namespace PresentationLayerAdmi.Controllers
 
             return Json(new { result = result, message = message }, JsonRequestBehavior.AllowGet);
         }
+
+        //A method to save Estimulador data
+        [HttpPost]
+        public JsonResult InsertarDatosEstimulador(Estimulador objEstimulador)
+        {
+            object result;
+            string message = string.Empty;
+
+            objEstimulador.idUsuario = idUsuario;
+
+            result = new BL_Estimulador().InsertarDatosEstimulador(objEstimulador, out message);
+
+            return Json(new { result = result, message = message }, JsonRequestBehavior.AllowGet);
+        }
+
+        //A method to save Quema data
+        [HttpPost]
+        public JsonResult InsertarDatosQuema(Quema objQuema)
+        {
+            object result;
+            string message = string.Empty;
+
+            objQuema.idUsuario = idUsuario;
+
+            result = new BL_Quema().InsertarDatosQuema(objQuema, out message);
+
+            return Json(new { result = result, message = message }, JsonRequestBehavior.AllowGet);
+        }
+
+        //A method to save Quema data
+        [HttpPost]
+        public JsonResult InsertarDatosCombateMalezas(CombateMalezas objCombateMalezas)
+        {
+            object result;
+            string message = string.Empty;
+
+            objCombateMalezas.idUsuario = idUsuario;
+
+            result = new BL_CombateMalezas().InsertarDatosCombateMalezas(objCombateMalezas, out message);
+
+            return Json(new { result = result, message = message }, JsonRequestBehavior.AllowGet);
+        }
     }
 }

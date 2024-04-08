@@ -22,3 +22,15 @@ C:\Users\Luis Antonio Jimenez\OneDrive - Estudiantes ITCR\TEC\ATI\AgroTEC\Sistem
 C:\Users\Luis Antonio Jimenez\OneDrive - Estudiantes ITCR\TEC\ATI\AgroTEC\SistemaAgronomiCIVCO_Guide\DataLayer\obj\Debug\DataLayer.csproj.CopyComplete
 C:\Users\Luis Antonio Jimenez\OneDrive - Estudiantes ITCR\TEC\ATI\AgroTEC\SistemaAgronomiCIVCO_Guide\DataLayer\obj\Debug\DataLayer.dll
 C:\Users\Luis Antonio Jimenez\OneDrive - Estudiantes ITCR\TEC\ATI\AgroTEC\SistemaAgronomiCIVCO_Guide\DataLayer\obj\Debug\DataLayer.pdb
+C:\Users\Luis Antonio Jimenez\OneDrive - Estudiantes ITCR\TEC\ATI\AgroTEC\SistemaAgronomiCIVCO_Guide\Agronomi\DataLayer\bin\Debug\DataLayer.dll
+C:\Users\Luis Antonio Jimenez\OneDrive - Estudiantes ITCR\TEC\ATI\AgroTEC\SistemaAgronomiCIVCO_Guide\Agronomi\DataLayer\bin\Debug\DataLayer.pdb
+C:\Users\Luis Antonio Jimenez\OneDrive - Estudiantes ITCR\TEC\ATI\AgroTEC\SistemaAgronomiCIVCO_Guide\Agronomi\DataLayer\bin\Debug\BouncyCastle.Crypto.dll
+C:\Users\Luis Antonio Jimenez\OneDrive - Estudiantes ITCR\TEC\ATI\AgroTEC\SistemaAgronomiCIVCO_Guide\Agronomi\DataLayer\bin\Debug\EntityLayer.dll
+C:\Users\Luis Antonio Jimenez\OneDrive - Estudiantes ITCR\TEC\ATI\AgroTEC\SistemaAgronomiCIVCO_Guide\Agronomi\DataLayer\bin\Debug\itextsharp.dll
+C:\Users\Luis Antonio Jimenez\OneDrive - Estudiantes ITCR\TEC\ATI\AgroTEC\SistemaAgronomiCIVCO_Guide\Agronomi\DataLayer\bin\Debug\EntityLayer.pdb
+C:\Users\Luis Antonio Jimenez\OneDrive - Estudiantes ITCR\TEC\ATI\AgroTEC\SistemaAgronomiCIVCO_Guide\Agronomi\DataLayer\bin\Debug\itextsharp.xml
+C:\Users\Luis Antonio Jimenez\OneDrive - Estudiantes ITCR\TEC\ATI\AgroTEC\SistemaAgronomiCIVCO_Guide\Agronomi\DataLayer\obj\Debug\DataLayer.csproj.AssemblyReference.cache
+C:\Users\Luis Antonio Jimenez\OneDrive - Estudiantes ITCR\TEC\ATI\AgroTEC\SistemaAgronomiCIVCO_Guide\Agronomi\DataLayer\obj\Debug\DataLayer.csproj.CoreCompileInputs.cache
+C:\Users\Luis Antonio Jimenez\OneDrive - Estudiantes ITCR\TEC\ATI\AgroTEC\SistemaAgronomiCIVCO_Guide\Agronomi\DataLayer\obj\Debug\DataLayer.csproj.CopyComplete
+C:\Users\Luis Antonio Jimenez\OneDrive - Estudiantes ITCR\TEC\ATI\AgroTEC\SistemaAgronomiCIVCO_Guide\Agronomi\DataLayer\obj\Debug\DataLayer.dll
+C:\Users\Luis Antonio Jimenez\OneDrive - Estudiantes ITCR\TEC\ATI\AgroTEC\SistemaAgronomiCIVCO_Guide\Agronomi\DataLayer\obj\Debug\DataLayer.pdb

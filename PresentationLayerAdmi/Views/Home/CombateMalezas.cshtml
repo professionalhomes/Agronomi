@@ -88,7 +88,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-success" style="background-color: #606C37; border-color: #606C37;" onclick="SaveSeleccionData()">Guardar</button>
+                <button type="button" class="btn btn-success" style="background-color: #606C37; border-color: #606C37;" onclick="InsertarDatosCombateMalezas()">Guardar</button>
             </div>
         </div>
     </div>
@@ -128,6 +128,8 @@
 
         $("#txtID").val(0);
         $("#txtCodigo").val("");
+        $("#txtNombreProducto").val("");
+        $("#txtCostoProducto").val("");
         $("#txtCantidadProducto").val("");
         $("#txtCantidadAplicada").val("");
         $("#txtCostoPorAplicacion").val("");
@@ -136,4 +138,61 @@
 
         $("#FormModal").modal("show");
     }
+
+    function InsertarDatosCombateMalezas() {
+
+            var CombateMalezasDatos = {
+
+                id: $("#txtID").val(),
+                idTerreno: $("#txtCodigo").val(),
+                producto: $("#txtNombreProducto").val(),
+                costoProducto: $("#txtCostoProducto").val(),
+                cantidadProducto: $("#txtCantidadProducto").val(),
+                cantidadAplicada: $("#txtCantidadAplicada").val(),
+                costoPorAplicacion: $("#txtCostoPorAplicacion").val()
+            }
+
+            jQuery.ajax({
+                url: '@Url.Action("InsertarDatosCombateMalezas", "Home")',
+                type: "POST",
+                data: JSON.stringify({ objCombateMalezas: CombateMalezasDatos }),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+
+                    $(".modal-body").LoadingOverlay("hide");
+
+                    //To register the new information in the table and hide the modal
+                    if (CombateMalezasDatos.id == 0) {
+
+                        if (data.result != 0) {
+
+                            CombateMalezasDatos.id = data.result;
+                            tableData.row.add(CombateMalezasDatos).draw(false);
+                            $("#FormModal").modal("hide");
+                        }
+                        else {
+
+                            $("#errorMessage").text(data.message);
+                            $("#errorMessage").show();
+                        }
+                    }
+                },
+                error: function (error) {
+
+                    $(".modal-body").LoadingOverlay("hide");
+                    $("#errorMessage").text("Error Ajax");
+                    $("#errorMessage").show();
+
+                },//beforeSend allow to do something during the success case is executing
+                beforeSend: function () {
+                    $(".modal-body").LoadingOverlay("show", {
+                        imageResizeFactor: 2,
+                        text: "Cargando...",
+                        size: 14
+                    })
+                }
+            });
+    }
+
 </script>

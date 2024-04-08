@@ -26,3 +26,17 @@ C:\Users\Luis Antonio Jimenez\OneDrive - Estudiantes ITCR\TEC\ATI\AgroTEC\Sistem
 C:\Users\Luis Antonio Jimenez\OneDrive - Estudiantes ITCR\TEC\ATI\AgroTEC\SistemaAgronomiCIVCO_Guide\BusinessLayer\obj\Debug\BusinessLayer.csproj.CopyComplete
 C:\Users\Luis Antonio Jimenez\OneDrive - Estudiantes ITCR\TEC\ATI\AgroTEC\SistemaAgronomiCIVCO_Guide\BusinessLayer\obj\Debug\BusinessLayer.dll
 C:\Users\Luis Antonio Jimenez\OneDrive - Estudiantes ITCR\TEC\ATI\AgroTEC\SistemaAgronomiCIVCO_Guide\BusinessLayer\obj\Debug\BusinessLayer.pdb
+C:\Users\Luis Antonio Jimenez\OneDrive - Estudiantes ITCR\TEC\ATI\AgroTEC\SistemaAgronomiCIVCO_Guide\Agronomi\BusinessLayer\bin\Debug\BusinessLayer.dll
+C:\Users\Luis Antonio Jimenez\OneDrive - Estudiantes ITCR\TEC\ATI\AgroTEC\SistemaAgronomiCIVCO_Guide\Agronomi\BusinessLayer\bin\Debug\BusinessLayer.pdb
+C:\Users\Luis Antonio Jimenez\OneDrive - Estudiantes ITCR\TEC\ATI\AgroTEC\SistemaAgronomiCIVCO_Guide\Agronomi\BusinessLayer\bin\Debug\BouncyCastle.Crypto.dll
+C:\Users\Luis Antonio Jimenez\OneDrive - Estudiantes ITCR\TEC\ATI\AgroTEC\SistemaAgronomiCIVCO_Guide\Agronomi\BusinessLayer\bin\Debug\DataLayer.dll
+C:\Users\Luis Antonio Jimenez\OneDrive - Estudiantes ITCR\TEC\ATI\AgroTEC\SistemaAgronomiCIVCO_Guide\Agronomi\BusinessLayer\bin\Debug\EntityLayer.dll
+C:\Users\Luis Antonio Jimenez\OneDrive - Estudiantes ITCR\TEC\ATI\AgroTEC\SistemaAgronomiCIVCO_Guide\Agronomi\BusinessLayer\bin\Debug\itextsharp.dll
+C:\Users\Luis Antonio Jimenez\OneDrive - Estudiantes ITCR\TEC\ATI\AgroTEC\SistemaAgronomiCIVCO_Guide\Agronomi\BusinessLayer\bin\Debug\DataLayer.pdb
+C:\Users\Luis Antonio Jimenez\OneDrive - Estudiantes ITCR\TEC\ATI\AgroTEC\SistemaAgronomiCIVCO_Guide\Agronomi\BusinessLayer\bin\Debug\EntityLayer.pdb
+C:\Users\Luis Antonio Jimenez\OneDrive - Estudiantes ITCR\TEC\ATI\AgroTEC\SistemaAgronomiCIVCO_Guide\Agronomi\BusinessLayer\bin\Debug\itextsharp.xml
+C:\Users\Luis Antonio Jimenez\OneDrive - Estudiantes ITCR\TEC\ATI\AgroTEC\SistemaAgronomiCIVCO_Guide\Agronomi\BusinessLayer\obj\Debug\BusinessLayer.csproj.AssemblyReference.cache
+C:\Users\Luis Antonio Jimenez\OneDrive - Estudiantes ITCR\TEC\ATI\AgroTEC\SistemaAgronomiCIVCO_Guide\Agronomi\BusinessLayer\obj\Debug\BusinessLayer.csproj.CoreCompileInputs.cache
+C:\Users\Luis Antonio Jimenez\OneDrive - Estudiantes ITCR\TEC\ATI\AgroTEC\SistemaAgronomiCIVCO_Guide\Agronomi\BusinessLayer\obj\Debug\BusinessLayer.csproj.CopyComplete
+C:\Users\Luis Antonio Jimenez\OneDrive - Estudiantes ITCR\TEC\ATI\AgroTEC\SistemaAgronomiCIVCO_Guide\Agronomi\BusinessLayer\obj\Debug\BusinessLayer.dll
+C:\Users\Luis Antonio Jimenez\OneDrive - Estudiantes ITCR\TEC\ATI\AgroTEC\SistemaAgronomiCIVCO_Guide\Agronomi\BusinessLayer\obj\Debug\BusinessLayer.pdb

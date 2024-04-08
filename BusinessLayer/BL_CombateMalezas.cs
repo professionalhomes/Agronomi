@@ -17,5 +17,13 @@ namespace BusinessLayer
         {
             return objDL_CombateMalezas.ToList(usuario);
         }
+
+        //This method allow to insert data
+        public int InsertarDatosCombateMalezas(CombateMalezas objCombateMalezas, out string message)
+        {
+            //Falta validación de datos
+
+            return objDL_CombateMalezas.InsertarDatosCombateMalezas(objCombateMalezas, out message);
+        }
     }
 }

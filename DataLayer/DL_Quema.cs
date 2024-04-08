@@ -60,5 +60,50 @@ namespace DataLayer
             }
             return QuemaList;
         }
+        public int InsertarDatosQuema(Quema objQuema, out string message)
+        {
+            int result = 0;
+            message = string.Empty;
+
+            using (SqlConnection objConnection = new SqlConnection(Connection.stringConnection))
+            {
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("SP_Insertar_Quema", objConnection);
+
+                    cmd.CommandType = CommandType.Text;
+                    cmd.Parameters.AddWithValue("@idTerreno", objQuema.idTerreno);
+                    cmd.Parameters.AddWithValue("@producto", objQuema.producto);
+                    cmd.Parameters.AddWithValue("@costoProducto", Convert.ToInt32(objQuema.costoProducto));
+                    cmd.Parameters.AddWithValue("@cantidadProducto", Convert.ToInt32(objQuema.cantidadProducto));
+                    cmd.Parameters.AddWithValue("@cantidadAplicada", Convert.ToInt32(objQuema.cantidadAplicada));
+                    cmd.Parameters.AddWithValue("@costoPorAplicacion", Convert.ToInt32(objQuema.costoPorAplicacion));
+                    cmd.Parameters.AddWithValue("@idUsuario", Convert.ToInt32(objQuema.idUsuario));
+
+                    cmd.Parameters.Add("result", SqlDbType.Int).Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add("message", SqlDbType.VarChar, 500).Direction = ParameterDirection.Output;
+
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    objConnection.Open();
+
+                    cmd.ExecuteNonQuery();
+
+                    result = Convert.ToInt32(cmd.Parameters["result"].Value);
+                    message = cmd.Parameters["message"].Value.ToString();
+
+                    objConnection.Close();
+                }
+                catch (Exception ex)
+                {
+                    result = 0;
+                }
+                finally
+                {
+                    objConnection.Close();
+                }
+            }
+            return result;
+        }
     }
 }
