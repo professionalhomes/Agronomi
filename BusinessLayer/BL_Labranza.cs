@@ -23,7 +23,22 @@ namespace BusinessLayer
         {
             //Falta validación de datos
 
+            objLabranza.resultadoLabranza = CalcularCostoLabranza(objLabranza).ToString();
+
             return objDL_Labranza.InsertarDatosLabranza(objLabranza, out message);
+        }
+
+        //A method to calculate the cost of labranza
+        private double CalcularCostoLabranza(Labranza objLabranza)
+        {
+            double costoPorArado = Convert.ToDouble(objLabranza.costoPorArado);
+            double costoPorEnmindas = Convert.ToDouble(objLabranza.costoPorEnmindas);
+            double costoPorTrazado = Convert.ToDouble(objLabranza.costoPorTrazado);
+            double costoPorCamas = Convert.ToDouble(objLabranza.costoPorCamas);
+            double costoPorMurillo = Convert.ToDouble(objLabranza.costoPorMurillo);
+            double costoPorRastra = Convert.ToDouble(objLabranza.costoPorRastra);
+
+            return costoPorArado + costoPorEnmindas + costoPorTrazado + costoPorCamas + costoPorMurillo + costoPorRastra;
         }
     }
 }

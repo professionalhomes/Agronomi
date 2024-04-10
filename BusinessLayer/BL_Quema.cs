@@ -24,7 +24,20 @@ namespace BusinessLayer
         {
             //Falta validación de datos
 
+            objQuema.resultadoQuema = CalcularCostoQuema(objQuema).ToString();
+
             return objDL_Quema.InsertarDatosQuema(objQuema, out message);
+        }
+
+        //This method to calculate cost of Quema
+        private double CalcularCostoQuema(Quema objQuema)
+        {
+            double costoProducto = Convert.ToDouble(objQuema.costoProducto);
+            double cantidadProducto = Convert.ToDouble(objQuema.cantidadProducto);
+            double cantidadAplicada = Convert.ToDouble(objQuema.cantidadAplicada);
+            double costoPorAplicacion = Convert.ToDouble(objQuema.costoPorAplicacion);
+
+            return (costoProducto * cantidadProducto) + (cantidadAplicada * costoPorAplicacion);
         }
     }
 }

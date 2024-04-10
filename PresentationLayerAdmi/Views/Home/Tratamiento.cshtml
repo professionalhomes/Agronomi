@@ -189,6 +189,7 @@
                         if (data.result != 0) {
 
                             tratamientoDatos.id = data.result;
+                            tratamientoDatos.resultadoTratamientoHierbas = data.costo;
                             tableData.row.add(tratamientoDatos).draw(false);
                             $("#FormModal").modal("hide");
                         }

@@ -172,6 +172,7 @@
                         if (data.result != 0) {
 
                             CosechaDatos.id = data.result;
+                            CosechaDatos.resultadoCosecha = data.costo;
                             tableData.row.add(CosechaDatos).draw(false);
                             $("#FormModal").modal("hide");
                         }

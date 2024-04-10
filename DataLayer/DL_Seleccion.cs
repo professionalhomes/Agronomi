@@ -43,8 +43,7 @@ namespace DataLayer
                                 costoOportunidad = Convert.ToInt32(dr["costoOportunidad"]),
                                 analisisPatologico = dr["analisisPatologico"].ToString(),
                                 ubicacionTerrno = dr["ubicacionTerrno"].ToString(),
-                                resultadoSeleccionTerreno = Convert.ToDecimal(dr["resultadoSeleccionTerreno"])
-
+                                resultadoSeleccionTerreno = dr["resultadoSeleccionTerreno"].ToString()
                             });
                         }
                     }
@@ -80,6 +79,7 @@ namespace DataLayer
                     cmd.Parameters.AddWithValue("@analisisTerreno", objSeleccion.analisisTerreno);
                     cmd.Parameters.AddWithValue("@costoOportunidad", objSeleccion.costoOportunidad);
                     cmd.Parameters.AddWithValue("@analisisPatologico", objSeleccion.analisisPatologico);
+                    cmd.Parameters.AddWithValue("@resultadoSeleccionTerreno", Convert.ToDouble(objSeleccion.resultadoSeleccionTerreno));
                     cmd.Parameters.AddWithValue("@ubicacionTerrno", objSeleccion.ubicacionTerrno);
                     cmd.Parameters.AddWithValue("@idUsuario", objSeleccion.idUsuario);
 

@@ -196,6 +196,7 @@
                         if (data.result != 0) {
 
                             FungicidasDatos.id = data.result;
+                            FungicidasDatos.resultadoFungicidas = data.costo;
                             tableData.row.add(FungicidasDatos).draw(false);
                             $("#FormModal").modal("hide");
                         }

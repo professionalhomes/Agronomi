@@ -288,6 +288,7 @@
                         if (data.result != 0) {
 
                             seleccionInfo.id = data.result;
+                            seleccionInfo.resultadoSeleccionTerreno = data.costo;
                             tableData.row.add(seleccionInfo).draw(false);
                             $("#FormModal").modal("hide");
                         }

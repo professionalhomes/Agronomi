@@ -23,7 +23,20 @@ namespace BusinessLayer
         {
             //Falta validación de datos
 
+            objBactericidas.resultadoBactericidas = CalcularCostoBactericidas(objBactericidas).ToString();
+
             return objDL_Bactericidas.InsertarDatosBactericidas(objBactericidas, out message);
+        }
+
+        //A method to calculate the cost of Bactericidas
+        private double CalcularCostoBactericidas(Bactericidas objBactericidas)
+        {
+            double costoProducto = Convert.ToDouble(objBactericidas.costoProducto);
+            double cantidadProducto = Convert.ToDouble(objBactericidas.cantidadProducto);
+            double cantidadAplicada = Convert.ToDouble(objBactericidas.cantidadAplicada);
+            double costoPorAplicacion = Convert.ToDouble(objBactericidas.costoPorAplicacion);
+
+            return (costoProducto * cantidadProducto) + (cantidadAplicada * costoPorAplicacion);
         }
     }
 }

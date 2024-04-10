@@ -81,6 +81,7 @@ namespace DataLayer
                     cmd.Parameters.AddWithValue("@costoAplicacionHierbicidas", Convert.ToInt32(objTratamiento.costoAplicacionHierbicidas));
                     cmd.Parameters.AddWithValue("@horasAsignadasAplicacionHierbicidas", Convert.ToInt32(objTratamiento.horasAsignadasAplicacionHierbicidas));
                     cmd.Parameters.AddWithValue("@costoPorHoraAplicacionHierbicidas", Convert.ToInt32(objTratamiento.costoPorHoraAplicacionHierbicidas));
+                    cmd.Parameters.AddWithValue("@resultadoTratamientoHierbas", Convert.ToDouble(objTratamiento.resultadoTratamientoHierbas));
                     cmd.Parameters.AddWithValue("@actividad", objTratamiento.actividad);
                     cmd.Parameters.AddWithValue("@idUsuario", Convert.ToInt32(objTratamiento.idUsuario));
 

@@ -196,6 +196,7 @@
                         if (data.result != 0) {
 
                             BactericidasDatos.id = data.result;
+                            BactericidasDatos.resultadoBactericidas = data.costo;
                             tableData.row.add(BactericidasDatos).draw(false);
                             $("#FormModal").modal("hide");
                         }

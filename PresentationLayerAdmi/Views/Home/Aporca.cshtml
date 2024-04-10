@@ -153,6 +153,7 @@
                         if (data.result != 0) {
 
                             AporcaDatos.id = data.result;
+                            AporcaDatos.resultadoAporca = data.costo;
                             tableData.row.add(AporcaDatos).draw(false);
                             $("#FormModal").modal("hide");
                         }

@@ -23,7 +23,26 @@ namespace BusinessLayer
         {
             //Falta validación de datos
 
+            objTratamiento.resultadoTratamientoHierbas = CalcularCostoTratamiento(objTratamiento).ToString();
+
             return objDL_Tratamiento.InsertarDatosTratamiento(objTratamiento, out message);
+        }
+
+        //A method to calculate the cost of Tratamiento
+        private double CalcularCostoTratamiento(Tratamiento objTratamiento)
+        {
+            double costoPorCortaMalezas = Convert.ToDouble(objTratamiento.costoPorCortaMalezas);
+            double costoPorHoraCorteMalezas = Convert.ToDouble(objTratamiento.costoPorHoraCorteMalezas);
+            double horasAsignadasCorteMalezas = Convert.ToDouble(objTratamiento.horasAsignadasCorteMalezas);
+
+            double costoAplicacionHierbicidas = Convert.ToDouble(objTratamiento.costoAplicacionHierbicidas);
+            double horasAsignadasAplicacionHierbicidas = Convert.ToDouble(objTratamiento.horasAsignadasAplicacionHierbicidas);
+            double costoPorHoraAplicacionHierbicidas = Convert.ToDouble(objTratamiento.costoPorHoraAplicacionHierbicidas);
+
+            double horasCortaMalezas = costoPorHoraCorteMalezas * horasAsignadasCorteMalezas;
+            double horasAplicacionHierbicidas = costoPorHoraAplicacionHierbicidas * horasAsignadasAplicacionHierbicidas;
+
+            return (costoPorCortaMalezas * horasCortaMalezas) + (costoAplicacionHierbicidas * horasAplicacionHierbicidas);
         }
     }
 }

@@ -23,7 +23,21 @@ namespace BusinessLayer
         {
             //Falta validación de datos
 
+            objCombateMalezas.resultadoCombateMalezas = CalcularCostoCombateMalezas(objCombateMalezas).ToString();
+
             return objDL_CombateMalezas.InsertarDatosCombateMalezas(objCombateMalezas, out message);
         }
+
+        //A method to calculate the cost of combate malezas
+        private double CalcularCostoCombateMalezas(CombateMalezas objCombateMalezas)
+        {
+            double costoProducto = Convert.ToDouble(objCombateMalezas.costoProducto);
+            double cantidadProducto = Convert.ToDouble(objCombateMalezas.cantidadProducto);
+            double cantidadAplicada = Convert.ToDouble(objCombateMalezas.cantidadAplicada);
+            double costoPorAplicacion = Convert.ToDouble(objCombateMalezas.costoPorAplicacion);
+
+            return (costoProducto * cantidadProducto) + (cantidadAplicada * costoPorAplicacion);
+        }
+
     }
 }

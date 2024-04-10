@@ -161,6 +161,7 @@
                         if (data.result != 0) {
 
                             SiembraDatos.id = data.result;
+                            SiembraDatos.resultadoSiembra = data.costo;
                             tableData.row.add(SiembraDatos).draw(false);
                             $("#FormModal").modal("hide");
                         }

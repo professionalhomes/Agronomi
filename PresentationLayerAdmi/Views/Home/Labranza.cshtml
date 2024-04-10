@@ -181,6 +181,7 @@
                         if (data.result != 0) {
 
                             labranzaDatos.id = data.result;
+                            labranzaDatos.resultadoLabranza = data.costo;
                             tableData.row.add(labranzaDatos).draw(false);
                             $("#FormModal").modal("hide");
                         }

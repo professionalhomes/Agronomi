@@ -196,6 +196,7 @@
                         if (data.result != 0) {
 
                             NematicidasDatos.id = data.result;
+                            NematicidasDatos.resultadoNematicidas = data.costo;
                             tableData.row.add(NematicidasDatos).draw(false);
                             $("#FormModal").modal("hide");
                         }

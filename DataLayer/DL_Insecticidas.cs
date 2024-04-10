@@ -84,6 +84,7 @@ namespace DataLayer
                     cmd.Parameters.AddWithValue("@ciclos", Convert.ToInt32(objInsecticidas.ciclos));
                     cmd.Parameters.AddWithValue("@duracionCiclo", Convert.ToInt32(objInsecticidas.duracionCiclo));
                     cmd.Parameters.AddWithValue("@duracionTotal", Convert.ToInt32(objInsecticidas.duracionTotal));
+                    cmd.Parameters.AddWithValue("@resultadoInsecticidas", Convert.ToDouble(objInsecticidas.resultadoInsecticidas));
                     cmd.Parameters.AddWithValue("@idUsuario", Convert.ToInt32(objInsecticidas.idUsuario));
 
                     cmd.Parameters.Add("result", SqlDbType.Int).Direction = ParameterDirection.Output;

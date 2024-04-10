@@ -23,7 +23,20 @@ namespace BusinessLayer
         {
             //Falta validación de datos
 
+            objEstimulador.resultadoEstimuladorCrecimiento = CalcularCostoEstimulador(objEstimulador).ToString();
+
             return objDL_Estimulador.InsertarDatosEstimulador(objEstimulador, out message);
+        }
+
+        //A method to calculate the cost of Estimulador Crecimiento
+        private double CalcularCostoEstimulador(Estimulador objEstimulador)
+        {
+            double costoProducto = Convert.ToDouble(objEstimulador.costoProducto);
+            double cantidadProducto = Convert.ToDouble(objEstimulador.cantidadProducto);
+            double cantidadAplicada = Convert.ToDouble(objEstimulador.cantidadAplicada);
+            double costoPorAplicacion = Convert.ToDouble(objEstimulador.costoPorAplicacion);
+
+            return (costoProducto * cantidadProducto) + (cantidadAplicada * costoPorAplicacion);
         }
     }
 }

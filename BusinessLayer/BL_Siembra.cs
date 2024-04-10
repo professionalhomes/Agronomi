@@ -23,7 +23,20 @@ namespace BusinessLayer
         {
             //Falta validación de datos
 
+            objSiembra.resultadoSiembra = CalcularCostoSiembra(objSiembra).ToString();
+
             return objDL_Siembra.InsertarDatosSiembra(objSiembra, out message);
+        }
+
+        //A method to calculate the cost of Siembra
+        private double CalcularCostoSiembra(Siembra objSiembra)
+        {
+            double costoPorSucroAnimal = Convert.ToDouble(objSiembra.costoPorSucroAnimal);
+            double costoPorRegadoPapa = Convert.ToDouble(objSiembra.costoPorRegadoPapa);
+            double costoPorTapadoPap = Convert.ToDouble(objSiembra.costoPorTapadoPap);
+            double costoPorFertilizacion = Convert.ToDouble(objSiembra.costoPorFertilizacion);
+
+            return costoPorFertilizacion + costoPorRegadoPapa + costoPorSucroAnimal + costoPorTapadoPap;
         }
     }
 }

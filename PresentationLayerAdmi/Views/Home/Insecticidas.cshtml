@@ -196,6 +196,7 @@
                         if (data.result != 0) {
 
                             InsecticidasDatos.id = data.result;
+                            InsecticidasDatos.resultadoInsecticidas = data.costo;
                             tableData.row.add(InsecticidasDatos).draw(false);
                             $("#FormModal").modal("hide");
                         }

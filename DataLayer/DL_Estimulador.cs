@@ -78,6 +78,7 @@ namespace DataLayer
                     cmd.Parameters.AddWithValue("@cantidadProducto", Convert.ToInt32(objEstimulador.cantidadProducto));
                     cmd.Parameters.AddWithValue("@cantidadAplicada", Convert.ToInt32(objEstimulador.cantidadAplicada));
                     cmd.Parameters.AddWithValue("@costoPorAplicacion", Convert.ToInt32(objEstimulador.costoPorAplicacion));
+                    cmd.Parameters.AddWithValue("@resultadoEstimuladorCrecimiento", Convert.ToInt32(objEstimulador.resultadoEstimuladorCrecimiento));
                     cmd.Parameters.AddWithValue("@idUsuario", Convert.ToInt32(objEstimulador.idUsuario));
 
                     cmd.Parameters.Add("result", SqlDbType.Int).Direction = ParameterDirection.Output;

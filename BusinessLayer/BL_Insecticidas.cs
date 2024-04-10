@@ -23,7 +23,20 @@ namespace BusinessLayer
         {
             //Falta validación de datos
 
+            objInsecticidas.resultadoInsecticidas = CalcularCostoInsecticidas(objInsecticidas).ToString();
+
             return objDL_Insecticidas.InsertarDatosInsecticidas(objInsecticidas, out message);
+        }
+
+        //A method to calculate the cost of Insecticidas
+        private double CalcularCostoInsecticidas(Insecticidas objInsecticidas)
+        {
+            double costoProducto = Convert.ToDouble(objInsecticidas.costoProducto);
+            double cantidadProducto = Convert.ToDouble(objInsecticidas.cantidadProducto);
+            double cantidadAplicada = Convert.ToDouble(objInsecticidas.cantidadAplicada);
+            double costoPorAplicacion = Convert.ToDouble(objInsecticidas.costoPorAplicacion);
+
+            return (costoProducto * cantidadProducto) + (cantidadAplicada * costoPorAplicacion);
         }
     }
 }

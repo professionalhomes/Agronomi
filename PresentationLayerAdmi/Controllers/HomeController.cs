@@ -170,7 +170,7 @@ namespace PresentationLayerAdmi.Controllers
 
             result = new BL_Seleccion().InsertSeleccionData(objSeleccion, out message);
 
-            return Json(new { result = result, message = message }, JsonRequestBehavior.AllowGet);
+            return Json(new { result = result, message = message, costo = objSeleccion.resultadoSeleccionTerreno }, JsonRequestBehavior.AllowGet);
         }
 
         //This method allow to list the tratamiento data
@@ -316,7 +316,7 @@ namespace PresentationLayerAdmi.Controllers
 
             result = new BL_Labranza().InsertarDatosLabranza(objLabranza, out message);
 
-            return Json(new { result = result, message = message }, JsonRequestBehavior.AllowGet);
+            return Json(new { result = result, message = message, costo = objLabranza.resultadoLabranza }, JsonRequestBehavior.AllowGet);
         }
 
         //A method to save Tratamiento data
@@ -330,7 +330,7 @@ namespace PresentationLayerAdmi.Controllers
 
             result = new BL_Tratamiento().InsertarDatosTratamiento(objTratamiento, out message);
 
-            return Json(new { result = result, message = message }, JsonRequestBehavior.AllowGet);
+            return Json(new { result = result, message = message, costo = objTratamiento.resultadoTratamientoHierbas }, JsonRequestBehavior.AllowGet);
         }
 
         //A method to save Siembra data
@@ -344,7 +344,7 @@ namespace PresentationLayerAdmi.Controllers
 
             result = new BL_Siembra().InsertarDatosSiembra(objSiembra, out message);
 
-            return Json(new { result = result, message = message }, JsonRequestBehavior.AllowGet);
+            return Json(new { result = result, message = message, costo = objSiembra.resultadoSiembra}, JsonRequestBehavior.AllowGet);
         }
 
         //A method to save Cosecha data
@@ -358,7 +358,7 @@ namespace PresentationLayerAdmi.Controllers
 
             result = new BL_Cosecha().InsertarDatosCosecha(objCosecha, out message);
 
-            return Json(new { result = result, message = message }, JsonRequestBehavior.AllowGet);
+            return Json(new { result = result, message = message, costo = objCosecha.resultadoCosecha }, JsonRequestBehavior.AllowGet);
         }
 
         //A method to save Aporca data
@@ -372,7 +372,7 @@ namespace PresentationLayerAdmi.Controllers
 
             result = new BL_Aporca().InsertarDatosAporca(objAporca, out message);
 
-            return Json(new { result = result, message = message }, JsonRequestBehavior.AllowGet);
+            return Json(new { result = result, message = message, costo = objAporca.resultadoAporca }, JsonRequestBehavior.AllowGet);
         }
 
         //A method to save Bactericidas data
@@ -386,7 +386,7 @@ namespace PresentationLayerAdmi.Controllers
 
             result = new BL_Bactericidas().InsertarDatosBactericidas(objBactericidas, out message);
 
-            return Json(new { result = result, message = message }, JsonRequestBehavior.AllowGet);
+            return Json(new { result = result, message = message, costo = objBactericidas.resultadoBactericidas }, JsonRequestBehavior.AllowGet);
         }
 
         //A method to save Fungicidas data
@@ -400,7 +400,7 @@ namespace PresentationLayerAdmi.Controllers
 
             result = new BL_Fungicidas().InsertarDatosFungicidas(objFungicidas, out message);
 
-            return Json(new { result = result, message = message }, JsonRequestBehavior.AllowGet);
+            return Json(new { result = result, message = message, costo = objFungicidas.resultadoFungicidas }, JsonRequestBehavior.AllowGet);
         }
 
         //A method to save Insecticidas data
@@ -414,7 +414,7 @@ namespace PresentationLayerAdmi.Controllers
 
             result = new BL_Insecticidas().InsertarDatosInsecticidas(objInsecticidas, out message);
 
-            return Json(new { result = result, message = message }, JsonRequestBehavior.AllowGet);
+            return Json(new { result = result, message = message, costo = objInsecticidas.resultadoInsecticidas}, JsonRequestBehavior.AllowGet);
         }
 
         //A method to save Nematicidas data
@@ -428,7 +428,7 @@ namespace PresentationLayerAdmi.Controllers
 
             result = new BL_Nematicidas().InsertarDatosNematicidas(objNematicidas, out message);
 
-            return Json(new { result = result, message = message }, JsonRequestBehavior.AllowGet);
+            return Json(new { result = result, message = message, costo = objNematicidas.resultadoNematicidas}, JsonRequestBehavior.AllowGet);
         }
 
         //A method to save Estimulador data
@@ -442,7 +442,7 @@ namespace PresentationLayerAdmi.Controllers
 
             result = new BL_Estimulador().InsertarDatosEstimulador(objEstimulador, out message);
 
-            return Json(new { result = result, message = message }, JsonRequestBehavior.AllowGet);
+            return Json(new { result = result, message = message, costo = objEstimulador.resultadoEstimuladorCrecimiento}, JsonRequestBehavior.AllowGet);
         }
 
         //A method to save Quema data
@@ -456,10 +456,10 @@ namespace PresentationLayerAdmi.Controllers
 
             result = new BL_Quema().InsertarDatosQuema(objQuema, out message);
 
-            return Json(new { result = result, message = message }, JsonRequestBehavior.AllowGet);
+            return Json(new { result = result, message = message, costo = objQuema.resultadoQuema }, JsonRequestBehavior.AllowGet);
         }
 
-        //A method to save Quema data
+        //A method to save CombateMalezas data
         [HttpPost]
         public JsonResult InsertarDatosCombateMalezas(CombateMalezas objCombateMalezas)
         {
@@ -470,7 +470,7 @@ namespace PresentationLayerAdmi.Controllers
 
             result = new BL_CombateMalezas().InsertarDatosCombateMalezas(objCombateMalezas, out message);
 
-            return Json(new { result = result, message = message }, JsonRequestBehavior.AllowGet);
+            return Json(new { result = result, message = message, costo = objCombateMalezas.resultadoCombateMalezas}, JsonRequestBehavior.AllowGet);
         }
     }
 }

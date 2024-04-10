@@ -168,6 +168,7 @@
                         if (data.result != 0) {
 
                             CombateMalezasDatos.id = data.result;
+                            CombateMalezasDatos.resultadoCombateMalezas = data.costo;
                             tableData.row.add(CombateMalezasDatos).draw(false);
                             $("#FormModal").modal("hide");
                         }

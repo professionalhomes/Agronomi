@@ -169,6 +169,7 @@
                         if (data.result != 0) {
 
                             QuemaDatos.id = data.result;
+                            QuemaDatos.resultadoQuema = data.costo;
                             tableData.row.add(QuemaDatos).draw(false);
                             $("#FormModal").modal("hide");
                         }

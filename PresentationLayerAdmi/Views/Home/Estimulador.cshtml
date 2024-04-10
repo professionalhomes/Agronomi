@@ -169,6 +169,7 @@
                         if (data.result != 0) {
 
                             EstimuladorDatos.id = data.result;
+                            EstimuladorDatos.resultadoEstimuladorCrecimiento = data.costo;
                             tableData.row.add(EstimuladorDatos).draw(false);
                             $("#FormModal").modal("hide");
                         }
