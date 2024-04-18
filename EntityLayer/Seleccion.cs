@@ -22,8 +22,6 @@ namespace EntityLayer
 
         public string ubicacionTerrno { get; set; }
 
-        public string resultadoSeleccionTerreno { get; set; }
-
         public int idUsuario { get; set; }
     }
 }

@@ -170,7 +170,7 @@ namespace PresentationLayerAdmi.Controllers
 
             result = new BL_Seleccion().InsertSeleccionData(objSeleccion, out message);
 
-            return Json(new { result = result, message = message, costo = objSeleccion.resultadoSeleccionTerreno }, JsonRequestBehavior.AllowGet);
+            return Json(new { result = result, message = message }, JsonRequestBehavior.AllowGet);
         }
 
         //This method allow to list the tratamiento data
@@ -330,7 +330,7 @@ namespace PresentationLayerAdmi.Controllers
 
             result = new BL_Tratamiento().InsertarDatosTratamiento(objTratamiento, out message);
 
-            return Json(new { result = result, message = message, costo = objTratamiento.resultadoTratamientoHierbas }, JsonRequestBehavior.AllowGet);
+            return Json(new { result = result, message = message, costo = objTratamiento.costoActividad }, JsonRequestBehavior.AllowGet);
         }
 
         //A method to save Siembra data

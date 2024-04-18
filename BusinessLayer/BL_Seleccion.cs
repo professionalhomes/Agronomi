@@ -22,18 +22,8 @@ namespace BusinessLayer
         public int InsertSeleccionData(Seleccion objSeleccion, out string message)
         {   
             //Falta validación de datos
-            objSeleccion.resultadoSeleccionTerreno = CalcularCostoSeleccion(objSeleccion).ToString();
 
             return objDL_Seleccion.InsertSeleccionData(objSeleccion, out message);
-        }
-
-        //A method to calculate the cost of seleccion
-        //Probablemente haya que refinar este metodo
-        private double CalcularCostoSeleccion(Seleccion objSeleccion)
-        {
-            double costoOportunidad = Convert.ToDouble(objSeleccion.costoOportunidad);
-
-            return costoOportunidad;
         }
     }
 }

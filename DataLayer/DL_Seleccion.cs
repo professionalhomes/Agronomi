@@ -20,7 +20,7 @@ namespace DataLayer
                 try
                 {
                     StringBuilder query = new StringBuilder();
-                    query.AppendLine("SELECT idTerreno, tamanioTerreno, areaCultivo, analisisTerreno, costoOportunidad, analisisPatologico, ubicacionTerrno, resultadoSeleccionTerreno");
+                    query.AppendLine("SELECT idTerreno, tamanioTerreno, areaCultivo, analisisTerreno, costoOportunidad, analisisPatologico, ubicacionTerrno");
                     query.AppendLine("FROM tbl_SeleccionTerreno");
                     query.AppendLine("WHERE idUsuario = @parametroIdUsuario");
 
@@ -42,8 +42,7 @@ namespace DataLayer
                                 analisisTerreno = dr["analisisTerreno"].ToString(),
                                 costoOportunidad = Convert.ToInt32(dr["costoOportunidad"]),
                                 analisisPatologico = dr["analisisPatologico"].ToString(),
-                                ubicacionTerrno = dr["ubicacionTerrno"].ToString(),
-                                resultadoSeleccionTerreno = dr["resultadoSeleccionTerreno"].ToString()
+                                ubicacionTerrno = dr["ubicacionTerrno"].ToString()
                             });
                         }
                     }
@@ -79,7 +78,6 @@ namespace DataLayer
                     cmd.Parameters.AddWithValue("@analisisTerreno", objSeleccion.analisisTerreno);
                     cmd.Parameters.AddWithValue("@costoOportunidad", objSeleccion.costoOportunidad);
                     cmd.Parameters.AddWithValue("@analisisPatologico", objSeleccion.analisisPatologico);
-                    cmd.Parameters.AddWithValue("@resultadoSeleccionTerreno", Convert.ToDouble(objSeleccion.resultadoSeleccionTerreno));
                     cmd.Parameters.AddWithValue("@ubicacionTerrno", objSeleccion.ubicacionTerrno);
                     cmd.Parameters.AddWithValue("@idUsuario", objSeleccion.idUsuario);
 

@@ -22,13 +22,9 @@
                 <tr>
                     <th>Terreno</th>
                     <th>Actividad</th>
-                    <th>Costo por cortar maleza</th>
-                    <th>Costo por hora</th>
-                    <th>Horas asignadas</th>
-                    <th>Coste de aplicación de hierbicidas </th>
-                    <th>Costo por hora</th>
-                    <th>Horas asignadas</th>
-                    <th>Resultado</th>
+                    <th>Costo Hora</th>
+                    <th>Horas Asignadas</th>
+                    <th>Costo de Actividad</th>
                     <th></th>
                 </tr>
             </thead>
@@ -63,31 +59,12 @@
                     <div class="row">
                         <h6 class="modal-title" id="exampleModalLabel" style="color: #283618; text-align: center;">Datos de corte de malezas</h6>
                         <div class="col">
-                            <label for="txtCostoCortarMaleza" class="form-label" style="color: #283618;">Costo por cortar maleza ₡</label>
-                            <input type="number" id="txtCostoCortarMaleza" value="100000" required>
+                            <label for="txtCostoHora" class="form-label" style="color: #283618;">Costo por Hora ₡</label>
+                            <input type="number" id="txtCostoHora" value="100000" required>
                         </div>
                         <div class="col">
-                            <label for="txtCostoPorHoraMaleza" class="form-label" style="color: #283618;">Costo por hora ₡</label>
-                            <input type="number" id="txtCostoPorHoraMaleza" value="100000" required>
-                        </div>
-                        <div class="col">
-                            <label for="txtHorasAsignadasMaleza" class="form-label" style="color: #283618;">Horas asignadas</label>
-                            <input type="number" id="txtHorasAsignadasMaleza" value="100000" required>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <h6 class="modal-title" id="exampleModalLabel" style="color: #283618; text-align: center;">Datos de aplicación de hierbicidas</h6>
-                        <div class="col">
-                            <label for="txtCostoPorAplicacionHibercidas" class="form-label" style="color: #283618;">Costo de aplicación de hierbicidas ₡</label>
-                            <input type="number" id="txtCostoPorAplicacionHibercidas" value="100000" required>
-                        </div>
-                        <div class="col">
-                            <label for="txtCostoPorHoraHibercidas" class="form-label" style="color: #283618;">Costo por hora ₡</label>
-                            <input type="number" id="txtCostoPorHoraHibercidas" value="100000" required>
-                        </div>
-                        <div class="col">
-                            <label for="txtHorasAsignadasHibercidas" class="form-label" style="color: #283618;">Horas asignadas</label>
-                            <input type="number" id="txtHorasAsignadasHibercidas" value="100000" required>
+                            <label for="txtHorasAsignadas" class="form-label" style="color: #283618;">Cantidad Horas Asignadas</label>
+                            <input type="number" id="txtHorasAsignadas" value="100000" required>
                         </div>
                     </div>
                 </form>
@@ -128,13 +105,9 @@
                 "columns": [
                     { "data": "idTerreno" },
                     { "data": "actividad" },
-                    { "data": "costoPorCortaMalezas" },
-                    { "data": "costoPorHoraCorteMalezas" },
-                    { "data": "horasAsignadasCorteMalezas" },
-                    { "data": "costoAplicacionHierbicidas" },
-                    { "data": "costoPorHoraAplicacionHierbicidas" },
-                    { "data": "horasAsignadasAplicacionHierbicidas" },
-                    { "data": "resultadoTratamientoHierbas" }
+                    { "data": "costoHora" },
+                    { "data": "horasAsignadas" },
+                    { "data": "costoActividad" }
 
                 ],
                 "language": { "url": "https://cdn.datatables.net/plug-ins/1.12.1/i18n/es-ES.json" }
@@ -145,12 +118,8 @@
 
             $("#txtID").val(0);
             $("#txtCodigo").val("");
-            $("#txtCostoCortarMaleza").val("");
-            $("#txtCostoPorHoraMaleza").val("");
-            $("#txtHorasAsignadasMaleza").val("");
-            $("#txtCostoPorAplicacionHibercidas").val("");
-            $("#txtCostoPorHoraHibercidas").val("");
-            $("#txtHorasAsignadasHibercidas").val("");
+            $("#txtCostoHora").val("");
+            $("#txtHorasAsignadas").val("");
             $("#txtActividad").val("");
 
             $("#errorMessage").hide();
@@ -164,12 +133,8 @@
 
                 id: $("#txtID").val(),
                 idTerreno: $("#txtCodigo").val(),
-                costoPorCortaMalezas: parseFloat($("#txtCostoCortarMaleza").val()),
-                costoPorHoraCorteMalezas: parseFloat($("#txtCostoPorHoraMaleza").val()),
-                horasAsignadasCorteMalezas: parseFloat($("#txtHorasAsignadasMaleza").val()),
-                costoAplicacionHierbicidas: $("#txtCostoPorAplicacionHibercidas").val(),
-                horasAsignadasAplicacionHierbicidas: parseInt($("#txtCostoPorHoraHibercidas").val()),
-                costoPorHoraAplicacionHierbicidas: $("#txtHorasAsignadasHibercidas").val(),
+                costoHora: $("#txtCostoHora").val(),
+                horasAsignadas: $("#txtHorasAsignadas").val(),
                 actividad: $("#txtActividad").val()
             }
 
@@ -189,7 +154,7 @@
                         if (data.result != 0) {
 
                             tratamientoDatos.id = data.result;
-                            tratamientoDatos.resultadoTratamientoHierbas = data.costo;
+                            tratamientoDatos.costoActividad = data.costo;
                             tableData.row.add(tratamientoDatos).draw(false);
                             $("#FormModal").modal("hide");
                         }

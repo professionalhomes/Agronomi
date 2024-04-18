@@ -20,7 +20,7 @@ namespace DataLayer
                 try
                 {
                     StringBuilder query = new StringBuilder();
-                    query.AppendLine("SELECT idTerreno, actividad, costoPorCortaMalezas, costoPorHoraCorteMalezas,horasAsignadasCorteMalezas, costoAplicacionHierbicidas,horasAsignadasAplicacionHierbicidas,costoPorHoraAplicacionHierbicidas, resultadoTratamientoHierbas");
+                    query.AppendLine("SELECT idTerreno, actividad, costoHora, horasAsignadas, costoActividad");
                     query.AppendLine("FROM tbl_TratamientoHierbas");
                     query.AppendLine("WHERE idUsuario = @parametroIdUsuario");
 
@@ -38,13 +38,9 @@ namespace DataLayer
                             {
                                 idTerreno = dr["idTerreno"].ToString(),
                                 actividad = dr["actividad"].ToString(),
-                                costoPorCortaMalezas = dr["costoPorCortaMalezas"].ToString(),
-                                costoPorHoraCorteMalezas = dr["costoPorHoraCorteMalezas"].ToString().ToString(),
-                                horasAsignadasCorteMalezas = dr["horasAsignadasCorteMalezas"].ToString(),
-                                costoAplicacionHierbicidas = dr["costoAplicacionHierbicidas"].ToString(),
-                                horasAsignadasAplicacionHierbicidas = dr["horasAsignadasAplicacionHierbicidas"].ToString(),
-                                costoPorHoraAplicacionHierbicidas = dr["costoPorHoraAplicacionHierbicidas"].ToString(),
-                                resultadoTratamientoHierbas = dr["resultadoTratamientoHierbas"].ToString()
+                                costoHora = dr["costoHora"].ToString(),
+                                horasAsignadas = dr["horasAsignadas"].ToString().ToString(),
+                                costoActividad = dr["costoActividad"].ToString()
                             });
                         }
                     }
@@ -75,13 +71,9 @@ namespace DataLayer
 
                     cmd.CommandType = CommandType.Text;
                     cmd.Parameters.AddWithValue("@idTerreno", objTratamiento.idTerreno);
-                    cmd.Parameters.AddWithValue("@costoPorCortaMalezas", Convert.ToDecimal(objTratamiento.costoPorCortaMalezas));
-                    cmd.Parameters.AddWithValue("@costoPorHoraCorteMalezas", Convert.ToInt32(objTratamiento.costoPorHoraCorteMalezas));
-                    cmd.Parameters.AddWithValue("@horasAsignadasCorteMalezas", Convert.ToInt32(objTratamiento.horasAsignadasCorteMalezas));
-                    cmd.Parameters.AddWithValue("@costoAplicacionHierbicidas", Convert.ToInt32(objTratamiento.costoAplicacionHierbicidas));
-                    cmd.Parameters.AddWithValue("@horasAsignadasAplicacionHierbicidas", Convert.ToInt32(objTratamiento.horasAsignadasAplicacionHierbicidas));
-                    cmd.Parameters.AddWithValue("@costoPorHoraAplicacionHierbicidas", Convert.ToInt32(objTratamiento.costoPorHoraAplicacionHierbicidas));
-                    cmd.Parameters.AddWithValue("@resultadoTratamientoHierbas", Convert.ToDouble(objTratamiento.resultadoTratamientoHierbas));
+                    cmd.Parameters.AddWithValue("@costoHora", Convert.ToDecimal(objTratamiento.costoHora));
+                    cmd.Parameters.AddWithValue("@horasAsignadas", Convert.ToInt32(objTratamiento.horasAsignadas));
+                    cmd.Parameters.AddWithValue("@costoActividad", Convert.ToInt32(objTratamiento.costoActividad));
                     cmd.Parameters.AddWithValue("@actividad", objTratamiento.actividad);
                     cmd.Parameters.AddWithValue("@idUsuario", Convert.ToInt32(objTratamiento.idUsuario));
 

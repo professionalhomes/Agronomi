@@ -1,5 +1,6 @@
 ﻿using DataLayer;
 using EntityLayer;
+using Org.BouncyCastle.Security;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,7 @@ namespace BusinessLayer
         {
             //Falta validación de datos
 
-            objTratamiento.resultadoTratamientoHierbas = CalcularCostoTratamiento(objTratamiento).ToString();
+            objTratamiento.costoActividad = CalcularCostoTratamiento(objTratamiento).ToString();
 
             return objDL_Tratamiento.InsertarDatosTratamiento(objTratamiento, out message);
         }
@@ -31,18 +32,11 @@ namespace BusinessLayer
         //A method to calculate the cost of Tratamiento
         private double CalcularCostoTratamiento(Tratamiento objTratamiento)
         {
-            double costoPorCortaMalezas = Convert.ToDouble(objTratamiento.costoPorCortaMalezas);
-            double costoPorHoraCorteMalezas = Convert.ToDouble(objTratamiento.costoPorHoraCorteMalezas);
-            double horasAsignadasCorteMalezas = Convert.ToDouble(objTratamiento.horasAsignadasCorteMalezas);
+            int costo = 0;
 
-            double costoAplicacionHierbicidas = Convert.ToDouble(objTratamiento.costoAplicacionHierbicidas);
-            double horasAsignadasAplicacionHierbicidas = Convert.ToDouble(objTratamiento.horasAsignadasAplicacionHierbicidas);
-            double costoPorHoraAplicacionHierbicidas = Convert.ToDouble(objTratamiento.costoPorHoraAplicacionHierbicidas);
+            costo = int.Parse(objTratamiento.costoHora) * int.Parse(objTratamiento.horasAsignadas);
 
-            double horasCortaMalezas = costoPorHoraCorteMalezas * horasAsignadasCorteMalezas;
-            double horasAplicacionHierbicidas = costoPorHoraAplicacionHierbicidas * horasAsignadasAplicacionHierbicidas;
-
-            return (costoPorCortaMalezas * horasCortaMalezas) + (costoAplicacionHierbicidas * horasAplicacionHierbicidas);
+            return costo;
         }
     }
 }

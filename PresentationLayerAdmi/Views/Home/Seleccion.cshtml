@@ -26,7 +26,6 @@
                     <th>Costo de oportunidad</th>
                     <th>Análisis Patológico</th>
                     <th>Ubicación</th>
-                    <th>Resultado</th>
                     <th></th>
                 </tr>
             </thead>
@@ -141,8 +140,7 @@
                     { "data": "analisisTerreno" },
                     { "data": "costoOportunidad" },
                     { "data": "analisisPatologico" },
-                    { "data": "ubicacionTerrno" },
-                    { "data": "resultadoSeleccionTerreno" }
+                    { "data": "ubicacionTerrno" }
                 ],
                 "language": { "url": "https://cdn.datatables.net/plug-ins/1.12.1/i18n/es-ES.json" }
             });
@@ -288,7 +286,6 @@
                         if (data.result != 0) {
 
                             seleccionInfo.id = data.result;
-                            seleccionInfo.resultadoSeleccionTerreno = data.costo;
                             tableData.row.add(seleccionInfo).draw(false);
                             $("#FormModal").modal("hide");
                         }
