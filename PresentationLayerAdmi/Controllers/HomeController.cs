@@ -386,7 +386,7 @@ namespace PresentationLayerAdmi.Controllers
 
             result = new BL_Bactericidas().InsertarDatosBactericidas(objBactericidas, out message);
 
-            return Json(new { result = result, message = message, costo = objBactericidas.resultadoBactericidas }, JsonRequestBehavior.AllowGet);
+            return Json(new { result = result, message = message, costo = objBactericidas.costoPorAplicacion }, JsonRequestBehavior.AllowGet);
         }
 
         //A method to save Fungicidas data

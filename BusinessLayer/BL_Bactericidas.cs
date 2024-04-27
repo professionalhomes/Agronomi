@@ -23,7 +23,7 @@ namespace BusinessLayer
         {
             //Falta validación de datos
 
-            objBactericidas.resultadoBactericidas = CalcularCostoBactericidas(objBactericidas).ToString();
+            objBactericidas.costoPorAplicacion = CalcularCostoBactericidas(objBactericidas).ToString();
 
             return objDL_Bactericidas.InsertarDatosBactericidas(objBactericidas, out message);
         }
@@ -34,9 +34,8 @@ namespace BusinessLayer
             double costoProducto = Convert.ToDouble(objBactericidas.costoProducto);
             double cantidadProducto = Convert.ToDouble(objBactericidas.cantidadProducto);
             double cantidadAplicada = Convert.ToDouble(objBactericidas.cantidadAplicada);
-            double costoPorAplicacion = Convert.ToDouble(objBactericidas.costoPorAplicacion);
 
-            return (costoProducto * cantidadProducto) + (cantidadAplicada * costoPorAplicacion);
+            return (costoProducto / cantidadProducto) * cantidadAplicada;
         }
     }
 }
