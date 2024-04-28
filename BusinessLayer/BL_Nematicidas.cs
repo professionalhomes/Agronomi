@@ -23,7 +23,7 @@ namespace BusinessLayer
         {
             //Falta validación de datos
 
-            objNematicidas.resultadoNematicidas = CalcularCostoNematicidas(objNematicidas).ToString();
+            objNematicidas.costoPorAplicacion = CalcularCostoNematicidas(objNematicidas).ToString();
 
             return objDL_Nematicidas.InsertarDatosNematicidas(objNematicidas, out message);
         }
@@ -34,9 +34,8 @@ namespace BusinessLayer
             double costoProducto = Convert.ToDouble(objNematicidas.costoProducto);
             double cantidadProducto = Convert.ToDouble(objNematicidas.cantidadProducto);
             double cantidadAplicada = Convert.ToDouble(objNematicidas.cantidadAplicada);
-            double costoPorAplicacion = Convert.ToDouble(objNematicidas.costoPorAplicacion);
 
-            return (costoProducto * cantidadProducto) + (cantidadAplicada * costoPorAplicacion);
+            return (costoProducto / cantidadProducto) * cantidadAplicada;
         }
     }
 }

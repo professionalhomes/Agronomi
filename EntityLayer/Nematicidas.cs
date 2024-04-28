@@ -18,6 +18,5 @@ namespace EntityLayer
         public string ciclos { get; set; }
         public string duracionCiclo { get; set; }
         public string duracionTotal { get; set; }
-        public string resultadoNematicidas { get; set; }
     }
 }

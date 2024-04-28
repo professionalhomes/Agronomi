@@ -428,7 +428,7 @@ namespace PresentationLayerAdmi.Controllers
 
             result = new BL_Nematicidas().InsertarDatosNematicidas(objNematicidas, out message);
 
-            return Json(new { result = result, message = message, costo = objNematicidas.resultadoNematicidas}, JsonRequestBehavior.AllowGet);
+            return Json(new { result = result, message = message, costo = objNematicidas.costoPorAplicacion}, JsonRequestBehavior.AllowGet);
         }
 
         //A method to save Estimulador data
