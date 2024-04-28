@@ -470,7 +470,7 @@ namespace PresentationLayerAdmi.Controllers
 
             result = new BL_CombateMalezas().InsertarDatosCombateMalezas(objCombateMalezas, out message);
 
-            return Json(new { result = result, message = message, costo = objCombateMalezas.resultadoCombateMalezas}, JsonRequestBehavior.AllowGet);
+            return Json(new { result = result, message = message, costo = objCombateMalezas.costoPorAplicacion}, JsonRequestBehavior.AllowGet);
         }
     }
 }

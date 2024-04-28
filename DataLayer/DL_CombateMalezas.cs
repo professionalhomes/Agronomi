@@ -20,7 +20,7 @@ namespace DataLayer
                 try
                 {
                     StringBuilder query = new StringBuilder();
-                    query.AppendLine("SELECT idTerreno,producto,costoProducto,cantidadProducto,cantidadAplicada,costoPorAplicacion,resultadoCombateMalezas");
+                    query.AppendLine("SELECT idTerreno,producto,costoProducto,cantidadProducto,cantidadAplicada,costoPorAplicacion");
                     query.AppendLine("FROM tbl_CombateMalezas");
                     query.AppendLine("WHERE idUsuario = @parametroIdUsuario");
 
@@ -41,8 +41,7 @@ namespace DataLayer
                                 costoProducto = dr["costoProducto"].ToString(),
                                 cantidadProducto = dr["cantidadProducto"].ToString(),
                                 cantidadAplicada = dr["cantidadAplicada"].ToString().ToString(),
-                                costoPorAplicacion = dr["costoPorAplicacion"].ToString(),
-                                resultadoCombateMalezas = dr["resultadoCombateMalezas"].ToString()
+                                costoPorAplicacion = dr["costoPorAplicacion"].ToString()
                             });
                         }
                     }
@@ -78,7 +77,6 @@ namespace DataLayer
                     cmd.Parameters.AddWithValue("@cantidadProducto", Convert.ToInt32(objCombateMalezas.cantidadProducto));
                     cmd.Parameters.AddWithValue("@cantidadAplicada", Convert.ToInt32(objCombateMalezas.cantidadAplicada));
                     cmd.Parameters.AddWithValue("@costoPorAplicacion", Convert.ToInt32(objCombateMalezas.costoPorAplicacion));
-                    cmd.Parameters.AddWithValue("@resultadoCombateMalezas", Convert.ToDouble(objCombateMalezas.resultadoCombateMalezas));
                     cmd.Parameters.AddWithValue("@idUsuario", Convert.ToInt32(objCombateMalezas.idUsuario));
 
                     cmd.Parameters.Add("result", SqlDbType.Int).Direction = ParameterDirection.Output;

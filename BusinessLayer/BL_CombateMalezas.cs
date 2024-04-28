@@ -23,7 +23,7 @@ namespace BusinessLayer
         {
             //Falta validación de datos
 
-            objCombateMalezas.resultadoCombateMalezas = CalcularCostoCombateMalezas(objCombateMalezas).ToString();
+            objCombateMalezas.costoPorAplicacion = CalcularCostoCombateMalezas(objCombateMalezas).ToString();
 
             return objDL_CombateMalezas.InsertarDatosCombateMalezas(objCombateMalezas, out message);
         }
@@ -34,9 +34,8 @@ namespace BusinessLayer
             double costoProducto = Convert.ToDouble(objCombateMalezas.costoProducto);
             double cantidadProducto = Convert.ToDouble(objCombateMalezas.cantidadProducto);
             double cantidadAplicada = Convert.ToDouble(objCombateMalezas.cantidadAplicada);
-            double costoPorAplicacion = Convert.ToDouble(objCombateMalezas.costoPorAplicacion);
 
-            return (costoProducto * cantidadProducto) + (cantidadAplicada * costoPorAplicacion);
+            return (costoProducto / cantidadProducto) * cantidadAplicada;
         }
 
     }
