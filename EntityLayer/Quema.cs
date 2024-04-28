@@ -15,6 +15,5 @@ namespace EntityLayer
         public string cantidadProducto { get; set; }
         public string cantidadAplicada { get; set; }
         public string costoPorAplicacion { get; set; }
-        public string resultadoQuema { get; set; }
     }
 }

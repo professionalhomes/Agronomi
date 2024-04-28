@@ -456,7 +456,7 @@ namespace PresentationLayerAdmi.Controllers
 
             result = new BL_Quema().InsertarDatosQuema(objQuema, out message);
 
-            return Json(new { result = result, message = message, costo = objQuema.resultadoQuema }, JsonRequestBehavior.AllowGet);
+            return Json(new { result = result, message = message, costo = objQuema.costoPorAplicacion }, JsonRequestBehavior.AllowGet);
         }
 
         //A method to save CombateMalezas data
