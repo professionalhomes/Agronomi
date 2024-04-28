@@ -400,7 +400,7 @@ namespace PresentationLayerAdmi.Controllers
 
             result = new BL_Fungicidas().InsertarDatosFungicidas(objFungicidas, out message);
 
-            return Json(new { result = result, message = message, costo = objFungicidas.resultadoFungicidas }, JsonRequestBehavior.AllowGet);
+            return Json(new { result = result, message = message, costo = objFungicidas.costoPorAplicacion }, JsonRequestBehavior.AllowGet);
         }
 
         //A method to save Insecticidas data

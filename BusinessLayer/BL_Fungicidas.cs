@@ -23,7 +23,7 @@ namespace BusinessLayer
         {
             //Falta validación de datos
 
-            objFungicidas.resultadoFungicidas = CalcularCostoFungicidas(objFungicidas).ToString();
+            objFungicidas.costoPorAplicacion = CalcularCostoFungicidas(objFungicidas).ToString();
 
             return objDL_Fungicidas.InsertarDatosFungicidas(objFungicidas, out message);
         }
@@ -34,9 +34,8 @@ namespace BusinessLayer
             double costoProducto = Convert.ToDouble(objFungicidas.costoProducto);
             double cantidadProducto = Convert.ToDouble(objFungicidas.cantidadProducto);
             double cantidadAplicada = Convert.ToDouble(objFungicidas.cantidadAplicada);
-            double costoPorAplicacion = Convert.ToDouble(objFungicidas.costoPorAplicacion);
 
-            return (costoProducto * cantidadProducto) + (cantidadAplicada * costoPorAplicacion);
+            return (costoProducto / cantidadProducto) * cantidadAplicada;
         }
     }
 }
