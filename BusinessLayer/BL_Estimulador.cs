@@ -23,7 +23,7 @@ namespace BusinessLayer
         {
             //Falta validación de datos
 
-            objEstimulador.resultadoEstimuladorCrecimiento = CalcularCostoEstimulador(objEstimulador).ToString();
+            objEstimulador.costoPorAplicacion = CalcularCostoEstimulador(objEstimulador).ToString();
 
             return objDL_Estimulador.InsertarDatosEstimulador(objEstimulador, out message);
         }
@@ -34,9 +34,8 @@ namespace BusinessLayer
             double costoProducto = Convert.ToDouble(objEstimulador.costoProducto);
             double cantidadProducto = Convert.ToDouble(objEstimulador.cantidadProducto);
             double cantidadAplicada = Convert.ToDouble(objEstimulador.cantidadAplicada);
-            double costoPorAplicacion = Convert.ToDouble(objEstimulador.costoPorAplicacion);
 
-            return (costoProducto * cantidadProducto) + (cantidadAplicada * costoPorAplicacion);
+            return (costoProducto / cantidadProducto) * cantidadAplicada;
         }
     }
 }

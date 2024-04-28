@@ -20,7 +20,7 @@ namespace DataLayer
                 try
                 {
                     StringBuilder query = new StringBuilder();
-                    query.AppendLine("SELECT idTerreno,producto,costoProducto,cantidadProducto,cantidadAplicada,costoPorAplicacion,resultadoEstimuladorCrecimiento");
+                    query.AppendLine("SELECT idTerreno,producto,costoProducto,cantidadProducto,cantidadAplicada,costoPorAplicacion");
                     query.AppendLine("FROM tbl_EstimuladorCrecimiento");
                     query.AppendLine("WHERE idUsuario = @parametroIdUsuario");
 
@@ -41,8 +41,7 @@ namespace DataLayer
                                 costoProducto = dr["costoProducto"].ToString(),
                                 cantidadProducto = dr["cantidadProducto"].ToString(),
                                 cantidadAplicada = dr["cantidadAplicada"].ToString().ToString(),
-                                costoPorAplicacion = dr["costoPorAplicacion"].ToString(),
-                                resultadoEstimuladorCrecimiento = dr["resultadoEstimuladorCrecimiento"].ToString()
+                                costoPorAplicacion = dr["costoPorAplicacion"].ToString()
                             });
                         }
                     }
@@ -78,7 +77,6 @@ namespace DataLayer
                     cmd.Parameters.AddWithValue("@cantidadProducto", Convert.ToInt32(objEstimulador.cantidadProducto));
                     cmd.Parameters.AddWithValue("@cantidadAplicada", Convert.ToInt32(objEstimulador.cantidadAplicada));
                     cmd.Parameters.AddWithValue("@costoPorAplicacion", Convert.ToInt32(objEstimulador.costoPorAplicacion));
-                    cmd.Parameters.AddWithValue("@resultadoEstimuladorCrecimiento", Convert.ToInt32(objEstimulador.resultadoEstimuladorCrecimiento));
                     cmd.Parameters.AddWithValue("@idUsuario", Convert.ToInt32(objEstimulador.idUsuario));
 
                     cmd.Parameters.Add("result", SqlDbType.Int).Direction = ParameterDirection.Output;

@@ -442,7 +442,7 @@ namespace PresentationLayerAdmi.Controllers
 
             result = new BL_Estimulador().InsertarDatosEstimulador(objEstimulador, out message);
 
-            return Json(new { result = result, message = message, costo = objEstimulador.resultadoEstimuladorCrecimiento}, JsonRequestBehavior.AllowGet);
+            return Json(new { result = result, message = message, costo = objEstimulador.costoPorAplicacion}, JsonRequestBehavior.AllowGet);
         }
 
         //A method to save Quema data
