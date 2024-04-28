@@ -20,7 +20,7 @@ namespace DataLayer
                 try
                 {
                     StringBuilder query = new StringBuilder();
-                    query.AppendLine("SELECT idTerreno,producto,costoProducto,cantidadProducto,cantidadAplicada,costoPorAplicacion,ciclos,duracionCiclo,duracionTotal,resultadoInsecticidas");
+                    query.AppendLine("SELECT idTerreno,producto,costoProducto,cantidadProducto,cantidadAplicada,costoPorAplicacion,ciclos,duracionCiclo,duracionTotal");
                     query.AppendLine("FROM tbl_Insecticidas");
                     query.AppendLine("WHERE idUsuario = @parametroIdUsuario");
 
@@ -44,8 +44,7 @@ namespace DataLayer
                                 costoPorAplicacion = dr["costoPorAplicacion"].ToString(),
                                 ciclos = dr["ciclos"].ToString(),
                                 duracionCiclo = dr["duracionCiclo"].ToString(),
-                                duracionTotal = dr["duracionTotal"].ToString(),
-                                resultadoInsecticidas = dr["resultadoInsecticidas"].ToString()
+                                duracionTotal = dr["duracionTotal"].ToString()
                             });
                         }
                     }
@@ -84,7 +83,6 @@ namespace DataLayer
                     cmd.Parameters.AddWithValue("@ciclos", Convert.ToInt32(objInsecticidas.ciclos));
                     cmd.Parameters.AddWithValue("@duracionCiclo", Convert.ToInt32(objInsecticidas.duracionCiclo));
                     cmd.Parameters.AddWithValue("@duracionTotal", Convert.ToInt32(objInsecticidas.duracionTotal));
-                    cmd.Parameters.AddWithValue("@resultadoInsecticidas", Convert.ToDouble(objInsecticidas.resultadoInsecticidas));
                     cmd.Parameters.AddWithValue("@idUsuario", Convert.ToInt32(objInsecticidas.idUsuario));
 
                     cmd.Parameters.Add("result", SqlDbType.Int).Direction = ParameterDirection.Output;

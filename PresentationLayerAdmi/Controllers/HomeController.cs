@@ -414,7 +414,7 @@ namespace PresentationLayerAdmi.Controllers
 
             result = new BL_Insecticidas().InsertarDatosInsecticidas(objInsecticidas, out message);
 
-            return Json(new { result = result, message = message, costo = objInsecticidas.resultadoInsecticidas}, JsonRequestBehavior.AllowGet);
+            return Json(new { result = result, message = message, costo = objInsecticidas.costoPorAplicacion}, JsonRequestBehavior.AllowGet);
         }
 
         //A method to save Nematicidas data
