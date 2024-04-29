@@ -14,7 +14,6 @@ namespace EntityLayer
         public string costoPorLavado { get; set; }
         public string costoPorSaco { get; set; }
         public string costoPorTransporteCarga { get; set; }
-        public string costoPorLavadoQuintal { get; set; }
-        public string resultadoCosecha { get; set; }  
+        public string costoDelQuintal { get; set; }
     }
 }

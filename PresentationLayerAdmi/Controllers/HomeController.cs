@@ -358,7 +358,7 @@ namespace PresentationLayerAdmi.Controllers
 
             result = new BL_Cosecha().InsertarDatosCosecha(objCosecha, out message);
 
-            return Json(new { result = result, message = message, costo = objCosecha.resultadoCosecha }, JsonRequestBehavior.AllowGet);
+            return Json(new { result = result, message = message }, JsonRequestBehavior.AllowGet);
         }
 
         //A method to save Aporca data

@@ -21,12 +21,10 @@
             <thead>
                 <tr>
                     <th>Terreno</th>
-                    <th>Costo Por Cosecha</th>
+                    <th>Costo del Quintal</th>
                     <th>Costo Por Lavado</th>
                     <th>Costo Por Saco</th>
                     <th>Costo Por Transporte Carga</th>
-                    <th>Costo Por Lavado Quintal</th>
-                    <th>Resultado</th>
                 </tr>
             </thead>
             <tbody>
@@ -56,8 +54,8 @@
                     <div class="row">
                         <h6 class="modal-title" id="exampleModalLabel" style="color: #ffffff; text-align: center;">.</h6>
                         <div class="col">
-                            <label for="txtCostoPorCosecha" class="form-label" style="color: #283618;">Costo Por Cosecha ₡</label>
-                            <input type="number" id="txtCostoPorCosecha" value="" required>
+                            <label for="txtCostoDelQuintal" class="form-label" style="color: #283618;">Costo del quintal ₡</label>
+                            <input type="number" id="txtCostoDelQuintal" value="100000" required>
                         </div>
                         <div class="col">
                             <label for="txtCostoPorLavado" class="form-label" style="color: #283618;">Costo por lavado ₡</label>
@@ -73,10 +71,6 @@
                         <div class="col">
                             <label for="txtCostoPorTransporteCarga" class="form-label" style="color: #283618;">Costo transporte carga ₡</label>
                             <input type="number" id="txtCostoPorTransporteCarga" value="100000" required>
-                        </div>
-                        <div class="col">
-                            <label for="txtCostoPorLavadoQuintal" class="form-label" style="color: #283618;">Costo lavado quintal ₡</label>
-                            <input type="number" id="txtCostoPorLavadoQuintal" value="100000" required>
                         </div>
                     </div>
                 </form>
@@ -116,12 +110,10 @@
                 },
                 "columns": [
                     { "data": "idTerreno" },
-                    { "data": "costoPorCosecha" },
+                    { "data": "costoDelQuintal" },
                     { "data": "costoPorLavado" },
                     { "data": "costoPorSaco" },
-                    { "data": "costoPorTransporteCarga" },
-                    { "data": "costoPorLavadoQuintal" },
-                    { "data": "resultadoCosecha" }
+                    { "data": "costoPorTransporteCarga" }
 
                 ],
                 "language": { "url": "https://cdn.datatables.net/plug-ins/1.12.1/i18n/es-ES.json" }
@@ -132,11 +124,10 @@
 
         $("#txtID").val(0);
         $("#txtCodigo").val("");
-        $("#txtCostoPorCosecha").val("");
+        $("#txtCostoDelQuintal").val("");
         $("#txtCostoPorLavado").val("");
         $("#txtCostoPorSaco").val("");
         $("#txtCostoPorTransporteCarga").val("");
-        $("#txtCostoPorLavadoQuintal").val("");
 
         $("#errorMessage").hide();
 
@@ -149,11 +140,10 @@
 
                 id: $("#txtID").val(),
                 idTerreno: $("#txtCodigo").val(),
-                costoPorCosecha: $("#txtCostoPorCosecha").val(),
+                costoDelQuintal: $("#txtCostoDelQuintal").val(),
                 costoPorLavado: $("#txtCostoPorLavado").val(),
                 costoPorSaco: $("#txtCostoPorSaco").val(),
-                costoPorTransporteCarga: $("#txtCostoPorTransporteCarga").val(),
-                costoPorLavadoQuintal: $("#txtCostoPorLavadoQuintal").val(),
+                costoPorTransporteCarga: $("#txtCostoPorTransporteCarga").val()
             }
 
             jQuery.ajax({
@@ -172,7 +162,6 @@
                         if (data.result != 0) {
 
                             CosechaDatos.id = data.result;
-                            CosechaDatos.resultadoCosecha = data.costo;
                             tableData.row.add(CosechaDatos).draw(false);
                             $("#FormModal").modal("hide");
                         }
@@ -198,6 +187,6 @@
                     })
                 }
             });
-        }
+        }   
 
 </script>

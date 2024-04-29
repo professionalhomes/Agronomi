@@ -20,7 +20,7 @@ namespace DataLayer
                 try
                 {
                     StringBuilder query = new StringBuilder();
-                    query.AppendLine("SELECT idTerreno,costoPorCosecha,costoPorLavado,costoPorSaco,costoPorTransporteCarga,costoPorLavadoQuintal,resultadoCosecha");
+                    query.AppendLine("SELECT idTerreno,costoDelQuintal,costoPorLavado,costoPorSaco,costoPorTransporteCarga");
                     query.AppendLine("FROM tbl_Cosecha");
                     query.AppendLine("WHERE idUsuario = @parametroIdUsuario");
 
@@ -35,14 +35,12 @@ namespace DataLayer
                         while (dr.Read())
                         {
                             CosechaList.Add(new Cosecha()
-                            {
+                            {   
                                 idTerreno = dr["idTerreno"].ToString(),
-                                costoPorCosecha = dr["costoPorCosecha"].ToString(),
+                                costoDelQuintal = dr["costoDelQuintal"].ToString(),
                                 costoPorLavado = dr["costoPorLavado"].ToString(),
                                 costoPorSaco = dr["costoPorSaco"].ToString(),
-                                costoPorTransporteCarga = dr["costoPorTransporteCarga"].ToString().ToString(),
-                                costoPorLavadoQuintal = dr["costoPorLavadoQuintal"].ToString(),
-                                resultadoCosecha = dr["resultadoCosecha"].ToString()
+                                costoPorTransporteCarga = dr["costoPorTransporteCarga"].ToString()
                             });
                         }
                     }
@@ -73,12 +71,10 @@ namespace DataLayer
 
                     cmd.CommandType = CommandType.Text;
                     cmd.Parameters.AddWithValue("@idTerreno", objCosecha.idTerreno);
-                    cmd.Parameters.AddWithValue("@costoPorCosecha", Convert.ToInt32(objCosecha.costoPorCosecha));
                     cmd.Parameters.AddWithValue("@costoPorLavado", Convert.ToInt32(objCosecha.costoPorLavado));
                     cmd.Parameters.AddWithValue("@costoPorSaco", Convert.ToInt32(objCosecha.costoPorSaco));
                     cmd.Parameters.AddWithValue("@costoPorTransporteCarga", Convert.ToInt32(objCosecha.costoPorTransporteCarga));
-                    cmd.Parameters.AddWithValue("@costoPorLavadoQuintal", Convert.ToInt32(objCosecha.costoPorLavadoQuintal));
-                    cmd.Parameters.AddWithValue("@resultadoCosecha", Convert.ToInt32(objCosecha.resultadoCosecha));
+                    cmd.Parameters.AddWithValue("@costoDelQuintal", Convert.ToInt32(objCosecha.costoDelQuintal));
                     cmd.Parameters.AddWithValue("@idUsuario", Convert.ToInt32(objCosecha.idUsuario));
 
                     cmd.Parameters.Add("result", SqlDbType.Int).Direction = ParameterDirection.Output;
