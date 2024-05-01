@@ -699,6 +699,7 @@
     <Content Include="Views\Home\Estimulador.cshtml" />
     <Content Include="Views\Home\Quema.cshtml" />
     <Content Include="Views\Home\CombateMalezas.cshtml" />
+    <Content Include="Views\Home\Resultados.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

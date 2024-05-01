@@ -108,6 +108,11 @@ namespace PresentationLayerAdmi.Controllers
             return View();
         }
 
+        public ActionResult Resultados()
+        {
+            SetUserNameInViewBag(this);
+            return View();
+        }
 
         //This method allow to list the seleccion data on the seleccionDataTable
         [HttpGet] 
