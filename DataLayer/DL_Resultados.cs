@@ -16,6 +16,8 @@ namespace DataLayer
         public int costoLabranza { get; private set; }
         public int costoSiembra { get; private set; }
         public int costoTratamiento { get; private set; }
+        public int costoCosecha { get; private set; }
+        public int areaCultivo { get; private set; }
 
         private void ConsultarCostoMantenimiento(int usuario, string idTerreno)
         {
@@ -83,6 +85,73 @@ namespace DataLayer
                 }
             }
         }
+
+        private void ConsultarCostoCosecha(int idUsuario, string idTerreno)
+        {
+            using (SqlConnection objConnection = new SqlConnection(Connection.stringConnection))
+            {
+                SqlCommand command = new SqlCommand("ConsultarCostoCosecha", objConnection);
+                command.CommandType = CommandType.StoredProcedure;
+
+                // Agrega parámetros al comando
+                command.Parameters.AddWithValue("@idTerreno", idTerreno);
+                command.Parameters.AddWithValue("@idUsuario", idUsuario);
+
+                try
+                {
+                    objConnection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            costoCosecha = reader.GetInt32(reader.GetOrdinal("costoCosecha"));
+                        }
+                    }
+
+                    reader.Close();
+                }
+                catch (Exception ex)
+                {
+                    costoCosecha = 0;
+                }
+            }
+        }
+
+        private void ConsultarAreaCultivo(int idUsuario, string idTerreno)
+        {
+            using (SqlConnection objConnection = new SqlConnection(Connection.stringConnection))
+            {
+                SqlCommand command = new SqlCommand("ConsultarAreaCultivo", objConnection);
+                command.CommandType = CommandType.StoredProcedure;
+
+                // Agrega parámetros al comando
+                command.Parameters.AddWithValue("@idTerreno", idTerreno);
+                command.Parameters.AddWithValue("@idUsuario", idUsuario);
+
+                try
+                {
+                    objConnection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            areaCultivo = reader.GetInt32(reader.GetOrdinal("areaCultivo"));
+                        }
+                    }
+
+                    reader.Close();
+                }
+                catch (Exception ex)
+                {
+                    areaCultivo = 0;
+                }
+            }
+        }
+
 
     }
 }

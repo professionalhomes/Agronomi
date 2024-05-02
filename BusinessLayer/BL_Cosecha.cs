@@ -23,7 +23,7 @@ namespace BusinessLayer
         {
             //Falta validación de datos
 
-            //objCosecha.costoPorCosecha = CalcularCostoCosecha(objCosecha).ToString();
+            objCosecha.costoPorCosecha = CalcularCostoCosecha(objCosecha).ToString();
 
             return objDL_Cosecha.InsertarDatosCosecha(objCosecha, out message);
         }
@@ -36,7 +36,7 @@ namespace BusinessLayer
             double costoPorTransporteCarga = Convert.ToDouble(objCosecha.costoPorTransporteCarga);
             double costoDelQuintal = Convert.ToDouble(objCosecha.costoDelQuintal);
 
-            return (costoPorLavado + costoPorSaco + costoPorTransporteCarga + costoDelQuintal);
+            return (costoPorLavado + costoPorSaco + costoPorTransporteCarga) / costoDelQuintal;
         }
     }
 }
