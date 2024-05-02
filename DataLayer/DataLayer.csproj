@@ -62,8 +62,10 @@
     <Compile Include="DL_Nematicidas.cs" />
     <Compile Include="DL_Province.cs" />
     <Compile Include="DL_Quema.cs" />
+    <Compile Include="DL_Resultados.cs" />
     <Compile Include="DL_Seleccion.cs" />
     <Compile Include="DL_Siembra.cs" />
+    <Compile Include="DL_Terreno.cs" />
     <Compile Include="DL_Tratamiento.cs" />
     <Compile Include="DL_User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

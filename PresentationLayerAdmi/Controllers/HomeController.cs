@@ -477,5 +477,20 @@ namespace PresentationLayerAdmi.Controllers
 
             return Json(new { result = result, message = message, costo = objCombateMalezas.costoPorAplicacion}, JsonRequestBehavior.AllowGet);
         }
+
+        //---Terrenos dropDownList---
+
+        //This method allow to list the province data on provinceDropDownList 
+        [HttpGet]
+        public JsonResult ListarTerrenos()
+        {
+            List<Terreno> objListaTerrenos = new List<Terreno>(); 
+
+             int usuario = idUsuario;
+
+            objListaTerrenos = new BL_Terreno().ListarTerrenos(usuario);
+
+            return Json(new { data = objListaTerrenos }, JsonRequestBehavior.AllowGet);
+        }
     }
 }

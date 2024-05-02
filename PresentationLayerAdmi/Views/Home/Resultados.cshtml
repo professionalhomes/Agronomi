@@ -4,16 +4,20 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2 style="color: #283618;">Resultados</h2>
+<h2 style="color: #283618;">Desgloce de costos</h2>
 
 <div class="card">
-    <div class="card-header" style="color: #283618;">
-        Datos registrados
-    </div>
     <div class="card-body">
         <div class="row">
             <div class="col-12">
-                <button type="button" class="btn btn-success" style="background-color: #606C37; border-color: #606C37;" onclick="OpenModal(null)">Agregar</button>
+                <select id="cboTerrenos" class="form-select">
+                    <option value="0">Seleccione el terreno</option>
+                </select>
+                <div>
+                    <br />
+                    <button type="button" class="btn btn-success" style="background-color: #606C37; border-color: #606C37;" onclick="ConsultarTerreno()">Consultar</button>
+                </div>
+                
             </div>
         </div>
         <hr />
@@ -21,10 +25,12 @@
             <thead>
                 <tr>
                     <th>Terreno</th>
-                    <th>Costo Total Animal</th>
-                    <th>Costo Por Aporcamiento</th>
-                    <th>Costo Por Fertilizacion</th>
-                    <th>Resultado</th>
+                    <th>Tratamiento</th>
+                    <th>Labranza</th>
+                    <th>Siembra</th>
+                    <th>Mantenimiento</th>
+                    <th>Cosecha</th>
+                    <th>Producción</th>
                 </tr>
             </thead>
             <tbody>
@@ -32,3 +38,23 @@
         </table>
     </div>
 </div>
+
+<script>
+    /*dropDownList para terreno*/
+
+        $.ajax({
+            url:'@Url.Action("ListarTerrenos", "Home")',
+            type: "GET",
+            dataType: "json",
+            success: function (data) {
+                var terrenos = $("#cboTerrenos");
+                var datos = data.data;
+                $(datos).each(function (i, v) {
+                    terrenos.append('<option value="' + v.idTerreno + '">' + v.idTerreno + '</option>');
+                });
+            },
+            error: function () {
+                console.log('error con el dropDownList de terrenos :(')
+            }
+        });
+</script>

@@ -61,8 +61,10 @@
     <Compile Include="BL_Province.cs" />
     <Compile Include="BL_Quema.cs" />
     <Compile Include="BL_Resources.cs" />
+    <Compile Include="BL_Resultados.cs" />
     <Compile Include="BL_Seleccion.cs" />
     <Compile Include="BL_Siembra.cs" />
+    <Compile Include="BL_Terreno.cs" />
     <Compile Include="BL_Tratamiento.cs" />
     <Compile Include="BL_User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

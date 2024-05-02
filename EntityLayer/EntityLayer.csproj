@@ -61,8 +61,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Province.cs" />
     <Compile Include="Quema.cs" />
+    <Compile Include="Resultados.cs" />
     <Compile Include="Seleccion.cs" />
     <Compile Include="Siembra.cs" />
+    <Compile Include="Terreno.cs" />
     <Compile Include="Tratamiento.cs" />
     <Compile Include="Users.cs" />
   </ItemGroup>
