@@ -6,61 +6,83 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Org.BouncyCastle.Asn1.Misc;
 
 namespace DataLayer
 {
     public class DL_Resultados
     {
-        
-        //public List<Resultados> ToList(int usuario)
-        //{
-        //    List<Resultados> ResultadosList = new List<Resultados>();
+        public int costoMantenimiento { get; private set; }
+        public int costoLabranza { get; private set; }
+        public int costoSiembra { get; private set; }
+        public int costoTratamiento { get; private set; }
 
-        //    using (SqlConnection objConnection = new SqlConnection(Connection.stringConnection))
-        //    {
-        //        try
-        //        {
-        //            StringBuilder query = new StringBuilder();
-        //            query.AppendLine("SELECT idTerreno,NombreProducto,costoProducto,cantidadProducto,cantidadAplicada,costoPorAplicacion,ciclos,duracionCiclo,duracionTotal");
-        //            query.AppendLine("FROM tbl_Bactericidas");
-        //            query.AppendLine("WHERE idUsuario = @parametroIdUsuario");
+        private void ConsultarCostoMantenimiento(int usuario, string idTerreno)
+        {
+            using (SqlConnection objConnection = new SqlConnection(Connection.stringConnection))
+            {
+                SqlCommand command = new SqlCommand("SumarCostosPorIdTerreno", objConnection);
+                command.CommandType = CommandType.StoredProcedure;
 
-        //            SqlCommand cmd = new SqlCommand(query.ToString(), objConnection);
-        //            cmd.CommandType = CommandType.Text;
-        //            cmd.Parameters.AddWithValue("@parametroIdUsuario", usuario);
+                // Agrega parámetros al comando
+                command.Parameters.AddWithValue("@idTerreno", idTerreno);
+                command.Parameters.AddWithValue("@idUsuario", usuario);
 
-        //            objConnection.Open();
+                // Agrega un parámetro de salida para recibir el resultado
+                SqlParameter resultadoParam = new SqlParameter("@resultado", SqlDbType.Int);
+                resultadoParam.Direction = ParameterDirection.Output;
+                command.Parameters.Add(resultadoParam);
 
-        //            using (SqlDataReader dr = cmd.ExecuteReader())
-        //            {
-        //                while (dr.Read())
-        //                {
-        //                    ResultadosList.Add(new Resultados()
-        //                    {
-        //                        idTerreno = dr["idTerreno"].ToString(),
-        //                        NombreProducto = dr["NombreProducto"].ToString(),
-        //                        costoProducto = dr["costoProducto"].ToString(),
-        //                        cantidadProducto = dr["cantidadProducto"].ToString(),
-        //                        cantidadAplicada = dr["cantidadAplicada"].ToString().ToString(),
-        //                        costoPorAplicacion = dr["costoPorAplicacion"].ToString(),
-        //                        ciclos = dr["ciclos"].ToString(),
-        //                        duracionCiclo = dr["duracionCiclo"].ToString(),
-        //                        duracionTotal = dr["duracionTotal"].ToString()
-        //                    });
-        //                }
-        //            }
-        //            objConnection.Close();
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            ResultadosList = new List<Resultados>();
-        //        }
-        //        finally
-        //        {
-        //            objConnection.Close();
-        //        }
-        //    }
-        //    return ResultadosList;
-        //}
+                try
+                {
+                    objConnection.Open();
+                    command.ExecuteNonQuery();
+                    costoMantenimiento = (int)resultadoParam.Value;
+                }
+                catch (Exception ex)
+                {
+                    costoMantenimiento = 0;
+                }
+            }
+        }
+
+        public void ConsultarCostosLTS(int idUsuario, string idTerreno)
+        {
+
+            using (SqlConnection objConnection = new SqlConnection(Connection.stringConnection))
+            {
+                SqlCommand command = new SqlCommand("ObtenerCostosTratamientoSiembraLabranza", objConnection);
+                command.CommandType = CommandType.StoredProcedure;
+
+                // Agrega parámetros al comando
+                command.Parameters.AddWithValue("@idTerreno", idTerreno);
+                command.Parameters.AddWithValue("@idUsuario", idUsuario);
+
+                try
+                {
+                    objConnection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            costoTratamiento = reader.GetInt32(reader.GetOrdinal("costoActividad"));
+                            costoLabranza = reader.GetInt32(reader.GetOrdinal("resultadoLabranza"));
+                            costoSiembra = reader.GetInt32(reader.GetOrdinal("resultadoSiembra"));
+                        }
+                    }
+
+                    reader.Close();
+                }
+                catch (Exception ex)
+                {
+                    costoMantenimiento = 0;
+                    costoLabranza = 0;
+                    costoSiembra = 0;
+                }
+            }
+        }
+
     }
 }
