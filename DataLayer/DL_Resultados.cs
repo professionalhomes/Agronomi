@@ -152,6 +152,12 @@ namespace DataLayer
             }
         }
 
-
+        public void CalcularCostoProduccion(int usuario, string idTerreno)
+        {
+            ConsultarCostoMantenimiento(usuario, idTerreno);
+            ConsultarCostosLTS(usuario, idTerreno);
+            ConsultarCostoCosecha(usuario, idTerreno);
+            ConsultarAreaCultivo(usuario, idTerreno);
+        }
     }
 }

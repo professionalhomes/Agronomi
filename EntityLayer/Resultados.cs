@@ -22,6 +22,8 @@ namespace EntityLayer
 
         public string Cosecha { get; set; }
 
+        public string Cultivo { get; set; }
+
         public string Producción { get; set; }
 
     }
