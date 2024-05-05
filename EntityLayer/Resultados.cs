@@ -24,7 +24,7 @@ namespace EntityLayer
 
         public string Cultivo { get; set; }
 
-        public string Producción { get; set; }
+        public string Produccion { get; set; }
 
     }
 }
