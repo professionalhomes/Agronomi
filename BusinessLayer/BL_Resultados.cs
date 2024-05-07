@@ -41,6 +41,7 @@ namespace BusinessLayer
             objResultados = Constructor(usuario, idTerreno);
 
             objResultados.Produccion = CalcularCostoProduccion(usuario, idTerreno).ToString();
+            objResultados.idTerreno = idTerreno;
 
             return objResultados;
         }

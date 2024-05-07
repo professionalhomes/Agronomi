@@ -74,7 +74,29 @@
                 tableData = $("#table").DataTable({
                     responsive: true,
                     ordering: false,
-                    dom: 'lfrtip',
+                    dom: 'lBfrtip',
+                    buttons: [
+                        {
+                            extend: 'pdfHtml5',
+                            text: '<i class="fas fa-file-pdf"></i>',
+                            titleAttr: 'Exportar a PDF',
+                            className: 'btn btn-margin btn-colorPdf',
+                            orientation: 'landscape',
+                            attr: {
+                                id: 'btnPdf' // Agrega el ID 'btnPdf' al botón de PDF
+                            }
+                        },
+                        {
+                            extend: 'excelHtml5',
+                            text: '<i class="fas fa-file-excel"></i>',
+                            titleAttr: 'Exportar a Excel',
+                            className: 'btn btn-margin btn-colorExcel',
+                            attr: {
+                                id: 'btnExcel' // Agrega el ID 'btnExcel' al botón de Excel
+                            }
+                        }
+                    ],
+                    buttonContainer: '<div class="btn-group"></div>',
                     "ajax": {
                         url: '@Url.Action("ListarCostosProduccion", "Home")',
                         type: "GET",
@@ -92,6 +114,16 @@
                     ],
                     "language": { "url": "https://cdn.datatables.net/plug-ins/1.12.1/i18n/es-ES.json" }
                 });
+                var btnMarginStyle = document.createElement('style');
+                btnMarginStyle.innerHTML = '.btn-margin { margin-right: 5px; margin-left: 5px; }';
+                document.head.appendChild(btnMarginStyle);
+                var btnColorPdf = document.createElement('style');
+                btnColorPdf.innerHTML = '.btn-colorPdf { background-color: #606C37 } .btn-colorPdf:hover { background-color: #606C37 }';
+                document.head.appendChild(btnColorPdf);
+                var btnColorExcel = document.createElement('style');
+                btnColorExcel.innerHTML = '.btn-colorExcel { background-color: #606C37 } .btn-colorExcel:hover { background-color: #606C37 }';
+                document.head.appendChild(btnColorExcel);
+
             }
 
 </script>
