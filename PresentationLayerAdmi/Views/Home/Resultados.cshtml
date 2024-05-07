@@ -57,4 +57,41 @@
                 console.log('error con el dropDownList de terrenos :(')
             }
         });
+
+        function ConsultarTerreno() {
+            if ($.fn.DataTable.isDataTable('#table')) {
+                $('#table').DataTable().destroy(); // Destruir la instancia previa de DataTables si existe
+            }
+            var idTerreno = $("#cboTerrenos").val(); // Obtener el valor seleccionado del combobox
+            cargarDatos(idTerreno); // Llamar a la función cargarDatos con el idTerreno seleccionado
+        }
+
+        var tableData;
+        var rowSelected;
+
+            // Definir la función para cargar los datos según el idTerreno seleccionado
+            function cargarDatos(idTerreno) {
+                tableData = $("#table").DataTable({
+                    responsive: true,
+                    ordering: false,
+                    dom: 'lfrtip',
+                    "ajax": {
+                        url: '@Url.Action("ListarCostosProduccion", "Home")',
+                        type: "GET",
+                        dataType: "json",
+                        data: {idTerreno: idTerreno },
+                    },
+                    "columns": [
+                        { "data": "idTerreno" },
+                        { "data": "Tratamiento" },
+                        { "data": "Labranza" },
+                        { "data": "Siembra" },
+                        { "data": "Mantenimiento" },
+                        { "data": "Cosecha" },
+                        { "data": "Produccion" }
+                    ],
+                    "language": { "url": "https://cdn.datatables.net/plug-ins/1.12.1/i18n/es-ES.json" }
+                });
+            }
+
 </script>

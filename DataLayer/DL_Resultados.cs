@@ -19,7 +19,7 @@ namespace DataLayer
         public int costoCosecha { get; private set; }
         public int areaCultivo { get; private set; }
 
-        private void ConsultarCostoMantenimiento(int usuario, string idTerreno)
+        private void ConsultarCostoMantenimiento(int idUsuario, string idTerreno)
         {
             using (SqlConnection objConnection = new SqlConnection(Connection.stringConnection))
             {
@@ -28,25 +28,34 @@ namespace DataLayer
 
                 // Agrega parámetros al comando
                 command.Parameters.AddWithValue("@idTerreno", idTerreno);
-                command.Parameters.AddWithValue("@idUsuario", usuario);
-
-                // Agrega un parámetro de salida para recibir el resultado
-                SqlParameter resultadoParam = new SqlParameter("@resultado", SqlDbType.Int);
-                resultadoParam.Direction = ParameterDirection.Output;
-                command.Parameters.Add(resultadoParam);
+                command.Parameters.AddWithValue("@idUsuario", idUsuario);
 
                 try
                 {
                     objConnection.Open();
-                    command.ExecuteNonQuery();
-                    costoMantenimiento = (int)resultadoParam.Value;
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            // Asegúrate de que el nombre de la columna devuelta coincida con el nombre correcto
+                            // y de que el tipo de datos sea el adecuado
+                            // Aquí asumo que el nombre de la columna devuelta es "totalCosto" y es un entero
+                            costoMantenimiento = reader.GetInt32(reader.GetOrdinal("totalCosto"));
+                        }
+                    }
+
+                    reader.Close();
                 }
                 catch (Exception ex)
                 {
+                    // Manejo de errores: Puedes registrar la excepción o asignar un valor predeterminado
                     costoMantenimiento = 0;
                 }
             }
         }
+
 
         public void ConsultarCostosLTS(int idUsuario, string idTerreno)
         {
@@ -79,7 +88,7 @@ namespace DataLayer
                 }
                 catch (Exception ex)
                 {
-                    costoMantenimiento = 0;
+                    costoTratamiento = 0;
                     costoLabranza = 0;
                     costoSiembra = 0;
                 }
@@ -106,7 +115,9 @@ namespace DataLayer
                     {
                         while (reader.Read())
                         {
-                            costoCosecha = reader.GetInt32(reader.GetOrdinal("costoCosecha"));
+                            decimal costoDecimal = reader.GetDecimal(reader.GetOrdinal("costoCosecha"));
+                            // Convierte el valor decimal a int
+                            costoCosecha = Convert.ToInt32(costoDecimal);
                         }
                     }
 
@@ -115,9 +126,11 @@ namespace DataLayer
                 catch (Exception ex)
                 {
                     costoCosecha = 0;
+                    // Manejo de errores: Puedes registrar la excepción o asignar un valor predeterminado
                 }
             }
         }
+
 
         private void ConsultarAreaCultivo(int idUsuario, string idTerreno)
         {

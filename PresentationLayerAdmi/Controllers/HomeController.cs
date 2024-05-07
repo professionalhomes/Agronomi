@@ -492,5 +492,19 @@ namespace PresentationLayerAdmi.Controllers
 
             return Json(new { data = objListaTerrenos }, JsonRequestBehavior.AllowGet);
         }
+
+        //This method allow to list the producction cost data
+        [HttpGet]
+        public JsonResult ListarCostosProduccion(string idTerreno)
+        {
+            List<Resultados> objResultadosList = new List<Resultados>();
+
+            // Crear instancia de la clase BL_Resultados y llamar al método ListarResultados
+            var blResultados = new BL_Resultados();
+            objResultadosList.Add(blResultados.ListarResultados(idUsuario, idTerreno));
+
+            return Json(new { data = objResultadosList }, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }
