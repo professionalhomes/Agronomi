@@ -501,7 +501,7 @@ namespace PresentationLayerAdmi.Controllers
 
             // Crear instancia de la clase BL_Resultados y llamar al método ListarResultados
             var blResultados = new BL_Resultados();
-            objResultadosList.Add(blResultados.ListarResultados(idUsuario, idTerreno));
+            objResultadosList.AddRange(blResultados.ListarResultados(idUsuario, idTerreno));
 
             return Json(new { data = objResultadosList }, JsonRequestBehavior.AllowGet);
         }

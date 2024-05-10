@@ -11,6 +11,7 @@ namespace BusinessLayer
     public class BL_Resultados
     {
         private DL_Resultados objDL_Resultados = new DL_Resultados();
+        private DL_Terreno objDL_Terrenos = new DL_Terreno();
         private Resultados objResultados;
 
         private Resultados Constructor(int usuario, string idTerreno)
@@ -36,14 +37,34 @@ namespace BusinessLayer
                 + Convert.ToInt32(objResultados.Cosecha)) / Convert.ToInt32(objResultados.Cultivo);
         }
 
-        public Resultados ListarResultados(int usuario, string idTerreno)
+        public List<Resultados> ListarResultados(int usuario, string idTerreno)
         {
-            objResultados = Constructor(usuario, idTerreno);
+            List<Resultados> resultados = new List<Resultados>();
 
-            objResultados.Produccion = CalcularCostoProduccion(usuario, idTerreno).ToString();
-            objResultados.idTerreno = idTerreno;
+            if (idTerreno == "1")
+            {
+                // Listar todos los terrenos
+                foreach (var terreno in objDL_Terrenos.ListarTerrenos(usuario))
+                {
+                    var objResultados = Constructor(usuario, terreno.idTerreno);
+                    objResultados.Produccion = CalcularCostoProduccion(usuario, terreno.idTerreno).ToString();
+                    objResultados.idTerreno = terreno.idTerreno;
 
-            return objResultados;
+                    resultados.Add(objResultados);
+                }
+            }
+            else
+            {
+                // Listar solo el terreno especificado
+                var objResultados = Constructor(usuario, idTerreno);
+                objResultados.Produccion = CalcularCostoProduccion(usuario, idTerreno).ToString();
+                objResultados.idTerreno = idTerreno;
+
+                resultados.Add(objResultados);
+            }
+
+            return resultados;
         }
+
     }
 }
