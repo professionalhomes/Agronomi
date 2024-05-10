@@ -52,6 +52,9 @@ namespace BusinessLayer
 
                     resultados.Add(objResultados);
                 }
+                // Calcular y agregar los totales por categoría
+                var totalesPorCategoria = CalcularTotalesPorCategoria(resultados);
+                resultados.Add(totalesPorCategoria);
             }
             else
             {
@@ -64,6 +67,39 @@ namespace BusinessLayer
             }
 
             return resultados;
+        }
+
+        private Resultados CalcularTotalesPorCategoria(List<Resultados> resultados)
+        {
+            var totalesPorCategoria = new Resultados
+            {
+                idTerreno = "Totales", // IdTerreno vacío para representar los totales
+                Tratamiento = "0",
+                Labranza = "0",
+                Siembra = "0",
+                Mantenimiento = "0",
+                Cosecha = "0",
+                Produccion = "0"
+            };
+
+            foreach (var resultado in resultados)
+            {
+                double costo;
+                if (double.TryParse(resultado.Tratamiento, out costo))
+                    totalesPorCategoria.Tratamiento = (double.Parse(totalesPorCategoria.Tratamiento) + costo).ToString();
+                if (double.TryParse(resultado.Labranza, out costo))
+                    totalesPorCategoria.Labranza = (double.Parse(totalesPorCategoria.Labranza) + costo).ToString();
+                if (double.TryParse(resultado.Siembra, out costo))
+                    totalesPorCategoria.Siembra = (double.Parse(totalesPorCategoria.Siembra) + costo).ToString();
+                if (double.TryParse(resultado.Mantenimiento, out costo))
+                    totalesPorCategoria.Mantenimiento = (double.Parse(totalesPorCategoria.Mantenimiento) + costo).ToString();
+                if (double.TryParse(resultado.Cosecha, out costo))
+                    totalesPorCategoria.Cosecha = (double.Parse(totalesPorCategoria.Cosecha) + costo).ToString();
+                if (double.TryParse(resultado.Produccion, out costo))
+                    totalesPorCategoria.Produccion = (double.Parse(totalesPorCategoria.Produccion) + costo).ToString();
+            }
+
+            return totalesPorCategoria;
         }
 
     }
