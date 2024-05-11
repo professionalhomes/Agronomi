@@ -113,6 +113,16 @@
             });
         });
 
+    //Function to validate that the number is valid
+    function esNumeroValido(numero) {
+        return numero.trim() !== "" && !isNaN(numero.trim());
+    }
+    //Function to show the error message
+    function mostrarError(mensaje) {
+        $("#errorMessage").text(mensaje);
+        $("#errorMessage").show();
+    }
+
     function OpenModal(json) {
 
         $("#txtID").val(0);
@@ -136,6 +146,18 @@
                 costoPorAporcamiento: $("#txtCostoPorAporcamiento").val(),
                 costoPorFertilizacion: $("#txtCostoPorFertilizacion").val(),
             }
+
+            // Validar que los campos no estén vacíos y que los costos sean valores numéricos
+            if (AporcaDatos.idTerreno.trim() === "") {
+                mostrarError("El campo Código del terreno es obligatorio.");
+                return;
+            }
+            if (!esNumeroValido(AporcaDatos.costoTotalAnimal) || !esNumeroValido(AporcaDatos.costoPorAporcamiento)
+                || !esNumeroValido(AporcaDatos.costoPorFertilizacion)) {
+                    mostrarError("Los campos de costo deben ser valores numéricos.");
+                    return;
+             }
+
 
             jQuery.ajax({
                 url: '@Url.Action("InsertarDatosAporca", "Home")',
@@ -180,5 +202,4 @@
                 }
             });
     }
-
 </script>
