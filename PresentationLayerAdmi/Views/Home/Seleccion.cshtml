@@ -253,6 +253,16 @@
             }
         );
 
+        //Function to validate that the number is valid
+        function esNumeroValido(numero) {
+            return numero.trim() !== "" && !isNaN(numero.trim());
+        }
+        //Function to show the error message
+        function mostrarError(mensaje) {
+            $("#errorMessage").text(mensaje);
+            $("#errorMessage").show();
+        }
+
         function SaveSeleccionData() {
 
             // Concatenate province, city, and district into one variable string
@@ -268,6 +278,17 @@
                 costoOportunidad: parseInt($("#txtCostoOportunidad").val()),
                 analisisPatologico: $("#txtAnalisisPatologico").val(),
                 ubicacionTerrno: fullLocation
+            }
+
+            // Validar que los campos no estén vacíos y que los costos sean valores numéricos
+            if (seleccionInfo.idTerreno.trim() === "") {
+                mostrarError("El campo Código del terreno es obligatorio.");
+                return;
+            }
+            if (!esNumeroValido(seleccionInfo.tamanioTerreno) || !esNumeroValido(seleccionInfo.areaCultivo)
+                || !esNumeroValido(seleccionInfo.costoPorFertilizacion)) {
+                mostrarError("Los campos de costo deben ser valores numéricos.");
+                return;
             }
 
             jQuery.ajax({
