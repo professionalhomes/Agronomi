@@ -151,6 +151,16 @@
         $("#FormModal").modal("show");
     }
 
+    //Function to validate that the number is valid
+    function esNumeroValido(numero) {
+        return numero.trim() !== "" && !isNaN(numero.trim());
+    }
+    //Function to show the error message
+    function mostrarError(mensaje) {
+        $("#errorMessage").text(mensaje);
+        $("#errorMessage").show();
+    }
+
     function InsertarDatosLabranza() {
 
             var labranzaDatos = {
@@ -163,6 +173,18 @@
                 costoPorCamas: $("#txtCostoPorCamas").val(),
                 costoPorMurillo: parseInt($("#txtCostoPorMurillo").val()),
                 costoPorRastra: $("#txtCostoPorRastra").val()
+            }
+
+            // Validar que los campos no estén vacíos y que los costos sean valores numéricos
+            if (labranzaDatos.idTerreno.trim() === "") {
+                mostrarError("El campo Código del terreno es obligatorio.");
+                return;
+            }
+            if (!esNumeroValido(labranzaDatos.costoPorArado) || !esNumeroValido(labranzaDatos.costoPorEnmindas)
+                || !esNumeroValido(labranzaDatos.costoPorTrazado) || !esNumeroValido(labranzaDatos.costoPorCamas)
+                || !esNumeroValido(labranzaDatos.costoPorMurillo) || !esNumeroValido(labranzaDatos.costoPorRastra)) {
+                mostrarError("Los campos de costo deben ser valores numéricos.");
+                return;
             }
 
             jQuery.ajax({
