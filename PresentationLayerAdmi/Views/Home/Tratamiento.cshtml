@@ -125,7 +125,17 @@
             $("#errorMessage").hide();
 
             $("#FormModal").modal("show");
-    }
+        }
+
+        //Function to validate that the number is valid
+        function esNumeroValido(numero) {
+            return numero.trim() !== "" && !isNaN(numero.trim());
+        }
+        //Function to show the error message
+        function mostrarError(mensaje) {
+            $("#errorMessage").text(mensaje);
+            $("#errorMessage").show();
+        }
 
         function InsertarDatosTratamiento() {
 
@@ -136,6 +146,17 @@
                 costoHora: $("#txtCostoHora").val(),
                 horasAsignadas: $("#txtHorasAsignadas").val(),
                 actividad: $("#txtActividad").val()
+            }
+
+            // Validar que los campos no estén vacíos y que los costos sean valores numéricos
+            if (tratamientoDatos.idTerreno.trim() === "") {
+                mostrarError("El campo Código del terreno es obligatorio.");
+                return;
+            }
+            if (!esNumeroValido(tratamientoDatos.costoHora) || !esNumeroValido(tratamientoDatos.horasAsignadas)
+                || !esNumeroValido(tratamientoDatos.actividad)) {
+                mostrarError("Los campos de costo deben ser valores numéricos.");
+                return;
             }
 
             jQuery.ajax({
