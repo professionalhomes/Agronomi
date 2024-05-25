@@ -133,6 +133,16 @@
         $("#FormModal").modal("show");
     }
 
+    //Function to validate that the number is valid
+    function esNumeroValido(numero) {
+        return numero.trim() !== "" && !isNaN(numero.trim());
+    }
+    //Function to show the error message
+    function mostrarError(mensaje) {
+        $("#errorMessage").text(mensaje);
+        $("#errorMessage").show();
+    }
+
     function InsertarDatosSiembra() {
 
             var SiembraDatos = {
@@ -143,7 +153,18 @@
                 costoPorRegadoPapa: parseFloat($("#txtCostoPorRegadoPapa").val()),
                 costoPorTapadoPap: parseFloat($("#txtCostoPorTapado").val()),
                 costoPorFertilizacion: $("#txtHorasPorFertilizacion").val(),
-        }
+            }
+
+            // Validar que los campos no estén vacíos y que los costos sean valores numéricos
+            if (SiembraDatos.idTerreno.trim() === "") {
+                mostrarError("El campo Código del terreno es obligatorio.");
+                return;
+            }
+            if (!esNumeroValido(SiembraDatos.costoPorSucroAnimal) || !esNumeroValido(SiembraDatos.costoPorRegadoPapa)
+                || !esNumeroValido(SiembraDatos.costoPorTapadoPap) || !esNumeroValido(SiembraDatos.costoPorFertilizacion)) {
+                mostrarError("Los campos de costo deben ser valores numéricos.");
+                return;
+            }
 
             jQuery.ajax({
                 url: '@Url.Action("InsertarDatosSiembra", "Home")',
