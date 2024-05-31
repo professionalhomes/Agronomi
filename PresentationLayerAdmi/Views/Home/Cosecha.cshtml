@@ -134,6 +134,16 @@
         $("#FormModal").modal("show");
     }
 
+    //Function to validate that the number is valid
+    function esNumeroValido(numero) {
+        return numero.trim() !== "" && !isNaN(numero.trim());
+    }
+    //Function to show the error message
+    function mostrarError(mensaje) {
+        $("#errorMessage").text(mensaje);
+        $("#errorMessage").show();
+    }
+
     function InsertarDatosCosecha() {
 
             var CosechaDatos = {
@@ -144,6 +154,17 @@
                 costoPorLavado: $("#txtCostoPorLavado").val(),
                 costoPorSaco: $("#txtCostoPorSaco").val(),
                 costoPorTransporteCarga: $("#txtCostoPorTransporteCarga").val()
+            }
+
+            // Validar que los campos no estén vacíos y que los costos sean valores numéricos
+            if (CosechaDatos.idTerreno.trim() === "") {
+                mostrarError("El campo Código del terreno es obligatorio.");
+                return;
+            }
+            if (!esNumeroValido(CosechaDatos.costoDelQuintal) || !esNumeroValido(CosechaDatos.costoPorLavado)
+                || !esNumeroValido(CosechaDatos.costoPorSaco) || !esNumeroValido(CosechaDatos.costoPorTransporteCarga)) {
+                    mostrarError("Los campos de costo deben ser valores numéricos.");
+                    return;
             }
 
             jQuery.ajax({
