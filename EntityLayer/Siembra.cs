@@ -11,7 +11,6 @@ namespace EntityLayer
         public string idTerreno { get; set; }
         public string costoPorSucroAnimal { get; set; }
         public string costoPorRegadoPapa { get; set; }
-        public string costoPorTapadoPap { get; set; }
         public string costoPorFertilizacion { get; set; }
         public string resultadoSiembra { get; set; }
         public int idUsuario { get; set; }
