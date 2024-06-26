@@ -20,7 +20,7 @@ namespace DataLayer
                 try
                 {
                     StringBuilder query = new StringBuilder();
-                    query.AppendLine("SELECT idTerreno,producto,costoProducto,cantidadProducto,cantidadAplicada,costoPorAplicacion,ciclos,duracionCiclo,duracionTotal");
+                    query.AppendLine("SELECT idTerreno,producto,costoProducto,cantidadProducto,cantidadAplicada,costoPorAplicacion");
                     query.AppendLine("FROM tbl_Nematicidas");
                     query.AppendLine("WHERE idUsuario = @parametroIdUsuario");
 
@@ -41,10 +41,7 @@ namespace DataLayer
                                 costoProducto = dr["costoProducto"].ToString(),
                                 cantidadProducto = dr["cantidadProducto"].ToString(),
                                 cantidadAplicada = dr["cantidadAplicada"].ToString().ToString(),
-                                costoPorAplicacion = dr["costoPorAplicacion"].ToString(),
-                                ciclos = dr["ciclos"].ToString(),
-                                duracionCiclo = dr["duracionCiclo"].ToString(),
-                                duracionTotal = dr["duracionTotal"].ToString()
+                                costoPorAplicacion = dr["costoPorAplicacion"].ToString()
                             });
                         }
                     }
@@ -80,9 +77,6 @@ namespace DataLayer
                     cmd.Parameters.AddWithValue("@cantidadProducto", Convert.ToInt32(objNematicidas.cantidadProducto));
                     cmd.Parameters.AddWithValue("@cantidadAplicada", Convert.ToInt32(objNematicidas.cantidadAplicada));
                     cmd.Parameters.AddWithValue("@costoPorAplicacion", Convert.ToInt32(objNematicidas.costoPorAplicacion));
-                    cmd.Parameters.AddWithValue("@ciclos", Convert.ToInt32(objNematicidas.ciclos));
-                    cmd.Parameters.AddWithValue("@duracionCiclo", Convert.ToInt32(objNematicidas.duracionCiclo));
-                    cmd.Parameters.AddWithValue("@duracionTotal", Convert.ToInt32(objNematicidas.duracionTotal));
                     cmd.Parameters.AddWithValue("@idUsuario", Convert.ToInt32(objNematicidas.idUsuario));
 
                     cmd.Parameters.Add("result", SqlDbType.Int).Direction = ParameterDirection.Output;

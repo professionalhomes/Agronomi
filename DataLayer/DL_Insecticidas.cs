@@ -20,7 +20,7 @@ namespace DataLayer
                 try
                 {
                     StringBuilder query = new StringBuilder();
-                    query.AppendLine("SELECT idTerreno,producto,costoProducto,cantidadProducto,cantidadAplicada,costoPorAplicacion,ciclos,duracionCiclo,duracionTotal");
+                    query.AppendLine("SELECT idTerreno,producto,costoProducto,cantidadProducto,cantidadAplicada,costoPorAplicacion");
                     query.AppendLine("FROM tbl_Insecticidas");
                     query.AppendLine("WHERE idUsuario = @parametroIdUsuario");
 
@@ -41,9 +41,6 @@ namespace DataLayer
                                 costoProducto = dr["costoProducto"].ToString(),
                                 cantidadProducto = dr["cantidadProducto"].ToString(),
                                 cantidadAplicada = dr["cantidadAplicada"].ToString().ToString(),
-                                costoPorAplicacion = dr["costoPorAplicacion"].ToString(),
-                                ciclos = dr["ciclos"].ToString(),
-                                duracionCiclo = dr["duracionCiclo"].ToString(),
                                 duracionTotal = dr["duracionTotal"].ToString()
                             });
                         }
@@ -80,9 +77,6 @@ namespace DataLayer
                     cmd.Parameters.AddWithValue("@cantidadProducto", Convert.ToInt32(objInsecticidas.cantidadProducto));
                     cmd.Parameters.AddWithValue("@cantidadAplicada", Convert.ToInt32(objInsecticidas.cantidadAplicada));
                     cmd.Parameters.AddWithValue("@costoPorAplicacion", Convert.ToInt32(objInsecticidas.costoPorAplicacion));
-                    cmd.Parameters.AddWithValue("@ciclos", Convert.ToInt32(objInsecticidas.ciclos));
-                    cmd.Parameters.AddWithValue("@duracionCiclo", Convert.ToInt32(objInsecticidas.duracionCiclo));
-                    cmd.Parameters.AddWithValue("@duracionTotal", Convert.ToInt32(objInsecticidas.duracionTotal));
                     cmd.Parameters.AddWithValue("@idUsuario", Convert.ToInt32(objInsecticidas.idUsuario));
 
                     cmd.Parameters.Add("result", SqlDbType.Int).Direction = ParameterDirection.Output;

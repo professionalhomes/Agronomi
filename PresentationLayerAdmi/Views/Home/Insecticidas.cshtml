@@ -25,9 +25,6 @@
                     <th>Costo Producto</th>
                     <th>Cantidad Producto</th>
                     <th>Cantidad Aplicada (Kg/L)</th>
-                    <th>Ciclos</th>
-                    <th>Duracion Ciclo</th>
-                    <th>Duracion Total</th>
                     <th>Costo Por Aplicacion</th>
                 </tr>
             </thead>
@@ -74,21 +71,6 @@
                             <input type="number" id="txtCantidadAplicada" value="100000" required>
                         </div>
                     </div>
-                    <div class="row">
-                        <h6 class="modal-title" id="exampleModalLabel" style="color: #ffffff; text-align: center;">.</h6>
-                        <div class="col">
-                            <label for="txtCiclos" class="form-label" style="color: #283618;">Cantidad Ciclos</label>
-                            <input type="number" id="txtCiclos" value="100000" required>
-                        </div>
-                        <div class="col">
-                            <label for="txtDuracionCiclo" class="form-label" style="color: #283618;">Duracion Ciclo</label>
-                            <input type="number" id="txtDuracionCiclo" value="100000" required>
-                        </div>
-                        <div class="col">
-                            <label for="txtDuracionTotal" class="form-label" style="color: #283618;">Duracion Total</label>
-                            <input type="number" id="txtDuracionTotal" value="100000" required>
-                        </div>
-                    </div>
                 </form>
                 <div class="row mt-2">
                     <div class="col-12">
@@ -130,9 +112,6 @@
                     { "data": "costoProducto" },
                     { "data": "cantidadProducto" },
                     { "data": "cantidadAplicada" },
-                    { "data": "ciclos" },
-                    { "data": "duracionCiclo" },
-                    { "data": "duracionTotal" },
                     { "data": "costoPorAplicacion" }
 
                 ],
@@ -148,9 +127,6 @@
         $("#txtCostoProducto").val("");
         $("#txtCantidadProducto").val("");
         $("#txtCantidadAplicada").val("");
-        $("#txtCiclos").val("");
-        $("#txtDuracionCiclo").val("");
-        $("#txtDuracionTotal").val("");
 
         $("#errorMessage").hide();
 
@@ -177,9 +153,6 @@
                 costoProducto: $("#txtCostoProducto").val(),
                 cantidadProducto: $("#txtCantidadProducto").val(),
                 cantidadAplicada: $("#txtCantidadAplicada").val(),
-                ciclos: $("#txtCiclos").val(),
-                duracionCiclo: $("#txtDuracionCiclo").val(),
-                duracionTotal: $("#txtDuracionTotal").val(),
             }
 
             // Validar que los campos no estén vacíos y que los costos sean valores numéricos

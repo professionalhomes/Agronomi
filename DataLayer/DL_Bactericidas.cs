@@ -20,7 +20,7 @@ namespace DataLayer
                 try
                 {
                     StringBuilder query = new StringBuilder();
-                    query.AppendLine("SELECT idTerreno,NombreProducto,costoProducto,cantidadProducto,cantidadAplicada,costoPorAplicacion,ciclos,duracionCiclo,duracionTotal");
+                    query.AppendLine("SELECT idTerreno,NombreProducto,costoProducto,cantidadProducto,cantidadAplicada,costoPorAplicacion");
                     query.AppendLine("FROM tbl_Bactericidas");
                     query.AppendLine("WHERE idUsuario = @parametroIdUsuario");
 
@@ -41,10 +41,7 @@ namespace DataLayer
                                 costoProducto = dr["costoProducto"].ToString(),
                                 cantidadProducto = dr["cantidadProducto"].ToString(),
                                 cantidadAplicada = dr["cantidadAplicada"].ToString().ToString(),
-                                costoPorAplicacion = dr["costoPorAplicacion"].ToString(),
-                                ciclos = dr["ciclos"].ToString(),
-                                duracionCiclo = dr["duracionCiclo"].ToString(),
-                                duracionTotal = dr["duracionTotal"].ToString()
+                                costoPorAplicacion = dr["costoPorAplicacion"].ToString()
                             });
                         }
                     }
@@ -80,9 +77,6 @@ namespace DataLayer
                     cmd.Parameters.AddWithValue("@cantidadProducto", Convert.ToInt32(objBactericidas.cantidadProducto));
                     cmd.Parameters.AddWithValue("@cantidadAplicada", Convert.ToInt32(objBactericidas.cantidadAplicada));
                     cmd.Parameters.AddWithValue("@costoPorAplicacion", Convert.ToInt32(objBactericidas.costoPorAplicacion));
-                    cmd.Parameters.AddWithValue("@ciclos", Convert.ToInt32(objBactericidas.ciclos));
-                    cmd.Parameters.AddWithValue("@duracionCiclo", Convert.ToInt32(objBactericidas.duracionCiclo));
-                    cmd.Parameters.AddWithValue("@duracionTotal", Convert.ToInt32(objBactericidas.duracionTotal));
                     cmd.Parameters.AddWithValue("@idUsuario", Convert.ToInt32(objBactericidas.idUsuario));
 
                     cmd.Parameters.Add("result", SqlDbType.Int).Direction = ParameterDirection.Output;
