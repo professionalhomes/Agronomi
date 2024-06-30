@@ -33,10 +33,10 @@ namespace BusinessLayer
         {
             double costoPorSucroAnimal = Convert.ToDouble(objSiembra.costoPorSucroAnimal);
             double costoPorRegadoPapa = Convert.ToDouble(objSiembra.costoPorRegadoPapa);
-            double costoPorTapadoPap = Convert.ToDouble(objSiembra.costoPorTapadoPap);
             double costoPorFertilizacion = Convert.ToDouble(objSiembra.costoPorFertilizacion);
+            double costoSemilla = Convert.ToDouble(objSiembra.costoSemilla);
 
-            return costoPorFertilizacion + costoPorRegadoPapa + costoPorSucroAnimal + costoPorTapadoPap;
+            return costoPorFertilizacion + costoPorRegadoPapa + costoPorSucroAnimal + costoSemilla;
         }
     }
 }

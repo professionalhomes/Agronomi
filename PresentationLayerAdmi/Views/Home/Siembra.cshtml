@@ -24,6 +24,7 @@
                     <th>Costo mano de obra animal</th>
                     <th>Costo mano de obra siembra</th>
                     <th>Costo Por Fertilizacion</th>
+                    <th>Costo de semilla</th>
                     <th>Resultado</th>
                 </tr>
             </thead>
@@ -64,6 +65,10 @@
                         <div class="col">
                             <label for="txtHorasPorFertilizacion" class="form-label" style="color: #283618;">Costo Por Fertilizacion</label>
                             <input type="number" id="txtHorasPorFertilizacion" value="100000" required>
+                        </div>
+                        <div class="col">
+                            <label for="txtCostoSemilla" class="form-label" style="color: #283618;">Costo de semilla ₡</label>
+                            <input type="number" id="txtCostoSemilla" value="100000" required>
                         </div>
                     </div>
                 </form>
@@ -106,6 +111,7 @@
                     { "data": "costoPorSucroAnimal" },
                     { "data": "costoPorRegadoPapa" },
                     { "data": "costoPorFertilizacion" },
+                    { "data": "costoSemilla" },
                     { "data": "resultadoSiembra" }
 
                 ],
@@ -120,6 +126,7 @@
         $("#txtCostoPorSucroAnimal").val("");
         $("#txtCostoPorRegadoPapa").val("");
         $("#txtHorasPorFertilizacion").val("");
+        $("#txtCostoSemilla").val("");
 
         $("#errorMessage").hide();
 
@@ -145,6 +152,7 @@
                 costoPorSucroAnimal: parseFloat($("#txtCostoPorSucroAnimal").val()),
                 costoPorRegadoPapa: parseFloat($("#txtCostoPorRegadoPapa").val()),
                 costoPorFertilizacion: $("#txtHorasPorFertilizacion").val(),
+                costoSemilla: $("#txtCostoSemilla").val(),
             }
 
             // Validar que los campos no estén vacíos y que los costos sean valores numéricos
@@ -153,7 +161,7 @@
                 return;
             }
             if (!esNumeroValido(SiembraDatos.costoPorSucroAnimal) || !esNumeroValido(SiembraDatos.costoPorRegadoPapa)
-                || !esNumeroValido(SiembraDatos.costoPorFertilizacion)) {
+                || !esNumeroValido(SiembraDatos.costoPorFertilizacion) || !esNumeroValido(SiembraDatos.costoSemilla)) {
                 mostrarError("Los campos de costo deben ser valores numéricos.");
                 return;
             }

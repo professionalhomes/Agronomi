@@ -20,7 +20,7 @@ namespace DataLayer
                 try
                 {
                     StringBuilder query = new StringBuilder();
-                    query.AppendLine("SELECT idTerreno, costoPorSucroAnimal, costoPorRegadoPapa,costoPorFertilizacion,resultadoSiembra");
+                    query.AppendLine("SELECT idTerreno, costoPorSucroAnimal, costoPorRegadoPapa,costoPorFertilizacion, costoSemilla,resultadoSiembra");
                     query.AppendLine("FROM tbl_Siembra");
                     query.AppendLine("WHERE idUsuario = @parametroIdUsuario");
 
@@ -40,6 +40,7 @@ namespace DataLayer
                                 costoPorSucroAnimal = dr["costoPorSucroAnimal"].ToString(),
                                 costoPorRegadoPapa = dr["costoPorRegadoPapa"].ToString(),
                                 costoPorFertilizacion = dr["costoPorFertilizacion"].ToString().ToString(),
+                                costoSemilla = dr["costoSemilla"].ToString(),
                                 resultadoSiembra = dr["resultadoSiembra"].ToString()
                             });
                         }
@@ -74,6 +75,7 @@ namespace DataLayer
                     cmd.Parameters.AddWithValue("@costoPorSucroAnimal", Convert.ToInt32(objSiembra.costoPorSucroAnimal));
                     cmd.Parameters.AddWithValue("@costoPorRegadoPapa", Convert.ToInt32(objSiembra.costoPorRegadoPapa));
                     cmd.Parameters.AddWithValue("@costoPorFertilizacion", Convert.ToInt32(objSiembra.costoPorFertilizacion));
+                    cmd.Parameters.AddWithValue("@costoSemilla", Convert.ToInt32(objSiembra.costoSemilla));
                     cmd.Parameters.AddWithValue("@resultadoSiembra", Convert.ToInt32(objSiembra.resultadoSiembra));
                     cmd.Parameters.AddWithValue("@idUsuario", Convert.ToInt32(objSiembra.idUsuario));
 

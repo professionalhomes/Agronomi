@@ -12,6 +12,7 @@ namespace EntityLayer
         public string costoPorSucroAnimal { get; set; }
         public string costoPorRegadoPapa { get; set; }
         public string costoPorFertilizacion { get; set; }
+        public string costoSemilla { get; set; }
         public string resultadoSiembra { get; set; }
         public int idUsuario { get; set; }
 
