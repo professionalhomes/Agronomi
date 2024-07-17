@@ -40,8 +40,7 @@ namespace DataLayer
                                 producto = dr["producto"].ToString(),
                                 costoProducto = dr["costoProducto"].ToString(),
                                 cantidadProducto = dr["cantidadProducto"].ToString(),
-                                cantidadAplicada = dr["cantidadAplicada"].ToString().ToString(),
-                                duracionTotal = dr["duracionTotal"].ToString()
+                                cantidadAplicada = dr["cantidadAplicada"].ToString().ToString()
                             });
                         }
                     }

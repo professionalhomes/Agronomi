@@ -75,7 +75,19 @@ namespace DataLayer
                     cmd.Parameters.AddWithValue("@NombreProducto",objBactericidas.NombreProducto);
                     cmd.Parameters.AddWithValue("@costoProducto", Convert.ToInt32(objBactericidas.costoProducto));
                     cmd.Parameters.AddWithValue("@cantidadProducto", Convert.ToInt32(objBactericidas.cantidadProducto));
-                    cmd.Parameters.AddWithValue("@cantidadAplicada", Convert.ToInt32(objBactericidas.cantidadAplicada));
+
+                    // Convertir el valor de string a float
+                    float cantidadAplicada;
+                    if (float.TryParse(objBactericidas.cantidadAplicada, out cantidadAplicada))
+                    {
+                        cmd.Parameters.AddWithValue("@cantidadAplicada", cantidadAplicada);
+                    }
+                    else
+                    {
+                        // Manejar el caso en que la conversión falle
+                        throw new FormatException("El valor de cantidadAplicada no es un número válido.");
+                    }
+
                     cmd.Parameters.AddWithValue("@costoPorAplicacion", Convert.ToInt32(objBactericidas.costoPorAplicacion));
                     cmd.Parameters.AddWithValue("@idUsuario", Convert.ToInt32(objBactericidas.idUsuario));
 
