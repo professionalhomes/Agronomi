@@ -255,7 +255,7 @@
 
         //Function to validate that the number is valid
         function esNumeroValido(numero) {
-            return numero.trim() !== "" && !isNaN(numero.trim());
+            return numero.toString().trim() !== "" && !isNaN(numero.toString().trim());
         }
         //Function to show the error message
         function mostrarError(mensaje) {
@@ -286,7 +286,7 @@
                 return;
             }
             if (!esNumeroValido(seleccionInfo.tamanioTerreno) || !esNumeroValido(seleccionInfo.areaCultivo)
-                || !esNumeroValido(seleccionInfo.costoPorFertilizacion)) {
+                || !esNumeroValido(seleccionInfo.costoOportunidad)) {
                 mostrarError("Los campos de costo deben ser valores numéricos.");
                 return;
             }
